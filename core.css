@@ -141,28 +141,72 @@ a:hover .arrow1 {
 
 
 
-/* ========================= */
-/* Global Variables & Resets */
-/* ========================= */
+
+/* =========================================================================== */
+/* MASTER COLOR SYSTEM & DARK MODE                                             */
+/* =========================================================================== */
+
 :root {
+  /* LAYOUT VARIABLES (Preserved!) */
   --shared-text-size: 1.05rem; 
   --global-padding: 2rem;
-  
 
+  /* LIGHT MODE (Default) */
   --bg-color: #F4F4F0;       /* Editorial Off-White */
   --text-color: #1A1A1A;     /* Ink Black / Charcoal */
   --accent-color: #C85A32;   /* Sophisticated Terracotta */
+  --rgb-text: 26, 26, 26;
+  --rgb-bg: 244, 244, 240;
 }
 
-/* 4. Custom Text Selection Color */
-::selection {
-  background-color: var(--accent-color);
-  color: var(--bg-color);
+/* 1. System Preference Detection */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1C1C1A;       /* Softer, warm charcoal background */
+    --text-color: #D4D4D0;     /* Muted, parchment-grey text */
+    --rgb-text: 212, 212, 208; /* Softened text for transparency */
+    --rgb-bg: 28, 28, 26;      /* Softened background for glass */
+  }
 }
 
-::-moz-selection { 
-  background-color: var(--accent-color);
-  color: var(--bg-color);
+/* 2. Manual Override (Toggled via JavaScript) */
+html[data-theme="light"] {
+  --bg-color: #F4F4F0;
+  --text-color: #1A1A1A;
+  --rgb-text: 26, 26, 26;
+  --rgb-bg: 244, 244, 240;
+}
+
+html[data-theme="dark"] {
+  --bg-color: #1C1C1A;       /* Softer, warm charcoal background */
+  --text-color: #D4D4D0;     /* Muted, parchment-grey text */
+  --rgb-text: 212, 212, 208; /* Softened text for transparency */
+  --rgb-bg: 28, 28, 26;      /* Softened background for glass */
+}
+
+/* 3. Paper Texture Blending Fix */
+@media (prefers-color-scheme: dark) {
+  body { background-blend-mode: screen; opacity: 0.95; }
+}
+html[data-theme="dark"] body {
+  background-blend-mode: screen;
+  opacity: 0.95;
+}
+html[data-theme="light"] body {
+  background-blend-mode: multiply;
+  opacity: 1;
+}
+
+
+
+/* ========================================== */
+/* OS THEME PHYSICS: E-INK REFRESH            */
+/* ========================================== */
+html, body, h1, h2, h3, p, span, div {
+  /* Snaps through 4 rigid frames over 0.5 seconds */
+  transition: background-color 0.5s steps(4, end),
+              color 0.5s steps(4, end),
+              border-color 0.5s steps(4, end);
 }
 
 
@@ -247,9 +291,8 @@ body::-webkit-scrollbar-thumb:hover,
   align-items: flex-start;
   padding: 1.5rem var(--global-padding);
   
-
-  background: rgba(244, 244, 240, 0.7); 
-  
+  /* THE FIX: Dynamic Frosted Glass */
+  background: rgba(var(--rgb-bg), 0.7);
 
   backdrop-filter: blur(12px) saturate(120%);
   -webkit-backdrop-filter: blur(12px) saturate(120%); 
@@ -258,6 +301,7 @@ body::-webkit-scrollbar-thumb:hover,
   transition: background 0.3s ease;
 }
 
+/* Optional: If your navbar has a bottom border line, make sure it adapts too */
 .navbar::after {
   content: "";
   position: absolute;
@@ -265,9 +309,8 @@ body::-webkit-scrollbar-thumb:hover,
   left: 0;
   width: 100%;
   height: 1px;
-
+  background: rgba(var(--rgb-text), 0.1);
 }
-
 
 .nav-metadata {
   font-family: 'iA Writer Duospace', monospace;
@@ -543,7 +586,7 @@ body::-webkit-scrollbar-thumb:hover,
 .terminal-hint {
   font-family: 'iA Writer Duospace', monospace;
   font-size: 0.75rem;
-  color: #b3b3b3;
+  color: var(--text-color);
   opacity: 0.5;
   letter-spacing: 0.05em;
   display: flex;
@@ -554,38 +597,6 @@ body::-webkit-scrollbar-thumb:hover,
 /* THE KILL-SWITCH: Eradicates the hint entirely on mobile/tablet */
 @media (max-width: 899px) {
   .terminal-hint {
-    display: none !important;
-  }
-}
-
-/* ========================================== */
-/* NAVBAR: CENTERED WEBSITE TITLE             */
-/* ========================================== */
-
-.nav-website-name {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%); /* Pulls it back exactly 50% of its own width to reach dead center */
-  
-  font-family: 'iA Writer Duospace', monospace;
-  font-size: 0.75rem;
-  color: var(--text-color);
-  opacity: 0.4; /* Ghostly integration */
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: opacity 0.2s ease, color 0.2s ease;
-  z-index: 10; /* Ensures it sits above any overlapping elements */
-}
-
-.nav-website-name:hover {
-  opacity: 1;
-  color: var(--accent-color);
-}
-
-/* THE KILL-SWITCH: Eradicates the title on mobile/tablet */
-@media (max-width: 899px) {
-  .nav-website-name {
     display: none !important;
   }
 }

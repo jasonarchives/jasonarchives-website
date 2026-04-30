@@ -44,7 +44,7 @@ body {
   opacity: 0.6;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.2);
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.2);
   padding-bottom: 1rem;
 }
 
@@ -134,7 +134,7 @@ body {
   color: var(--text-color);
   text-decoration: none;
   padding: 0.8rem 0;
-  border-bottom: 1px dotted rgba(26, 26, 26, 0.2);
+  border-bottom: 1px dotted rgba(var(--rgb-text), 0.2);
   opacity: 0.5; /* The "Light" default state */
   transition: all 0.2s ease;
   line-height: 1.4;
@@ -145,7 +145,7 @@ body {
 .ledger-link:hover {
   opacity: 1;
   color: var(--text-color);
-  border-bottom: 1px solid rgba(26, 26, 26, 0.6); 
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.6);
 }
 
 /* THE FIX: Active state is strictly and exclusively Terracotta */
@@ -179,7 +179,7 @@ body {
   letter-spacing: 0.1em;
   color: var(--accent-color); 
   margin: 6rem 0 1.5rem 0;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.1);
   padding-bottom: 0.5rem;
   scroll-margin-top: 8rem; 
 }
@@ -203,7 +203,7 @@ body {
   margin: 4rem 0; 
   padding: 1.5rem 2rem;
   border-left: 2px solid var(--accent-color);
-  background: rgba(26, 26, 26, 0.03); 
+  background: rgba(var(--rgb-text), 0.05);
   color: var(--text-color);
 }
 
@@ -218,7 +218,7 @@ body {
 .article-body img, .examinable-image {
   width: 100%;
   height: auto;
-  border: 1px solid rgba(26, 26, 26, 0.2);
+  border: 1px solid rgba(var(--rgb-text), 0.2);
   display: block;
 }
 
@@ -243,7 +243,7 @@ body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.1);
   padding-bottom: 0.5rem;
 }
 
@@ -325,7 +325,7 @@ body {
 .horizontal-scroll-camera { position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; background-color: var(--bg-color); display: flex; align-items: center; z-index: 500; }
 .horizontal-scroll-strip { display: flex; height: 100vh; width: max-content; will-change: transform; }
 .horizontal-slide { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; padding: 4rem; box-sizing: border-box; }
-.horizontal-slide img { max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid rgba(26, 26, 26, 0.2); box-shadow: 0 20px 60px rgba(0,0,0,0.05); }
+.horizontal-slide img { max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid rgba(var(--rgb-text), 0.2); box-shadow: 0 20px 60px rgba(0,0,0,0.05); }
 
 .end-slide { background-color: var(--text-color); color: var(--bg-color); justify-content: flex-start; padding-left: 10vw; }
 .end-slide .pipeline-link:hover { color: var(--accent-color) !important; }
@@ -360,7 +360,7 @@ body.hide-ui-mode .navbar, body.hide-ui-mode .bottom-left-footer, body.hide-ui-m
 .menu-btn { font-family: 'iA Writer Duospace', monospace; font-weight: 700; font-size: 0.75rem; color: var(--text-color); background: transparent; border: none; cursor: pointer; letter-spacing: 0.08em; transition: all 0.3s ease; opacity: 0.8; padding: 0; }
 .menu-btn:hover { color: var(--accent-color); opacity: 1; }
 
-.share-cluster { display: flex; align-items: center; gap: 1.5rem; margin-top: 4rem; padding-top: 2rem; margin-bottom: -4rem; border-top: 1px solid rgba(26, 26, 26, 0.2); }
+.share-cluster { display: flex; align-items: center; gap: 1.5rem; margin-top: 4rem; padding-top: 2rem; margin-bottom: -4rem; border-top: 1px solid rgba(var(--rgb-text), 0.2); }
 .share-label { font-family: 'iA Writer Duospace', monospace; font-size: 0.85rem; color: var(--text-color); opacity: 0.5; letter-spacing: 0.1em; }
 .share-link { font-family: 'iA Writer Duospace', monospace; font-size: 1.1rem; color: var(--text-color); text-decoration: none; font-weight: 700; transition: all 0.3s ease; }
 .share-link:hover { color: var(--accent-color); transform: translateY(-2px); }
@@ -492,4 +492,23 @@ body.hide-ui-mode .navbar, body.hide-ui-mode .bottom-left-footer, body.hide-ui-m
 .article-footer-link:hover {
   color: var(--accent-color);
   border-bottom-color: var(--accent-color);
+}
+
+
+/* ========================================== */
+/* DARK MODE TEXTURE REPAIR                   */
+/* ========================================== */
+
+html[data-theme="dark"] body {
+  /* We switch from 'multiply' to 'screen' or 'overlay' for dark surfaces */
+  background-blend-mode: overlay;
+
+  /* We dim the texture so it doesn't create that white 'vibrating' look */
+  opacity: 1;
+}
+
+/* If the pattern is still too bright, we target the body background specifically */
+html[data-theme="dark"] {
+  background-image: linear-gradient(rgba(28, 28, 26, 0.97), rgba(28, 28, 26, 0.97)),
+                    url("https://www.transparenttextures.com/patterns/p6.png");
 }

@@ -7,7 +7,32 @@
   <meta name="robots" content="index, follow, max-image-preview:large">  
   
 <!-- SEO title & meta -->   
+
   <title>Photos | Jason Mendes</title>
+
+
+  <script>
+  (function() {
+    // 1. Add a class to kill all transitions immediately
+    document.documentElement.classList.add('no-transition');
+
+    const savedTheme = localStorage.getItem('os-theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+
+    // 2. Wait a tiny heartbeat, then allow transitions again
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.documentElement.classList.remove('no-transition');
+      }, 100);
+    });
+  })();
+</script>
+
+
   <meta name="title" content="Photos | Jason Mendes">
   <meta name="description" content="A visual ledger of my observations, ranging from intimate client portraits to long-exposures of the Aurora Borealis. ">
 
@@ -31,6 +56,7 @@
   <link rel="stylesheet" href="cursor.css">
   <link rel="stylesheet" href="terminal.css">
   <link rel="stylesheet" href="overlay.css">
+  <link rel="stylesheet" href="theme.css">
 
 <script type="application/ld+json">
 {
@@ -80,6 +106,9 @@
     </div>
    
     <span id="desktop-terminal-hint" class="terminal-hint tile-in-delay-delay" style="margin-left: auto;">[PRESS ⌘K FOR QUICK SEARCH]</span>
+
+    <!-- MOBILE THEME TOGGLE (Hidden on Desktop) -->
+      <button id="mobile-theme-toggle" class="mobile-theme-toggle magnetic-btn">[ ◐ ]</button>
 
   </div>
 </nav>
@@ -139,15 +168,17 @@
       <div class="mono-kicker tile-in">
         <span>[RECORDS : 2018–2024]</span>
       </div>
-      
-      <div class="job-role mono-intro tile-in-delay " style="max-width: 600px; margin-top: -1rem; margin-bottom: 4rem;"><span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-size: medium;">My interest in photos began with old family albums, viewing them not just as memories, but as tangible &amp; meaningful artifacts of the past. Today, the camera is my tool to force a pause. It is my deliberate practice of slowing down to observe the quiet architecture of everyday life across places and alongside people. This archive is a visual ledger of those observations, ranging from intimate client portraits to long-exposures of the Aurora Borealis.</span></div>
-      
-    <div class="job-role mono-intro tile-in-delay-delay " style="max-width: 600px; margin-top: -3rem; margin-bottom: 6rem;">
-  <span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-size: medium;">
-    I post some of my work on <a href="https://unsplash.com/@jasemendess" target="_blank" rel="noopener noreferrer" style="color: var(--text-color);">Unsplash <span class="arrow">↗</span></a>,
-    so feel free to download and use my photos from there!<br>
-  </span>
-</div>
+
+    <div class="job-role mono-intro tile-in-delay" style="max-width: 600px; margin-top: -1rem; margin-bottom: 4rem;">
+        <span>My interest in photos began with old family albums, viewing them not just as memories, but as tangible &amp; meaningful artifacts of the past. Today, the camera is my tool to force a pause. It is my deliberate practice of slowing down to observe the quiet architecture of everyday life across places and alongside people. This archive is a visual ledger of those observations, ranging from intimate client portraits to long-exposures of the Aurora Borealis.</span>
+    </div>
+
+    <div class="job-role mono-intro tile-in-delay-delay" style="max-width: 600px; margin-top: -3rem; margin-bottom: 6rem;">
+      <span>
+        I post some of my work on <a href="https://unsplash.com/@jasemendess" target="_blank" rel="noopener noreferrer" style="color: var(--text-color);">Unsplash <span class="arrow">↗</span></a>,
+        so feel free to download and use my photos from there!<br>
+      </span>
+    </div>
 
 </div>
 </section>
@@ -800,10 +831,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script src="theme.js"> </script>
 <script src="cursor.js"> </script>
 <script src="physics.js"></script>
 <script src="terminal.js"></script>
 <script src="overlay.js"></script>
+
+
+<!-- DESKTOP THEME TOGGLE (Hidden on Mobile) -->
+<div class="os-theme-toggle-desktop" id="desktop-theme-toggle">
+  <!-- The Resting Vertical Spine -->
+  <div class="theme-label" id="theme-label">[ MODE: LIGHT ]</div>
+  <!-- The Hover Controls -->
+  <div class="theme-controls">
+    <button class="theme-btn" data-set-theme="light">[◯ LIGHT]</button>
+    <button class="theme-btn" data-set-theme="dark">[◐ DARK]</button>
+  </div>
+</div>
+
+
 
 </body>
 </html>

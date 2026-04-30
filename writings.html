@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="theme-color" content="#F4F4F0">
   <meta name="robots" content="index, follow, max-image-preview:large">  
-  
-  
+
 <!-- SEO title & meta -->    
   <title>Writings | Jason Mendes</title>
+
+
+<script>
+  (function() {
+    // 1. Add a class to kill all transitions immediately
+    document.documentElement.classList.add('no-transition');
+
+    const savedTheme = localStorage.getItem('os-theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+
+    // 2. Wait a tiny heartbeat, then allow transitions again
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.documentElement.classList.remove('no-transition');
+      }, 100);
+    });
+  })();
+</script>
+
   <meta name="title" content="Writings | Jason Mendes">
   <meta name="description" content="My archive documenting the messy intersections between human behavior, physical spaces, and digital systems through ethnographic field notes and candid self-reflection. ">
 
-<!-- SEO meta and og --> 
+<!-- SEO meta & og -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jasonarchives.online/writings.html">
   <meta property="og:title" content="Writings | Jason Mendes">
@@ -24,13 +47,7 @@
 
 <!-- favicon.ico -->  
   <link rel="icon" href="favicon.ico?v=2" sizes="any">
-  
-<!-- Styles & Preloads -->    
-  <link rel="stylesheet" href="core.css"/>
-  <link rel="stylesheet" href="writings.css"/>
-  <link rel="stylesheet" href="cursor.css"> 
-  <link rel="stylesheet" href="terminal.css">   
-  <link rel="stylesheet" href="overlay.css">   
+
   
 <script type="application/ld+json">
 {
@@ -41,11 +58,23 @@
   "url": "https://jasonarchives.online/writings.html",
   "image": "https://jasonarchives.online/preview/writingpreview.jpg"
 }
-</script>  
+</script>
+
+<!-- Styles & Preloads -->
+  <link rel="stylesheet" href="core.css"/>
+  <link rel="stylesheet" href="listpage.css"/>
+  <link rel="stylesheet" href="cursor.css">
+  <link rel="stylesheet" href="terminal.css">
+  <link rel="stylesheet" href="overlay.css">
+  <link rel="stylesheet" href="theme.css">
+
+
+
   
 </head>
 
 <body>
+
 
 <!--------------------------------------------------------------------------------------------------------------------------------------->        
           
@@ -59,6 +88,9 @@
     </div>
    
     <span id="desktop-terminal-hint" class="terminal-hint tile-in-delay-delay" style="margin-left: auto;">[PRESS ⌘K FOR QUICK SEARCH]</span>
+
+    <!-- MOBILE THEME TOGGLE (Hidden on Desktop) -->
+      <button id="mobile-theme-toggle" class="mobile-theme-toggle magnetic-btn">[ ◐ ]</button>
 
   </div>
 </nav>
@@ -82,22 +114,19 @@
     </nav>
 
     <div class="overlay-footer">
-      <a href="https://www.linkedin.com/in/jasemendes/" target="_blank" rel="noopener noreferrer">LinkedIn <span class="arrow">↗</span></a>
-      <a href="mailto:jasonsaviomendes@icloud.com" target="_blank" rel="noopener noreferrer">E-mail <span class="arrow">↗</span></a>
-      <a href="cv.html" target="_blank" class="fika-link" rel="noopener noreferrer">Download my CV <span class="arrow">↗</span></a>
-      <a href="https://calendly.com/jasonsaviomendes/book-a-fika-with-me" target="_blank" rel="noopener noreferrer" class="fika-link">Book a call with me <span class="arrow">↗</span></a>
+      <a href="https://www.linkedin.com/in/jasemendes/" target="_blank">LinkedIn <span class="arrow">↗</span></a>
+      <a href="mailto:jasonsaviomendes@icloud.com" target="_blank">E-mail <span class="arrow">↗</span></a>
+      <a href="cv.html" target="_blank" class="fika-link">Download my CV <span class="arrow">↗</span></a>
+      <a href="https://calendly.com/jasonsaviomendes/book-a-fika-with-me" target="_blank" class="fika-link">Book a call with me <span class="arrow">↗</span></a>
     </div>
 
   </div>
 </div>
 
 
-
 <!-------------------------------------------------------------------------------------------------------------------------------------->        
           
-<!-- MAIN BEGINS HERE -->  
-
-
+<!-- MAIN BEGINS HERE -->
 
 <main class="content tile-container" id="main-content">
  
@@ -108,8 +137,10 @@
         <span>[RECORDS : 2018–2023]</span>
       </div>
       
-      <div class="mono-intro tile-in-delay" style="max-width: 600px; margin-top: 1rem; margin-bottom: 4rem;"><span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-size: medium;">Writing is my primary tool for making sense of complexity. It forces me to slow down and translate abstract observations into concrete thought. This space is an archive of those reflections where I am documenting the messy intersections between human behavior, physical spaces, and digital systems through ethnographic field notes and candid self-reflection.</span><br></div>
-    
+     <div class="mono-intro tile-in-delay" style="max-width: 600px; margin-top: 1rem; margin-bottom: 4rem;">
+        <span>Writing is my primary tool for making sense of complexity. It forces me to slow down and translate abstract observations into concrete thought. This space is an archive of those reflections where I am documenting the messy intersections between human behavior, physical spaces, and digital systems through ethnographic field notes and candid self-reflection.</span>
+     </div>
+
   </section>
 
   <div class="filter-buttons tile-in-delay-delay ">
@@ -121,10 +152,11 @@
   </div> 
 
   <div class="article-list tile-in-delay-delay" id="linkList"> 
-    
+
     <a href="https://medium.com/@local.threads.collective/slowing-down-with-resistance-leisure-and-community-local-threads-collective-organises-a-picnic-76fa96052afd" target="_blank" rel="noopener noreferrer" class="article-row" data-tags="community building, short-ethnography">
+
       <div class="a-meta">
-        <span class="a-num">01/</span>
+        <span class="a-num">RECORD: WRT-01</span>
         <span class="a-tag">COMMUNITY BUILDING</span>
       </div>
       <div class="a-core">
@@ -132,13 +164,16 @@
         <p class="a-excerpt">In Mumbai’s Sanjay Gandhi National Park, Local Threads Collective gathered for a simple picnic—unstructured, slow, and free of agenda. Leisure here became resistance...</p>
       </div>
       <div class="a-action">
-        <span>Read on Medium <span class="arrow">↗</span></span>
+        <span>[MEDIUM<span class="arrow">↗</span>]</span>
       </div>
     </a>
 
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+
+
     <a href="https://medium.com/@jasonhasfika/a-seat-on-skåneexpressen-buss-15-longing-for-mundane-beauty-4129278b686f" target="_blank" rel="noopener noreferrer" class="article-row" data-tags="memoir">
       <div class="a-meta">
-        <span class="a-num">02/</span>
+        <span class="a-num">RECORD: WRT-02</span>
         <span class="a-tag">MEMOIR</span>
       </div>
       <div class="a-core">
@@ -146,41 +181,47 @@
         <p class="a-excerpt">On SkåneExpressen Buss 15, nightly rides from Malmö to Vellinge turned routine into quiet beauty. Fields, bridges, and fleeting dawns became the memories that lingered.</p>
       </div>
       <div class="a-action">
-        <span>Read on Medium <span class="arrow">↗</span></span>
+        <span>[MEDIUM<span class="arrow">↗</span>]</span>
       </div>
     </a>
 
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+
     <a href="https://medium.com/@jasonhasfika/finding-threads-among-fraying-tapestries-my-first-encounter-with-a-community-driven-collective-5d7b77c23270" target="_blank" rel="noopener noreferrer" class="article-row" data-tags="community building, memoir">
       <div class="a-meta">
-        <span class="a-num">03/</span>
+        <span class="a-num">RECORD: WRT-03</span>
         <span class="a-tag">COMMUNITY BUILDING</span>
       </div>
       <div class="a-core">
         <h2 class="a-title">Finding Threads among Fraying Tapestries</h2>
-        <p class="a-excerpt">Returning to Mumbai, I found belonging through Local Threads Collective at a simple riverfront workshop. Together, these moments wove a quiet counter to the city’s relentless pace.</p>
+        <p class="a-excerpt">Organising events and leading teams in Photography &amp; Graphic Design while studying at SFIT Mumbai.</p>
       </div>
       <div class="a-action">
-        <span>Read on Medium <span class="arrow">↗</span></span>
+       <span>[MEDIUM<span class="arrow">↗</span>]</span>
       </div>
     </a>
-    
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+
     <a href="https://medium.com/@jasonhasfika/inside-puben-cd4f40652e5a" target="_blank" rel="noopener noreferrer" class="article-row" data-tags="short-ethnography">
       <div class="a-meta">
-        <span class="a-num">04/</span>
+        <span class="a-num">RECORD: WRT-04</span>
         <span class="a-tag">SHORT-ETHNOGRAPHY</span>
       </div>
       <div class="a-core">
         <h2 class="a-title">Inside Puben</h2>
-        <p class="a-excerpt">At Puben in Uppsala’s “White Castle,” bartending turned into fieldwork. Cheap drinks, karaoke, and shared rituals revealed a space of belonging woven from everyday moments.</p>
+        <p class="a-excerpt">At Puben in Uppsala’s “White Castle”, bartending turned into fieldwork. Cheap drinks, karaoke, and shared rituals revealed a space of belonging woven from everyday moments.</p>
       </div>
       <div class="a-action">
-        <span>Read on Medium <span class="arrow">↗</span></span>
+       <span>[MEDIUM<span class="arrow">↗</span>]</span>
       </div>
     </a>
-    
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+
     <a href="https://medium.com/@jasonhasfika/humans-cameras-and-experiences-an-essay-e7bc9dd35cd7" target="_blank" rel="noopener noreferrer" class="article-row" data-tags="human-centered thinking">
       <div class="a-meta">
-        <span class="a-num">05/</span>
+        <span class="a-num">RECORD: WRT-05</span>
         <span class="a-tag">HUMAN-CENTERED THINKING</span>
       </div>
       <div class="a-core">
@@ -188,9 +229,10 @@
         <p class="a-excerpt">Over years of use, my camera shifted from tool to extension of myself. Through touch, sight, and emotion, it shaped how I experienced the world. It is no longer just equipment.</p>
       </div>
       <div class="a-action">
-        <span>Read on Medium <span class="arrow">↗</span></span>
+       <span>[MEDIUM<span class="arrow">↗</span>]</span>
       </div>
     </a>
+
 
   </div> 
 
@@ -213,16 +255,14 @@ function filterItems(tag, buttonElement) {
 
   items.forEach(item => {
     const tags = item.getAttribute('data-tags')?.split(',') || [];
-    // Clean up tags for matching
     const cleanTags = tags.map(t => t.trim().toLowerCase());
     
     if (tag === 'all' || cleanTags.includes(tag.toLowerCase())) {
-      item.style.display = "grid"; // We use grid for the article rows
-      // Small timeout to allow display:grid to apply before fading in
+      item.style.display = "grid";
       setTimeout(() => item.style.opacity = "1", 10);
     } else {
       item.style.opacity = "0";
-      setTimeout(() => item.style.display = "none", 300); // Wait for fade out
+      setTimeout(() => item.style.display = "none", 300);
     }
   });
 }
@@ -231,7 +271,7 @@ function filterItems(tag, buttonElement) {
 document.addEventListener("DOMContentLoaded", () => {
   const mainContent = document.getElementById("main-content");
   
-  document.querySelectorAll("nav a[href], .footer a[href]").forEach(link => {
+  document.querySelectorAll("nav a[href], .footer a[href], .article-list a[href]").forEach(link => {
     link.addEventListener("click", (e) => {
       if (link.target === "_blank" || link.href.startsWith("#")) return;
       e.preventDefault();
@@ -251,11 +291,25 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-
-<script src="cursor.js"> </script>
+<script src="theme.js"></script>
+<script src="cursor.js"></script>
 <script src="physics.js"></script>
 <script src="terminal.js"></script>
 <script src="overlay.js"></script>
+
+
+<!-- DESKTOP THEME TOGGLE (Hidden on Mobile) -->
+<div class="os-theme-toggle-desktop" id="desktop-theme-toggle">
+  <!-- The Resting Vertical Spine -->
+  <div class="theme-label" id="theme-label">[ MODE: LIGHT ]</div>
+  <!-- The Hover Controls -->
+  <div class="theme-controls">
+    <button class="theme-btn" data-set-theme="light">[◯ LIGHT]</button>
+    <button class="theme-btn" data-set-theme="dark">[◐ DARK]</button>
+  </div>
+</div>
+
+
 
 </body>
 </html>
