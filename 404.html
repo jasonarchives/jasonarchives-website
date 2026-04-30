@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Record Not Found | Jason Mendes</title>
+  
+  <style>
+    /* =========================================================================== */
+    /* 1. GLOBAL VARIABLES & FONTS (Extracted from core.css)                       */
+    /* =========================================================================== */
+    
+    :root {
+      --global-padding: 2rem;
+      --bg-color: #F4F4F0;       /* Editorial Off-White */
+      --text-color: #1A1A1A;     /* Ink Black / Charcoal */
+      --accent-color: #C85A32;   /* Sophisticated Terracotta */
+    }
+
+    @font-face {
+      font-family: 'iA Writer Duospace';
+      src: url('https://cdn.jsdelivr.net/gh/iaolo/iA-Fonts/iA%20Writer%20Duospace/Webfonts/iAWriterDuospace-Regular.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'iA Writer Duospace';
+      src: url('https://cdn.jsdelivr.net/gh/iaolo/iA-Fonts/iA%20Writer%20Duospace/Webfonts/iAWriterDuospace-Bold.woff2') format('woff2');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+
+    ::selection {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+    }
+
+    /* =========================================================================== */
+    /* 2. BASE ARCHITECTURE & TEXTURE                                              */
+    /* =========================================================================== */
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      margin: 0; padding: 0;
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      
+      /* Premium Static Paper Texture */
+      background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+      background-repeat: repeat;
+      background-attachment: fixed;
+      background-blend-mode: multiply;
+      overflow: hidden; /* Prevents scrolling on the 404 page */
+    }
+
+    /* =========================================================================== */
+    /* 3. TYPOGRAPHY & LAYOUT                                                      */
+    /* =========================================================================== */
+
+    .content {
+      padding: clamp(4rem, 10vh, 8rem) var(--global-padding);
+      box-sizing: border-box;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .error-layout {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 85vh; 
+    }
+
+    .hero-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .mono-kicker {
+      font-family: 'iA Writer Duospace', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      letter-spacing: 0.15em;
+    }
+
+    .page-hero {
+      font-size: clamp(4.5rem, 15vw, 15rem); 
+      font-weight: 700;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .mono-intro {
+      font-family: 'iA Writer Duospace', monospace;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-color);
+      opacity: 0.8;
+    }
+
+    /* =========================================================================== */
+    /* 4. 404 SPECIFIC COMPONENTS                                                  */
+    /* =========================================================================== */
+
+    .terminal-blink {
+      color: var(--accent-color);
+      font-weight: 400; 
+      animation: cursorBlink 1s infinite steps(1);
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .brutalist-return-btn {
+      font-family: 'iA Writer Duospace', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-color);
+      background-color: var(--text-color);
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.1s steps(2, jump-none), background-color 0s;
+    }
+
+    .brutalist-return-btn:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-2px); 
+      box-shadow: 4px 4px 0px var(--text-color); 
+    }
+
+    .brutalist-return-btn:active {
+      transform: translateY(0);
+      box-shadow: 0px 0px 0px var(--text-color); 
+    }
+
+    /* =========================================================================== */
+    /* 5. TILE ANIMATIONS (Extracted from core.css)                                */
+    /* =========================================================================== */
+
+    .tile-container { perspective: 1200px; }
+
+    .tile-in {
+      opacity: 0;
+      transform: rotateY(90deg) scale(0.95);
+      transform-origin: left center;
+      animation: tileOpen 0.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+    }
+
+    .tile-in-delay {
+      opacity: 0;
+      transform: rotateY(90deg) scale(0.95);
+      transform-origin: left center;
+      animation: tileOpen 0.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+      animation-delay: 0.2s;
+    }
+
+    .tile-in-delay-delay {
+      opacity: 0;
+      transform: rotateY(90deg) scale(0.95);
+      transform-origin: left center;
+      animation: tileOpen 0.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes tileOpen {
+      0% { opacity: 0; transform: rotateY(90deg) scale(0.95); }
+      60% { opacity: 1; transform: rotateY(-5deg) scale(1.02); }
+      100% { opacity: 1; transform: rotateY(0) scale(1); }
+    }
+
+    /* =========================================================================== */
+    /* 6. FOOTER & MOBILE ADJUSTMENTS                                              */
+    /* =========================================================================== */
+
+    .bottom-left-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.5rem var(--global-padding);
+      box-sizing: border-box;
+      pointer-events: none; 
+    }
+
+    .rights-reserved {
+      font-family: 'iA Writer Duospace', monospace;
+      font-size: 0.75rem; 
+      color: var(--text-color);
+      opacity: 0.9; 
+      letter-spacing: 0.05em; 
+      margin: 0;
+    }
+
+    @media (max-width: 800px) {
+      :root {
+        --global-padding: 1.5rem;
+      }
+      .error-layout {
+        min-height: 75vh;
+      }
+      .brutalist-return-btn {
+        width: 100%; 
+        text-align: center;
+        padding: 1.2rem;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+
+<body class="page-404">
+
+  <main class="content tile-container error-layout">
+    
+    <div class="hero-content-wrapper"> 
+      
+      <div class="mono-kicker tile-in">
+        <span>[ SYSTEM EXCEPTION: ERR_404 ]</span>
+      </div>
+  
+      <div class="intro-text tile-in">
+        <h1 class="page-hero">404<span class="terminal-blink">_</span></h1>
+      </div>
+      
+      <div class="mono-intro tile-in-delay" style="max-width: 500px; margin-top: -1rem; margin-bottom: 3rem;">
+        <span>The requested ledger entry has been relocated, redacted, or never existed in this archive. Please try again.</span>
+      </div>
+      
+      <div class="tile-in-delay-delay">
+        <a href="index.html" class="brutalist-return-btn">
+          [← RETRIEVE ARCHIVE INDEX]
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <div class="bottom-left-footer">  
+    <footer class="footer tile-in">
+      <p class="rights-reserved"> © 2026 Jason Mendes</p>
+    </footer>
+  </div> 
+
+</body>
+</html>

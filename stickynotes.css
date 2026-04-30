@@ -1,0 +1,142 @@
+/* ========================= */
+/* Ethnographic Sticky Notes */
+/* ========================= */
+
+.sticky-note {
+  position: absolute;
+  width: 180px;  
+  height: 180px; 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem; 
+  box-sizing: border-box;
+  
+  text-decoration: none;
+  color: #1a1a1a; 
+  cursor: pointer;
+  z-index: 50; 
+  
+  /* Tells the GPU to prepare for these exact movements */
+  will-change: transform, opacity;  
+
+  /* --------------------------------------------------- */
+  /* OPTION 1 ACTIVE: The Tactile Spring (Shadows Removed)*/
+  /* --------------------------------------------------- */
+  animation: stampOntoWall 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0s;
+}
+
+/* OPTION 1 ACTIVE: The Lift-Off Hover */
+.sticky-note:hover {
+  transform: scale(1.1) rotate(0deg) translateY(-5px) !important; 
+  z-index: 100; 
+}
+
+.note-text {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem; 
+  line-height: 1.4;
+  text-align: center;
+  pointer-events: none; 
+}
+
+.note-link-prompt {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  opacity: 0.4;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+/* ========================= */
+/* Mobile Exclusion          */
+/* ========================= */
+/* Hides notes on touch devices to keep the screen clean */
+@media (max-width: 899px) {
+  .sticky-note {
+    display: none !important;
+  }
+}
+
+/* ========================= */
+/* Dynamic Cursor Tool Icon  */
+/* ========================= */
+
+#sticky-cursor-prompt {
+  position: fixed;
+  pointer-events: none; 
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; 
+  color: var(--accent-color); 
+  
+  opacity: 0; 
+  transition: opacity 0.2s ease;
+  
+  /* Positions it perfectly at the bottom-right of the mouse pointer */
+  transform: translate(12px, 12px);
+}
+
+/* ========================= */
+/* OPTION 1 ACTIVE ANIMATIONS*/
+/* ========================= */
+
+.falling-note {
+  /* Gives it a realistic falling gravity curve */
+  animation: dropOffWall 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards !important;
+  pointer-events: none; /* Stops it from being clickable while falling */
+}
+
+/* The Spring Entrance */
+@keyframes stampOntoWall {
+  0%   { opacity: 0; transform: scale(1.3) translateY(-10px) rotate(calc(var(--rot) - 10deg)); filter: blur(4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0) rotate(var(--rot)); filter: blur(0); }
+}
+
+/* The Gravity Drop */
+@keyframes dropOffWall {
+  0%   { transform: rotate(var(--rot)) translateY(0) scale(1); opacity: 1; }
+  100% { transform: rotate(calc(var(--rot) + 25deg)) translateY(120vh) scale(0.9); opacity: 0; }
+}
+
+
+/* ========================================================================= */
+/* ========================================================================= */
+/* OPTION 2: THE PAPER PEELER (ARCHIVED)                                     */
+/* To use this instead, replace the transitions, hovers, and keyframes above */
+/* with the code below!                                                      */
+/* ========================================================================= */
+
+/*
+.sticky-note {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), z-index 0s;
+  animation: stampOntoWall 0.4s forwards;
+}
+
+.sticky-note:hover {
+  transform: scale(1.08) rotate(0deg) !important; 
+  z-index: 100; 
+}
+
+@keyframes stampOntoWall {
+  0%   { opacity: 0; transform: scale(1.15) rotate(var(--rot)); }
+  50%  { opacity: 1; transform: scale(0.95) rotate(var(--rot)); } 
+  100% { opacity: 1; transform: scale(1) rotate(var(--rot)); }
+}
+
+@keyframes dropOffWall {
+  0%   { transform: rotate(var(--rot)) translateY(0); opacity: 1; }
+  20%  { transform: rotate(calc(var(--rot) - 10deg)) translateY(-20px) scale(1.05); opacity: 1; } 
+  100% { transform: rotate(calc(var(--rot) + 45deg)) translateY(120vh) scale(0.8); opacity: 0; } 
+}
+*/

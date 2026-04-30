@@ -1,0 +1,63 @@
+/* ========================= */
+/* Global Drafting Cursor    */
+/* ========================= */
+
+@media (pointer: fine) {
+  /* Hides the default arrow */
+  body, html, a, button, .giant-link {
+    cursor: none !important; 
+  }
+
+  #crosshair-cursor {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 20px;
+    height: 20px;
+    pointer-events: none; 
+    z-index: 999999; /* Maxed out to ensure it is always on top */
+    will-change: transform; 
+    display: block;
+  }
+
+  
+  
+  /* The Crosshair Lines */
+  #crosshair-cursor::before,
+  #crosshair-cursor::after {
+    content: '';
+    position: absolute;
+    background-color: var(--accent-color, #C85A32);
+    top: 50%;
+    left: 50%;
+    transition: transform 0.2s cubic-bezier(0.45, 0, 0.55, 1), background-color 0.2s ease;
+  }
+
+  #crosshair-cursor::before {
+    width: 20px;
+    height: 2px;
+    margin-top: -1px;
+    margin-left: -10px;
+  }
+
+  #crosshair-cursor::after {
+    width: 2px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -1px;
+  }
+
+  /* Hover State (Rotates to 'x') */
+  #crosshair-cursor.hovered::before,
+  #crosshair-cursor.hovered::after {
+    background-color: var(--text-color, #1A1A1A);
+  }
+
+  #crosshair-cursor.hovered::before { transform: rotate(45deg); }
+  #crosshair-cursor.hovered::after  { transform: rotate(45deg); }
+}
+
+@media (pointer: coarse) {
+  /* Failsafe for touchscreens */
+  #crosshair-cursor { display: none !important; }
+}

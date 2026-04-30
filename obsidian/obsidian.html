@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zeitgeist | Jason Mendes</title>
+  <link rel="stylesheet" href="../core.css"/>
+  <link rel="stylesheet" href="../obsidian/obsidian.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-right" style="margin-left: auto;">
+    <a href="index.html" class="menu-btn" style="text-decoration: none;">[ ← RETURN ]</a>
+  </div>
+</nav>
+
+<main class="graph-wrapper" id="graph-canvas">
+  
+  <svg id="graph-lines"></svg>
+
+  <div id="graph-nodes">
+    
+    <a href="index.html" class="node type-core" id="n-master" data-links="n-design,n-writing,n-photo">
+      <div class="node-dot"></div>
+      <span class="node-label">MASTER ARCHIVE</span>
+    </a>
+
+    <a href="design.html" class="node type-archive" id="n-design" data-links="r-hein,r-bike,r-zazou,r-ui">
+      <div class="node-dot"></div>
+      <span class="node-label">DESIGNS</span>
+    </a>
+    <a href="writings.html" class="node type-archive" id="n-writing" data-links="r-puben,r-bus,r-cam">
+      <div class="node-dot"></div>
+      <span class="node-label">WRITINGS</span>
+    </a>
+    <a href="photos.html" class="node type-archive" id="n-photo" data-links="">
+      <div class="node-dot"></div>
+      <span class="node-label">PHOTOS</span>
+    </a>
+
+    <a href="heinemann.html" class="node type-record" id="r-hein">
+      <div class="node-dot"></div><span class="node-label">Smartphone Duty-Free</span>
+    </a>
+    <a href="bicycle-parking.html" class="node type-record" id="r-bike">
+      <div class="node-dot"></div><span class="node-label">Bicycle Parking</span>
+    </a>
+    <a href="#" class="node type-record" id="r-zazou">
+      <div class="node-dot"></div><span class="node-label">Zazou Character Dev</span>
+    </a>
+    <a href="#" class="node type-record" id="r-ui">
+      <div class="node-dot"></div><span class="node-label">App Routing UI</span>
+    </a>
+
+    <a href="#" class="node type-record" id="r-puben">
+      <div class="node-dot"></div><span class="node-label">Inside Puben</span>
+    </a>
+    <a href="#" class="node type-record" id="r-bus">
+      <div class="node-dot"></div><span class="node-label">Skåne Expressen Buss 15</span>
+    </a>
+    <a href="#" class="node type-record" id="r-cam">
+      <div class="node-dot"></div><span class="node-label">Cameras & Experience</span>
+    </a>
+
+  </div>
+</main>
+
+<script src="../obsidian/obsidian.js"></script>
+</body>
+</html>

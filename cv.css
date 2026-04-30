@@ -1,0 +1,473 @@
+/* ========================= */
+/* Editorial Dossier Layout  */
+/* ========================= */
+
+.dossier-content {
+  padding: 8rem var(--global-padding) 6rem var(--global-padding);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ========================= */
+/* Hero Section              */
+/* ========================= */
+
+
+.hero-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 6rem;
+}
+
+.mono-kicker {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.85rem;
+  color: var(--text-color); 
+  letter-spacing: 0.15em;
+}
+
+/* ========================================== */
+/* FLOATING PRINT HUD                         */
+/* ========================================== */
+
+.floating-print-btn {
+    display: block;
+    position: fixed;
+    bottom: 2rem;
+    right: 1.5rem;
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: 0.8rem;
+    color: var(--bg-color); /* Inverted text */
+    background-color: var(--text-color); /* Inverted background */
+    border: none;
+    padding: 0.8rem 1.2rem;
+    z-index: 999;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s ease;
+}
+
+/* Hover Interaction */
+.floating-print-btn:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  transform: translateX(-50%) translateY(-3px); /* Satisfying mechanical lift */
+}
+
+.page-hero {
+  font-size: clamp(4rem, 12vw, 12rem); 
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--text-color);
+  margin: 0; 
+}
+
+/* ========================= */
+/* Profile Header Styling    */
+/* ========================= */
+
+.profile-header {
+  display: flex;
+  align-items: center; /* Aligns the image perfectly with the text */
+  gap: 2rem; /* Breathing room between image and name */
+}
+
+.profile-img {
+  width: 180px; 
+  height: 180px;
+  object-fit: cover;
+  /* SHAPE CONTROL: */
+  border-radius: 0; /* Keep it 0 for a stark square. Change to 50% for a perfect circle. */
+}
+
+.mono-intro {
+  font-family: 'iA Writer Duospace', monospace; /* UNIFIED FONT */
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  opacity: 0.8;
+  max-width: 700px;
+}
+
+/* ========================= */
+/* The Brutalist Grid        */
+/* ========================= */
+
+.dossier-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.dossier-row {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  border-top: 2px solid rgba(26, 26, 26, 0.2); 
+  padding: 4rem 0;
+}
+
+.dossier-label {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-color); 
+  letter-spacing: 0.1em;
+}
+
+.dossier-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; 
+}
+
+.dossier-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.dossier-meta {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+.dossier-meta-del {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+.dossier-role {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Tools & Systems Sub-Grid */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.tool-category {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-color); 
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+
+/* ========================= */
+/* QR Code System Stamp      */
+/* ========================= */
+
+/* Strictly hidden on digital screens */
+.qr-wrapper {
+  display: none !important; 
+}
+
+/* ========================= */
+/* Mobile Adjustments        */
+/* ========================= */
+
+@media (max-width: 900px) {
+  .dossier-row {
+    grid-template-columns: 1fr; 
+    gap: 2rem;
+    padding: 3rem 0;
+  }
+  .dossier-items { gap: 3rem; }
+}
+
+/* ========================= */
+/* Translucent Navbar        */
+/* ========================= */
+
+.navbar {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem var(--global-padding);
+  background: rgba(244, 244, 240, 0.7); 
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.05);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+/* ========================= */
+/* Navbar Menu Toggle        */
+/* ========================= */
+
+.menu-btn {
+  font-family: 'iA Writer Duospace', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  padding: 0; 
+}
+
+.menu-btn:hover {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* Hover Interaction */
+.massive-hero-nav .giant-link:hover::after {
+  opacity: 1;
+  color: var(--text-color);
+  transform: translate(2px, -1px); 
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  
+  background-color: var(--bg-color);
+  background-image: radial-gradient(circle, #b3b3b3 0.79px, transparent 0.2px);
+  background-size: 30px 30px;
+  background-attachment: fixed;
+  color: var(--text-color);
+  overflow-x: hidden; 
+  overflow-y: auto; 
+  cursor: default;
+}
+
+/* Main Container */
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 var(--global-padding);
+  box-sizing: border-box;
+}
+
+.top-section {
+  width: 100%;
+  max-width: 1600px;
+}
+
+.top-left-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+}
+
+/* =========================================================================== */
+/* MASTER PRINT SYSTEM (MUST REMAIN AT THE ABSOLUTE BOTTOM OF THIS FILE)       */
+/* =========================================================================== */
+
+@media print {
+  @page { 
+    margin: 0.6cm; /* TIGHTENED: Maximizes the physical paper boundaries */
+  }
+  
+  /* 1. Kill all backgrounds, animations, and FORCE VISIBILITY */
+  * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    color: black !important;
+    opacity: 1 !important; 
+    visibility: visible !important; 
+  }
+
+  /* 2. Hide all digital UI Elements & Excluded Content */
+  .navbar, .bottom-left-footer, #crosshair-cursor, .back-to-top, 
+  .index-overlay, .print-hide, #terminal-overlay, .floating-print-btn,
+  .mobile-home-link, .hide-on-print { 
+    display: none !important; 
+  }
+
+  /* 3. Height Resets */
+  html, body, main { 
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* 4. Completely eradicate the top padding */
+  .dossier-content, .intro-section, .hero-content-wrapper { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    max-width: 100% !important; 
+  }
+
+  /* 5. Precision Hero Section (COMPRESSED) */
+  .hero-content-wrapper {
+    margin-bottom: 1.5rem !important; /* Shaved off a full 1rem */
+    gap: 1rem !important; 
+  }
+  .page-hero {
+    font-size: 3rem !important; /* Scaled down from 3.5rem */
+    line-height: 0.85 !important; 
+    margin: 0 !important;
+  }
+  .profile-header {
+    gap: 1rem !important; 
+  }
+  .profile-img {
+    width: 90px !important; /* Shrunk significantly to recover vertical space */
+    height: 90px !important;
+    filter: grayscale(100%) contrast(120%) !important; 
+  }
+  .mono-intro {
+    font-size: 0.85rem !important; /* Scaled down */
+    line-height: 1.3 !important; /* Tighter reading lines */
+    max-width: 100% !important; 
+  }
+
+/* 6. Bypass Chrome's Grid Bug (STRICT BLOCK LAYOUT) */
+  .dossier-row { 
+    display: flex !important;
+    flex-direction: row !important;
+    border-top: 2px solid black !important; 
+    padding: 0.8rem 0 !important; 
+    gap: 1.5rem !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important; 
+  }
+  
+  .dossier-row > .dossier-meta:first-child,
+  .dossier-row > div:first-child {
+    width: 140px !important; 
+    flex-shrink: 0 !important;
+  }
+
+  /* KILLS FLEXBOX: Reverts to standard block so pagination works */
+  .dossier-items {
+    display: block !important; 
+    width: calc(100% - 160px) !important;
+  }
+
+  /* KILLS FLEXBOX: Makes the job block unbreakable */
+  .dossier-item {
+    display: block !important; 
+    page-break-inside: avoid !important; 
+    break-inside: avoid !important; 
+    margin-bottom: 1.5rem !important; /* Replaces the flex gap */
+  }
+
+  /* Recreates the tight spacing between job title and description without flex gap */
+  .dossier-item > * {
+    display: block !important;
+    margin-bottom: 0.3rem !important;
+  }
+  .dossier-item > *:last-child {
+    margin-bottom: 0 !important;
+  }
+  
+  /* 7. Typography Scaling for Paper (COMPRESSED) */
+  .dossier-role {
+    font-size: 1.1rem !important; /* Dropped from 1.2rem */
+  }
+  .dossier-meta, .dossier-meta-del, .dossier-label, .tool-category {
+    font-size: 0.75rem !important; /* Dropped from 0.8rem */
+    line-height: 1.3 !important; /* Tighter leading */
+    opacity: 1 !important; 
+  }
+
+/* 8. Tools Grid (STRICT INLINE-BLOCK LAYOUT) */
+  .tools-grid {
+    display: block !important; /* Kills flexbox */
+  }
+  
+  /* Uses old-school percentages to create two perfect, unbreakable columns */
+  .tools-grid > div {
+    display: inline-block !important;
+    width: 48% !important;
+    vertical-align: top !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 1.2rem !important;
+  }
+  
+  
+  /* 9. Print-Only QR Code Activation */
+  .qr-wrapper {
+    display: flex !important; 
+    flex-direction: column;
+    gap: 0.4rem;
+    max-width: 100px !important; /* Shrunk slightly */
+    margin-top: 1rem !important; 
+  }
+  .qr-image {
+    width: 100%;
+    height: auto;
+    border: 1px solid black !important; 
+    padding: 0.2rem; 
+  }
+  .qr-caption {
+    font-size: 0.5rem !important; 
+    letter-spacing: 0.05em;
+    text-align: left;
+  }
+}
+
+/* 10. Strict Page Break Control (Stops lines from getting sliced) */
+  p, h1, h2, h3, li, .mono-intro, .dossier-meta, .dossier-role {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* NEW: Prevents a page break directly after a heading/category */
+  .tool-category, .dossier-role, .dossier-meta {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* NEW: Forces the wrapper holding the tool category and list to stay together */
+  .tools-grid > div {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Controls "Orphans" and "Widows" */
+  p, .mono-intro {
+    orphans: 3 !important; 
+    widows: 3 !important;  
+  }

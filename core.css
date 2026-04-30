@@ -1,0 +1,555 @@
+/* ========================================= */
+/* SYSTEM OVERRIDE: Global Viewport Scaling  */
+/* ========================================= */
+
+/* 1. Kill Chrome Horizontal Scrollbar Bug */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+ /* THE FIX: Permanently reserves scrollbar space to stop layout shifts */
+  scrollbar-gutter: stable;
+}
+
+
+/* Fix Full-Screen Overlay from extending past the scrollbar */
+.index-overlay {
+  width: 100% !important;
+}
+
+/* 2. Fluid Vertical Padding for ALL Main Pages */
+
+main.tile-container, 
+.dossier-content, 
+.content, 
+.landing-page {
+  padding-top: clamp(4rem, 10vh, 8rem) !important;
+  padding-bottom: clamp(3rem, 8vh, 6rem) !important;
+  box-sizing: border-box;
+}
+
+/* 3. Aspect-Ratio Aware Typography */
+
+.page-hero, 
+.giant-link {
+  font-size: clamp(3.5rem, min(9vw, 15vh), 10rem) !important; 
+  line-height: 0.85;
+}
+
+/* 4. Ultra-Wide Monitor Lock */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  box-sizing: border-box;
+}
+
+.navbar > div {
+  width: 100%;
+  max-width: 1600px; 
+}
+
+/* 5. Extreme Vertical Compression (For heavily scaled Windows Laptops) */
+@media (max-height: 800px) {
+  .hero-content-wrapper, 
+  .intro-section {
+    margin-bottom: 2.5rem !important; 
+    gap: 1rem;
+  }
+  
+  .dossier-row, 
+  .continuous-row, 
+  .project-row, 
+  .article-row,
+  .community-article {
+    padding: 2.5rem 0 !important; 
+    gap: 1.5rem !important;
+  }
+}
+
+
+
+/* =========================================================================== */
+
+
+
+/* ========================= */
+/* Typography: Font Faces    */
+/* ========================= */
+
+/* Calling iA Writer Duospace via jsDelivr CDN */
+@font-face {
+  font-family: 'iA Writer Duospace';
+  src: url('https://cdn.jsdelivr.net/gh/iaolo/iA-Fonts/iA%20Writer%20Duospace/Webfonts/iAWriterDuospace-Regular.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/iaolo/iA-Fonts/iA%20Writer%20Duospace/Webfonts/iAWriterDuospace-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'iA Writer Duospace';
+  src: url('https://cdn.jsdelivr.net/gh/iaolo/iA-Fonts/iA%20Writer%20Duospace/Webfonts/iAWriterDuospace-Bold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/iaolo/iA-Fonts/iA%20Writer%20Duospace/Webfonts/iAWriterDuospace-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Apply Duospace to Non-Title Elements */
+
+.quick-links a, 
+.rights-reserved,
+.nav-metadata {
+  font-family: 'iA Writer Duospace', monospace;
+}
+
+/* 1. The Default State */
+.arrow {
+  font-size: 1rem;
+  font-family: 'iA Writer Duospace', monospace;
+  display: inline-block;
+  margin-left: 0.1rem;
+  transition: transform 0.3s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* 2. The Hover State */
+a:hover .arrow {
+  transform: translate(1px, -1px); /* Kinetic nudge */
+}
+
+
+/* 1. The Default State */
+.arrow1 {
+  font-size: 2rem;
+  font-family: 'iA Writer Duospace', monospace;
+  display: inline-block;
+  margin-left: 0.3rem;
+  transition: transform 0.3s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* 2. The Hover State */
+a:hover .arrow1 {
+  transform: translate(1px, -1px); /* Kinetic nudge */
+}
+
+
+/* =========================================================================== */
+
+
+
+/* ========================= */
+/* Global Variables & Resets */
+/* ========================= */
+:root {
+  --shared-text-size: 1.05rem; 
+  --global-padding: 2rem;
+  
+
+  --bg-color: #F4F4F0;       /* Editorial Off-White */
+  --text-color: #1A1A1A;     /* Ink Black / Charcoal */
+  --accent-color: #C85A32;   /* Sophisticated Terracotta */
+}
+
+/* 4. Custom Text Selection Color */
+::selection {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+::-moz-selection { 
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+
+
+/* =========================================================================== */
+
+
+
+/* ========================================== */
+/* GLOBAL CUSTOM SCROLLBAR (BRUTALIST)        */
+/* ========================================== */
+
+/* 1. Firefox Engine (Strictly isolated so Safari ignores it) */
+@-moz-document url-prefix() {
+  html {
+    scrollbar-width: thin;
+    /* Uses a transparent Terracotta so it bleeds into the off-white paper */
+    scrollbar-color: rgba(200, 90, 50, 0.3) var(--bg-color); 
+  }
+}
+
+/* 2. WebKit Engine (Forces Safari, Chrome, and Edge to draw a physical block) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+::-webkit-scrollbar {
+  width: 12px; 
+  height: 12px; 
+  -webkit-appearance: none; 
+}
+
+/* The Track (Ledger Perforation) */
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+  background: var(--bg-color); 
+  border-left: 1px dotted rgba(26, 26, 26, 0.3); 
+}
+
+/* The Thumb (Resting State: 30% Faded Terracotta, Floating) */
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+  background-color: rgba(200, 90, 50, 0.3); 
+  border-radius: 0px; 
+  
+  /* Creates the invisible barrier so the block floats inside the track */
+  border: 3px solid transparent; 
+  background-clip: padding-box; 
+}
+
+/* Hover State (Active State: 100% Solid Terracotta & Expansion) */
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent-color); 
+  
+  /* Shrinks the invisible barrier, making the physical block expand */
+  border: 1px solid transparent; 
+  background-clip: padding-box;
+}
+
+
+
+
+
+
+/* ========================= */
+/* Navbar Metadata & Flipper */
+/* ========================= */
+
+/* ========================= */
+/* Translucent Glass Navbar  */
+/* ========================= */
+
+.navbar {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem var(--global-padding);
+  
+
+  background: rgba(244, 244, 240, 0.7); 
+  
+
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%); 
+  
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+
+}
+
+
+.nav-metadata {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  text-align: left; 
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.nav-flipper {
+  display: flex;
+  align-items: center; 
+  justify-content: flex-start; 
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.nav-flipper .flip-reel span {
+  height: 1.2rem;
+  line-height: 1.2rem; 
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+
+.nav-flipper .static-text {
+  opacity: 0.5;
+}
+
+.nav-flipper .flip-window {
+  height: 1.2rem; 
+  overflow: hidden;
+  position: relative;
+  color: var(--accent-color);
+  font-weight: 700;
+  min-width: 210px; 
+ 
+}
+
+.nav-flipper .flip-reel {
+  display: flex;
+  flex-direction: column;
+  animation: navFlipText 6s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+}
+
+
+@keyframes navFlipText {
+  0%, 15%   { transform: translateY(0); }
+  20%, 40%  { transform: translateY(-1.2rem); }
+  45%, 65%  { transform: translateY(-2.4rem); }
+  70%, 90%  { transform: translateY(-3.6rem); }
+  95%, 100% { transform: translateY(-4.8rem); }
+}
+
+
+
+/* =========================================================================== */
+
+
+
+/* ========================= */
+/* Footer                    */
+/* ========================= */
+
+.bottom-left-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem var(--global-padding);
+  box-sizing: border-box;
+  pointer-events: none; 
+}
+
+.footer {
+  pointer-events: auto;
+}
+
+.rights-reserved {
+  font-size: 0.75rem; /* Matched to nav-metadata */
+  color: var(--text-color);
+  opacity: 0.9; /* Raised from 0.5 to match navbar */
+  letter-spacing: 0.05em; /* Added to match the technical tracking */
+  margin: 0;
+}
+
+
+
+/* =========================================================================== */
+
+
+
+/* ========================= */
+/* Animations                */
+/* ========================= */
+
+@keyframes fadeInUp {
+  from { opacity: 0; filter: blur(5px); transform: translateY(20px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+
+.logo-in { animation: logoIn 0.6s ease forwards; }
+@keyframes logoIn {
+  0%   { opacity: 0; transform: translateY(-5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.logo-out { animation: logoOut 0.5s ease forwards; }
+@keyframes logoOut {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-5px); }
+}
+
+/* Tile Animations */
+.tile-container { perspective: 1200px; }
+
+.tile-in {
+  opacity: 0;
+  transform: rotateY(90deg) scale(0.95);
+  transform-origin: left center;
+  animation: tileOpen 0.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+.tile-in-delay,
+.tile-in-delay-delay {
+  opacity: 0;
+  transform: rotateY(90deg) scale(0.95);
+  transform-origin: left center;
+  animation: tileOpen 0.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes tileOpen {
+  0% { opacity: 0; transform: rotateY(90deg) scale(0.95); }
+  60% { opacity: 1; transform: rotateY(-5deg) scale(1.02); }
+  100% { opacity: 1; transform: rotateY(0) scale(1); }
+}
+
+.tile-out {
+  opacity: 1;
+  transform: rotateY(0) scale(1);
+  transform-origin: left center;
+  animation: tileClose 0.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+.tile-out-delay,
+.tile-out-delay-delay {
+  opacity: 1;
+  transform: rotateY(0) scale(1);
+  transform-origin: left center;
+  animation: tileClose 0.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes tileClose {
+  0% { opacity: 1; transform: rotateY(0) scale(1); }
+  100% { opacity: 0; transform: rotateY(-90deg) scale(0.95); }
+}
+
+/* ========================= */
+/* Mobile Adjustments        */
+/* ========================= */
+@media (max-width: 768px) {
+  :root {
+    --shared-text-size: 0.95rem; 
+    --global-padding: 1.5rem; 
+  }
+
+  .quick-links {
+    gap: 1.2rem 1rem;
+  }
+  
+  .nav-metadata {
+    font-size: 0.65rem;
+  }
+
+  
+  
+}
+
+/* ========================= */
+/* Mobile Footer Override    */
+/* ========================= */
+
+@media (max-width: 800px) {
+
+  body:not(.page-index, .page-photos) .bottom-left-footer {
+    position: relative; 
+    padding-bottom: 2rem; 
+    padding-top: 2rem;
+  }
+}
+
+/* =========================================================================== */
+
+/* ========================================== */
+/* Magnetic UI Elements                       */
+/* ========================================== */
+
+.magnetic-btn {
+  display: inline-block; 
+  will-change: transform; 
+  /* CRITICAL: Do NOT add a CSS 'transition' to the transform property. 
+     The JavaScript engine will handle the smooth easing frame-by-frame. */
+}
+
+
+
+/* =========================================================================== */
+
+/* ========================================== */
+/* Utility: Visually Hidden (Crawler/Reader)  */
+/* ========================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+
+/* ========================================== */
+/* TERMINAL: DESKTOP NAVBAR HINT              */
+/* ========================================== */
+
+.terminal-hint {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  color: #b3b3b3;
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+  display: flex;
+  gap: 1rem;
+}
+
+
+/* THE KILL-SWITCH: Eradicates the hint entirely on mobile/tablet */
+@media (max-width: 899px) {
+  .terminal-hint {
+    display: none !important;
+  }
+}
+
+/* ========================================== */
+/* NAVBAR: CENTERED WEBSITE TITLE             */
+/* ========================================== */
+
+.nav-website-name {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Pulls it back exactly 50% of its own width to reach dead center */
+  
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  opacity: 0.4; /* Ghostly integration */
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  z-index: 10; /* Ensures it sits above any overlapping elements */
+}
+
+.nav-website-name:hover {
+  opacity: 1;
+  color: var(--accent-color);
+}
+
+/* THE KILL-SWITCH: Eradicates the title on mobile/tablet */
+@media (max-width: 899px) {
+  .nav-website-name {
+    display: none !important;
+  }
+}

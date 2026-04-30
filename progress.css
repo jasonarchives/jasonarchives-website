@@ -1,0 +1,30 @@
+/* progress.css - Architectural Ruler */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px; 
+  /* Faint vertical tick marks to indicate page quarters */
+  background-image: repeating-linear-gradient(
+    to right, 
+    transparent, 
+    transparent 24.8%, 
+    rgba(26, 26, 26, 0.3) 24.8%, 
+    rgba(26, 26, 26, 0.3) 25%
+  );
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  z-index: 9999; 
+  pointer-events: none; 
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--accent-color);
+  opacity: 0.9;
+}
+
+@media (max-width: 800px) {
+  .progress-container { height: 4px; }
+}

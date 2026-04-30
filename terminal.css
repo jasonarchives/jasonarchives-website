@@ -1,0 +1,110 @@
+/* ========================================== */
+/* TERMINAL: SEARCHABLE FROSTED GLASS         */
+/* ========================================== */
+
+#terminal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-color: rgba(26, 26, 26, 0.4); 
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  z-index: 9999;
+  
+  display: flex; flex-direction: column; justify-content: center; 
+  align-items: flex-start; 
+  padding: 0 var(--global-padding); 
+  box-sizing: border-box;
+  
+  opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+}
+
+#terminal-overlay.is-active { opacity: 1; pointer-events: auto; }
+
+.terminal-container { 
+  width: 100%; max-width: 1600px; 
+  padding: 0; color: var(--bg-color); 
+}
+
+.terminal-input-wrapper { display: flex; align-items: center; margin-bottom: 1.5rem; width: 100%; }
+.terminal-prompt { display: none; }
+
+#terminal-input {
+  background: transparent; border: none; color: var(--bg-color); 
+  text-align: left;
+  font-family: 'SF Pro Display', sans-serif; 
+  font-size: clamp(2rem, 4vw, 3.5rem); 
+  font-weight: 700; letter-spacing: -0.02em; 
+  line-height: 1;
+  width: 100%; outline: none;
+}
+
+#terminal-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+/* The Scrollbar Cloak */
+#terminal-suggestions { 
+  list-style: none; padding: 0; margin: 0; 
+  display: flex; flex-direction: column; gap: 0.5rem; 
+  
+  max-height: 40vh; 
+  overflow-y: auto; 
+  overscroll-behavior: contain;
+  
+  /* Eradicates the scrollbar in Firefox and Edge */
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+/* Eradicates the scrollbar in WebKit (Chrome, Safari, iOS, newer Edge) */
+#terminal-suggestions::-webkit-scrollbar { 
+  display: none; 
+}
+
+.suggestion-item {
+  display: flex; justify-content: flex-start; align-items: center; gap: 1.5rem; 
+  padding: 0.6rem 0; 
+  cursor: pointer; opacity: 0.4; transition: all 0.2s;
+}
+
+.suggestion-item.is-highlighted, .suggestion-item:hover { 
+  opacity: 1; transform: translateX(10px); 
+}
+
+.suggestion-cmd { 
+  font-family: 'iA Writer Duospace', monospace; 
+  font-weight: 700; color: var(--bg-color); 
+  font-size: clamp(1rem, 2vw, 1.25rem); 
+  transition: all 0.2s ease;
+}
+
+.suggestion-desc { 
+  font-family: 'SF Pro Display', sans-serif; 
+  font-size: 0.9rem; color: var(--bg-color); opacity: 0.7;
+}
+
+/* The Exit Hint */
+.terminal-exit-hint {
+  position: absolute;
+  bottom: var(--global-padding);
+  left: var(--global-padding);
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem; 
+  letter-spacing: 0.05em;
+  color: var(--bg-color);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .suggestion-item {
+    flex-direction: column; align-items: flex-start; gap: 0.2rem; padding: 0.8rem 0;
+  }
+  .suggestion-item.is-highlighted, .suggestion-item:hover { 
+    transform: translateX(5px); 
+  }
+  .terminal-exit-hint {
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+  }
+}

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="index, follow, max-image-preview:large">  
+
+  <meta name="theme-color" content="#F4F4F0"> <title>Journey Mapping with Hunters | Jason Mendes</title>
+  <meta name="title" content="Journey Mapping with Hunters | Jason Mendes">
+  <meta name="description" content="Understanding user behaviour and visualising key findings through mixed methods research to guide UX decisions at GAIM.">
+  <meta name="author" content="Jason Mendes">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jasonarchives.online/designrec/DES-04.html">
+  <meta property="og:title" content="Journey Mapping with Hunters | Jason Mendes">
+  <meta property="og:description" content="Understanding user behaviour and visualising key findings through mixed methods research to guide UX decisions at GAIM.">
+  <meta property="og:image" content="https://jasonarchives.online/preview/DES04.jpg">
+  <meta property="og:image:width" content="1200"> 
+  <meta property="og:image:height" content="630">
+
+
+  <link rel="canonical" href="https://jasonarchives.online/designrec/DES-04.html">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="any">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Journey Mapping with Hunters",
+    "image": "https://jasonarchives.online/preview/DES02.jpg",  
+    "author": {
+      "@type": "Person",
+      "name": "Jason Mendes",
+      "url": "https://jasonarchives.online/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "jasonarchives.online",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jasonarchives.online/favicon.ico"
+      }
+    },
+    "datePublished": "2026-04-19",
+    "dateModified": "2026-04-19",
+    "description": "Understanding user behaviour and visualising key findings through mixed methods research to guide UX decisions at GAIM."
+  }
+  </script>
+ 
+
+
+
+  <link rel="stylesheet" href="../cursor.css"> 
+  <link rel="stylesheet" href="../core.css"/>  
+  <link rel="stylesheet" href="../record.css"/> 
+  <link rel="stylesheet" href="../progress.css"/> 
+  <link rel="stylesheet" href="../overlay.css"/> 
+  <link rel="stylesheet" href="../cursor.css"> 
+  <link rel="stylesheet" href="../animations.css"> 
+  <link rel="stylesheet" href="../terminal.css">
+
+</head>
+
+<body>
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- NAVBAR -->  
+
+<nav class="navbar">
+  <div style="display: flex; align-items: center; width: 100%; position: relative;">
+    
+    <div class="nav-right tile-in-delay-delay" style="display: flex; align-items: center;">
+      <button id="menu-toggle" class="menu-btn magnetic-btn">[←ARCHIVE]</button>
+    </div>
+   
+    <span id="desktop-terminal-hint" class="terminal-hint tile-in-delay-delay" style="margin-left: auto;">[PRESS ⌘K FOR QUICK SEARCH]</span>
+
+  </div>
+</nav>
+
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- OVERLAY -->  
+
+  
+
+<div id="index-overlay" class="index-overlay">
+  <button id="overlay-close-btn" class="overlay-close-btn">[ ✕ CLOSE ]</button>
+  <div class="overlay-content" style="width: 100%;">
+    
+    <a href="../design.html" class="overlay-home-link">[← BACK TO DESIGNS]</a>
+    
+    <!-- THE NEW SCROLLABLE DIRECTORY -->
+    <div class="overlay-scroll-area">
+      <span class="overlay-section-title">[RECORDS]</span>
+      
+      <!-- Adding the 'active' class colors the current record Terracotta -->
+      <a href="DES-01.html" class="overlay-record-link">DES-01: Creatives for Collectives<span class="arrow1">↗</span></a>
+      <a href="DES-02.html" class="overlay-record-link">DES-02: Reimagining a Duty-Free Experience<span class="arrow1">↗</span></a>
+      <a href="DES-03.html" class="overlay-record-link">DES-03: Bicycle Parking at Uppsala Centralstation<span class="arrow1">↗</span></a>
+      <a href="DES-04.html" class="overlay-record-link active">DES-04: Journey Mapping with Hunters<span class="arrow1">↗</span></a>
+      <a href="DES-05.html" class="overlay-record-link">DES-05: OST & Manual Redesign<span class="arrow1">↗</span></a>
+      <a href="DES-06.html" class="overlay-record-link">DES-06: Coming Soon<span class="arrow1">↗</span></a>      
+    </div>
+
+    <!-- GLOBAL NAV RELEGATED TO FOOTER -->
+    <div class="overlay-footer">
+      <a href="../index.html">Home <span class="arrow">↗</span></a>
+      <a href="../photos.html">Photos<span class="arrow">↗</span></a>
+      <a href="../writings.html">Writings<span class="arrow">↗</span></a>
+      <a href="../community.html">Community<span class="arrow">↗</span></a>
+    </div>
+
+  </div>
+</div>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->        
+
+
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- STICKY BUTTON -->  
+
+<button id="mobile-ledger-btn" class="mobile-hud-btn">[↑INDEX]</button>
+
+<div id="mobile-ledger-overlay" class="mobile-hud-overlay">
+  <div class="hud-header">
+    <span class="hud-title">[↓INDEX]</span>
+    <button id="close-hud-btn" class="hud-close">[ ✕ ]</button>
+  </div>
+  
+  <nav class="hud-nav">
+    <a href="#understanding" class="hud-link">01 / Understanding GAIM </a>
+    <a href="#research" class="hud-link">02 / UX Research </a>
+    <a href="#cjm" class="hud-link">03 / Insights & Customer Journey Map</a>
+    <a href="#personas" class="hud-link">04 / User Personas</a>
+    <a href="#readings" class="hud-link">05 / Readings That Guided Me</a>
+    <a href="#record" class="hud-link">Next Record</a>
+  </nav>
+</div>
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- MAIN -->  
+
+
+<main class="content tile-container">
+
+<article class="project-content active">
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- OVERVIEW -->  
+
+  <header class="article-header tile-in">
+    <h1 class="article-title">Journey Mapping with Hunters</h1>
+    <div class="article-meta">[RECORD: DES-04]</div>
+  </header>
+
+  <div class="article-grid">
+
+    <div class="article-body tile-in-delay">
+      
+      <p>
+      At <span class="footnote" data-note="GAIM creates cutting-edge
+        solutions that enhance your shooting skills and immerse you
+         in lifelike scenarios. Their commitment to attention to detail, 
+         and collaboration with industry experts ensure that GAIM products deliver 
+         the most realistic and effective shooting training experiences possible">GAIM 
+        Immersive Technology AB</span> in Malmö, 
+      Sweden, I was part of a team of three 
+      UX researchers tasked with understanding and visualizing user
+      behavior among GAIM's hunting simulator userbase.
+                 
+                 <br><br>
+                 
+                 Our goal was to 
+                 explore and document the entire customer journey
+                 and identify 
+                 opportunities to guide product decisions for
+                 improving the customer experience.
+                 
+                 <br><br>
+                 The project focused primarily on 
+                 <span class="footnote" data-note="Deep, Non-numerical understandings of
+                 human motivations, behaviors, emotions and opinions.">Qualitative Insights</span>, gathered through
+                 extensive interviews and observational
+                 studies. These insights informed
+                 a series of strategic UX Deliverables
+                 that have since helped guide product
+                 decisions across the organization, from development
+                 to sales and marketing.
+      </p>
+
+      <div class="editorial-grid">
+        <div class="grid-col">
+          <h3>My Role</h3>
+          
+          <p>Planning and executing the data gathering phase which
+             included Interviews, Blind Tests(Contextual Inquiry) &amp; 
+             Surveys, Leading the development of User Personas, Collaborating on
+             Customer Journey Mapping, Conducting workshops with Marketing &amp; 
+             Development teams to deliver key UX Insights</p>
+
+        </div>
+        <div class="grid-col">
+          <h3>Tools</h3>
+          <p>Miro, Figma, Dovetail, Jira, SurveyMonkey.</p>
+        </div>
+        <div class="grid-col">
+         <h3>Team Members and Co-ordinators</h3>
+          <div class="team-list">
+          <a href="https://www.linkedin.com/in/hannes-bjurstrom/" target="_blank" rel="noopener noreferrer" class="team-link">Hannes Bjurström<span class="arrow">↗</span></a>
+          <a href="https://www.linkedin.com/in/david-hansson-61bb72128/" target="_blank" rel="noopener noreferrer" class="team-link">David Hansson<span class="arrow">↗</span></a>
+          <a href="https://www.linkedin.com/in/gabrielladanielsson/" target="_blank" rel="noopener noreferrer" class="team-link">Gabriella Danielsson<span class="arrow">↗</span></a>
+          </div>
+        </div>
+      </div>
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 1 -->  
+
+
+       <h2 id="understanding">01 / Understanding GAIM</h2>
+       <p>We kicked off the project by conducting a few Pilot 
+       Interviews to test and refine a  <span class="footnote" data-note="A structured set of questions to prepare for in-depth 
+       interviews in the main study.">Questionnaire</span> for the main 
+       study.&nbsp;</p>
+
+      <figure>
+        <img src="../projectpics/MANUAL/MAN4.webp" alt="A team member at GAIM, using the rifle controller and meta headset while another takes down notes." loading="lazy" decoding="async" width="1429" height="938">
+        <figcaption>Using the GAIM Hunting Rifle with the Meta Quest.</figcaption>
+      </figure>
+
+      <p>Getting to know the product while empathizing with our customers was one of the goals we had during this initial phase. Hence, each team member spent many hours using the software and the tangible controller, taking notes of the many observations we came across.</p>
+
+      <figure>
+        <img src="../projectpics/MANUAL/MAN5.webp" alt="The image shows post it note stuck on a white board after the finishing of a team retrospective session." loading="lazy" decoding="async" width="1429" height="938">
+        <figcaption>Important notes from a team retrospective.</figcaption>
+      </figure>
+
+
+      <h2 id="research">02 / UX Research</h2>
+      
+
+      <p>
+        With a structured Questionnaire in-hand and a 
+        good understanding of how the product works, 
+        we moved ahead with gathering data through 
+        In-Depth Interviews. We gathered participants 
+        through sending out requests on GAIM’s monthly 
+        newsletter and then shortlisting candidates to 
+        have a diverse dataset.</p>
+
+      <figure>
+        <img src="../projectpics/CJM/MAP3.webp" alt="Screenshot from a Miro Board showing the collection of all the knowledge created through every phase of the project, organised systematically with sections on the top, bottom, right and left." loading="lazy" decoding="async" width="1429" height="938">
+        <figcaption>Miro Board where we collated and presented all the information collected during every phase of the project.</figcaption>
+      </figure>
+      
+    
+
+
+      <p>We also ran <span class="footnote" data-note="Contextual Inquiries with participants
+      unfamiliar with the GAIM system.">Blind Tests</span>, observing their interactions 
+       with the system through their 
+       onboarding and first-use. To supplement our Qualitative
+       work, we conducted surveys, recruiting participants through
+       GAIMS's Newsletter, which helped us triangulate our findings during the analysis.</p>
+
+
+       <div class="image-pair">
+        <figure>
+          <img src="../projectpics/CJM/MAP1.webp" alt="Screenshot showing a pie chart of nationality distribution of the results from our survey participants. " loading="lazy" decoding="async" width="800" height="800">
+        </figure>
+        <figure>
+          <img src="../projectpics/CJM/MAP5.webp" alt="A screenshot of a Miro Board showing notes taken down on post it notes nd placed alongside the user manual during a Blind Test session. " loading="lazy" decoding="async" width="800" height="800">
+        </figure>
+      </div>
+      <figcaption style="margin-top: -2rem; margin-bottom: 2rem;">Top: Nationality distribution on our surveys, that align with GAIM's userbase distribution across Europe & North America | Bottom: Note-taking during a Blind Test.</figcaption>
+
+
+      <p>After a rigorous <span class="footnote" data-note="A widely used, flexible qualitative 
+      research method for identifying, analyzing, and reporting 
+      patterns (themes) within data.">Thematic Analysis</span> phase was completed on Dovetail,
+      the <span class="footnote" data-note="In Dovetail, an insight is a 
+        specific object type where you summarize and share your research findings 
+        in a simple format, connected directly to your raw data. With insights, you 
+        can curate a narrative with editing and formatting tools alongside highlight reels as 
+        a compelling way to present your data to stakeholders.">Insights</span> that emerged were used to create a range of UX deliverables.</p>
+
+        
+          
+  
+
+     
+      <h2 id="cjm">03 / Insights &amp; Customer Journey Map</h2>
+      <p>
+        The Insights acted as a resource 
+        bank for the themes that emerged 
+        during the analysis. They were created, 
+        stored and presented from Dovetail itself. 
+        These Insights would then be used as a 
+        resource for Workshops and Brainstorming 
+        sessions across teams.&nbsp;</p>
+      
+      <blockquote class="pull-quote">A quote presented in the Insights - “When I look down the scope, I have to be sure of making the hit. What’s necessary for that, is practice."</blockquote>
+
+      
+      
+      <figure>
+        <img src="../projectpics/CJM/MAP8.webp" alt="Screenshot from a Miro Board showing how the Insights on Dovetail help create both the Customer Journey Map and Personas which in turn create the Persona Journey Maps that influence further UX Implementations." loading="lazy" decoding="async" width="1429" height="938">
+        <figcaption>How the Insights on Dovetail flow into other deliverables.</figcaption>
+      </figure>
+
+
+      <p>
+        The Customer Journey Map (CJM) was created as an end-to-end visualization of user interaction across all product touchpoints and phases. This was designed to be a living map that changes as the product evolves.</p>
+
+      
+      <figure>
+        <img src="../projectpics/CJM/MAP6.webp" alt="Screenshot of the Customer Journey Map with seven phaes fo the journey including Awareness, Consideration, Purchase, Onboarding, Usage, Loyalty and Advocacy." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>The filled-up Customer Journey Map with seven phases of the product journey.</figcaption>
+      </figure>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 4 -->  
+
+     
+      <h2 id="personas">04 / User Personas</h2>
+
+      <p>
+       
+       The User Personas were the final 
+       deliverable from the research that
+       were to be used by teams at GAIM 
+       as a tool for truly empathizing 
+       with their customers. It was split 
+       into three documents.</p>    
+
+       <ul class="clean-list">
+  <li><strong>Persona Foundation Document:</strong> Core patterns and attributes that shaped 
+             our personas. This document acted as a database to collect all user data that emerged from the Insights.</li>
+  <li><strong>Three User Personas:</strong>&nbsp;Fictional characters based on the data in the PFD, referred to by the teams to empathise with real users.</li>
+  <li><strong>Persona Journey Maps:</strong> Detailed mapping of each Persona’s experience across the seven phases of the CJM.</li>
+
+    </ul>
+      
+      <figure>
+        <img src="../projectpics/CJM/MAP7.webp" alt="Screenshot of three user personas mapped across the seven phases of the same customer journey map as before." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>Three Persona Journey Maps.</figcaption>
+      </figure>
+  
+    <div class="image-pair">
+        <a href="https://www.gaim.com" target="_blank" class="article-footer-link">
+          [ VIEW GAIM.COM ↗ ]
+        </a>
+      </div> 
+
+        
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 5 -->  
+
+     
+      <h2 id="readings">04 / Readings That Guided me</h2> 
+ 
+      <div class="team-list">
+          <a href="https://www.design-thinking-playbook.com/?lang=en" target="_blank" rel="noopener noreferrer" class="team-link1">The Design Thinking Playbook.<span class="arrow">↗</span></a>
+          <a href="https://www.mrmattdavies.me/post/the-danish-design-ladder" target="_blank" rel="noopener noreferrer" class="team-link1">The Danish Design Ladder<span class="arrow">↗</span></a>
+          <a href="https://dl.acm.org/doi/10.1145/997078.997089" target="_blank" rel="noopener noreferrer" class="team-link1">Personas: Practice & Theory<span class="arrow">↗</span></a>
+      </div> 
+
+
+
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SHARE -->  
+      
+<div class="share-cluster">
+  <span class="share-label">DISTRIBUTE RECORD:</span>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A53337%2Frecord3.html" id="share-linkedin" class="share-link" target="_blank" rel="noopener noreferrer">[ in ]</a>
+  <a href="https://api.whatsapp.com/send?text=Reimagining%20a%20Smartphone%20Duty-Free%20Experience%20for%20Heinemann%20%7C%20Jason%20Mendes%20http%3A%2F%2Flocalhost%3A53337%2Frecord3.html" id="share-whatsapp" class="share-link" target="_blank" rel="noopener noreferrer">[ wa ]</a>
+  <a href="mailto:?subject=Reimagining%20a%20Smartphone%20Duty-Free%20Experience%20for%20Heinemann%20%7C%20Jason%20Mendes&amp;body=Check out this UX case study: http%3A%2F%2Flocalhost%3A53337%2Frecord3.html" id="share-email" class="share-link">[ ✉ ]</a>
+  
+  <button id="share-copy" class="share-link" style="background: none; border: none; padding: 0; cursor: pointer;">[ copy ]</button>
+</div>
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- NEXT RECORD -->  
+
+
+      <div class="project-pipeline">
+        <h2 id="record">next record</h2>
+        <a href="DES-05.html" class="pipeline-link">
+          OST & Manual Redesign<span class="arrow-nudge">↗</span>
+        </a>
+      </div>
+
+</div>
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- LEDGER INDEX -->  
+   
+   
+    <aside class="ledger-index tile-in-delay-delay">
+      <a href="#understanding" class="ledger-link active">01 / Understanding GAIM </a>
+      <a href="#research" class="ledger-link">02 / UX Research</a>
+      <a href="#cjm" class="ledger-link">03 / Insights & Customer Journey Map</a>
+      <a href="#personas" class="ledger-link">04 / User Personas</a>
+      <a href="#readings" class="ledger-link">04 / Readings That Guided Me</a>
+      <a href="#record" class="ledger-link">Next Record</a>
+    </aside>
+
+  </div>
+
+
+</article>
+
+</main>
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- FOOTER-->  
+
+
+<div class="bottom-left-footer">   
+  <footer class="footer">
+    <p class="rights-reserved"> © 2026 Jason Mendes</p>
+  </footer>
+</div> 
+
+<script src="../animations.js"></script>
+<script src="../cursor.js"></script>
+<script src="../progress.js"></script>
+<script src="../physics.js"></script>
+<script src="../terminal.js"></script>
+<script src="../overlay.js"></script>
+
+
+</body>
+</html>

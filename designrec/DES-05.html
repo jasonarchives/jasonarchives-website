@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="index, follow, max-image-preview:large">  
+
+  <meta name="theme-color" content="#F4F4F0"> <title>OST & Manual Redesign | Jason Mendes</title>
+  <meta name="title" content="OST & Manual Redesign | Jason Mendes">
+  <meta name="description" content="Turning UX Research into concrete business strategy and implementing a pilot project. Documented a new UX Strategy and redesigned the core User Manual.">
+  <meta name="author" content="Jason Mendes">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jasonarchives.online/designrec/DES-05.html">
+  <meta property="og:title" content="OST & Manual Redesign | Jason Mendes">
+  <meta property="og:description" content="Turning UX Research into concrete business strategy and implementing a pilot project. Documented a new UX Strategy and redesigned the core User Manual.">
+  <meta property="og:image" content="https://jasonarchives.online/preview/DES05.jpg">
+  <meta property="og:image:width" content="1200"> 
+  <meta property="og:image:height" content="630">
+
+
+  <link rel="canonical" href="https://jasonarchives.online/designrec/DES-05.html">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="any">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "OST & Manual Redesign",
+    "image": "https://jasonarchives.online/preview/DES05.jpg",  
+    "author": {
+      "@type": "Person",
+      "name": "Jason Mendes",
+      "url": "https://jasonarchives.online/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "jasonarchives.online",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jasonarchives.online/favicon.ico"
+      }
+    },
+    "datePublished": "2026-04-19",
+    "dateModified": "2026-04-22",
+    "description": "Turning UX Research into concrete business strategy and implementing a pilot project. Documented a new UX Strategy and redesigned the core User Manual."
+  }
+  </script>
+
+
+  <link rel="stylesheet" href="../cursor.css"> 
+  <link rel="stylesheet" href="../core.css"/>  
+  <link rel="stylesheet" href="../record.css"/> 
+  <link rel="stylesheet" href="../progress.css"/> 
+  <link rel="stylesheet" href="../overlay.css"/> 
+  <link rel="stylesheet" href="../cursor.css"> 
+  <link rel="stylesheet" href="../animations.css"> 
+  <link rel="stylesheet" href="../terminal.css"> 
+
+</head>
+
+<body>
+
+
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- NAVBAR -->  
+
+<nav class="navbar">
+  <div style="display: flex; align-items: center; width: 100%; position: relative;">
+    
+    <div class="nav-right tile-in-delay-delay" style="display: flex; align-items: center;">
+      <button id="menu-toggle" class="menu-btn magnetic-btn">[←ARCHIVE]</button>
+    </div>
+   
+    <span id="desktop-terminal-hint" class="terminal-hint tile-in-delay-delay" style="margin-left: auto;">[PRESS ⌘K FOR QUICK SEARCH]</span>
+
+  </div>
+</nav>
+
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- OVERLAY -->  
+
+  
+
+<div id="index-overlay" class="index-overlay">
+  <button id="overlay-close-btn" class="overlay-close-btn">[ ✕ CLOSE ]</button>
+  <div class="overlay-content" style="width: 100%;">
+    
+    <a href="../design.html" class="overlay-home-link">[← BACK TO DESIGNS]</a>
+    
+    <!-- THE NEW SCROLLABLE DIRECTORY -->
+    <div class="overlay-scroll-area">
+      <span class="overlay-section-title">[RECORDS]</span>
+      
+      <!-- Adding the 'active' class colors the current record Terracotta -->
+      <a href="DES-01.html" class="overlay-record-link">DES-01: Creatives for Collectives<span class="arrow1">↗</span></a>
+      <a href="DES-02.html" class="overlay-record-link">DES-02: Reimagining a Duty-Free Experience<span class="arrow1">↗</span></a>
+      <a href="DES-03.html" class="overlay-record-link">DES-03: Bicycle Parking at Uppsala Centralstation<span class="arrow1">↗</span></a>
+      <a href="DES-04.html" class="overlay-record-link">DES-04: Journey Mapping with Hunters<span class="arrow1">↗</span></a>
+      <a href="DES-05.html" class="overlay-record-link active">DES-05: OST & Manual Redesign<span class="arrow1">↗</span></a>
+      <a href="DES-06.html" class="overlay-record-link">DES-06: Coming Soon<span class="arrow1">↗</span></a>      
+    </div>
+
+    <!-- GLOBAL NAV RELEGATED TO FOOTER -->
+    <div class="overlay-footer">
+      <a href="../index.html">Home <span class="arrow">↗</span></a>
+      <a href="../photos.html">Photos<span class="arrow">↗</span></a>
+      <a href="../writings.html">Writings<span class="arrow">↗</span></a>
+      <a href="../community.html">Community<span class="arrow">↗</span></a>
+    </div>
+
+  </div>
+</div>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->        
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- STICKY BUTTON -->  
+
+<button id="mobile-ledger-btn" class="mobile-hud-btn">[↑INDEX]</button>
+
+<div id="mobile-ledger-overlay" class="mobile-hud-overlay">
+  <div class="hud-header">
+    <span class="hud-title">[↓INDEX]</span>
+    <button id="close-hud-btn" class="hud-close">[ ✕ ]</button>
+  </div>
+  
+  <nav class="hud-nav">
+    <a href="#ux" class="hud-link">01 / Commmunicating UX Deliverables </a>
+    <a href="#ost" class="hud-link">02 / Opportunity Solution Tree </a>
+    <a href="#matrix" class="hud-link">03 / Prioritization Matrix</a>
+    <a href="#workshops" class="hud-link">04 / Workshops </a>
+    <a href="#manual" class="hud-link">05 / Manual Redesign </a>
+    <a href="#workflow" class="hud-link">06 / UX Workflow at GAIM </a>
+    <a href="#record" class="hud-link">Next Record</a>
+  </nav>
+</div>
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- MAIN -->  
+
+
+<main class="content tile-container">
+
+<article class="project-content active">
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- OVERVIEW -->  
+
+  <header class="article-header tile-in">
+    <h1 class="article-title">OST &amp; Manual Redesign</h1>
+    <div class="article-meta">[RECORD: DES-05]</div>
+  </header>
+
+  <div class="article-grid">
+
+    <div class="article-body tile-in-delay">
+      
+      <p>
+      While working on understanding the user behavior at GAIM, I was
+                also working on a parallel project with the aim to synthesize 
+                concrete business outcomes from the UX Research, needed to be used to drive strategy at GAIM. So the aim became
+                 to align cross-functional teams around Humman-Centered goals.
+                 
+                 <br><br>
+                 Research showed us that the CJM and Personas can help 
+                 focus on customer needs and improve
+                 decision-making, so our mission was
+                 to operationalize those deliverables. In practice, this meant 
+                 using Visual
+                 Frameworks and Ideation Methods to bridge 
+                 the gap between user needs and GAIM’s
+                 business objectives.
+                 And demonstrating the use of this strategy by working on 
+                 an opportunity that emerged from the research.
+                 
+      </p>
+
+      <div class="editorial-grid">
+        <div class="grid-col">
+          <h3>My Role</h3>
+          
+         <p>Planning &amp; Executing Ideation Workshops with 
+         different teams at GAIM, Designing and communicating 
+         the Opportunity Solution Tree to development and 
+         marketing teams, &nbsp;Creating User-Flows for the 
+         User Manual, Implementing changes in the Manual 
+         based on Insights.&nbsp;</p>
+
+
+        </div>
+        <div class="grid-col">
+          <h3>Tools</h3>
+          <p>Miro, Dovetail, Jira, Teams.</p>
+        </div>
+        <div class="grid-col">
+         <h3>Team Members and Co-ordinators</h3>
+          <div class="team-list">
+          <a href="https://www.linkedin.com/in/hannes-bjurstrom/" target="_blank" rel="noopener noreferrer" class="team-link">Hannes Bjurström<span class="arrow">↗</span></a>
+          <a href="https://www.linkedin.com/in/david-hansson-61bb72128/" target="_blank" rel="noopener noreferrer" class="team-link">David Hansson<span class="arrow">↗</span></a>
+          <a href="https://www.linkedin.com/in/gabrielladanielsson/" target="_blank" rel="noopener noreferrer" class="team-link">Gabriella Danielsson<span class="arrow">↗</span></a>
+          </div>
+        </div>
+      </div>
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 1 -->  
+
+
+       <h2 id="ux">01 / Communicating UX Deliverables</h2>
+       <p>Collaborating with the other teams at GAIM to communicate the <span class="footnote" data-note="In Dovetail, an insight is a 
+        specific object type where you summarize and share your research findings 
+        in a simple format, connected directly to your raw data. With insights, you 
+        can curate a narrative with editing and formatting tools alongside highlight reels as 
+        a compelling way to present your data to stakeholders.">Insights</span> from the research was a key factor to making employees vary of the importance of being Human-Centric while working on product features.</p>
+
+      <figure>
+        <img src="../supportimg/IMG5.webp" alt="A picture of GAIM's main meeting room with a print of the CJM on a wall by the table." loading="lazy" decoding="async" width="1429" height="938">
+        <figcaption>A print of the CJM in the main meeting room at GAIM's office.</figcaption>
+      </figure>
+
+      <p>We placed large-sized prints of the CJM, Personas and Persona Journey Maps in main meeting spaces where most of the shared brainstorming usually took place. This helped employees always have access to user contexts and needs close to them while making key decisions.</p>
+
+        
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 2 -->  
+ 
+
+      <h2 id="ost">02 / Opportunity Solution Tree</h2>
+      
+
+      <p>The first Visual Framework we built that easily accomodated actionable tasks that 
+      emerged during brainstormings or ideation workshops was the <span class="footnote" data-note="A visual, high-level product 
+      discovery framework designed to map the path from a specific business 
+      outcome to the solutions that achieve it .">Opportunity Solution Tree.</span></p>
+
+      <figure>
+        <img src="../projectpics/MANUAL/MAN13.png" alt="Screenshot from a Miro Board showing a section of the Opportunity Solution Tree with multiple opportunities and solutions and business goals filled up in it, each of them also link to each other and are placed inside the seven different phases of the CJM." loading="lazy" decoding="async" width="1429" height="938">
+        <figcaption>Section of the filled-up Opportunity Solution Tree on a Miro Board</figcaption>
+      </figure>
+      
+      
+      <blockquote class="pull-quote">The interconnected OST makes collating insights very visually appealing and easy to keep track of, alongside other project management tools.</blockquote>
+
+
+      <p>The OST was created and used on a Miro Board that was in itself a collection of all deliverables the UX team had created at GAIM.</p>
+
+        
+          
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 3 -->  
+
+     
+      <h2 id="matrix">03 / Prioritization Matrix</h2>
+      <p>
+        The second Visual Framework was the Prioritization Matrix that worked 
+        hand-in-hand with the OST. Ideas generated were mapped to an effort-impact 
+        grid and <span class="footnote" data-note="A collaborative, visual prioritization
+         technique where team members place colored 'dots' on sticky notes, shapes, 
+         or images to vote on the best ideas">dot voting</span> was used to collaboratively identify what was desirable, feasible and viable.</p>
+      
+      <figure>
+        <img src="../projectpics/MANUAL/MAN14.webp" alt="Screenshot from a Miro Board showing how the Insights on Dovetail help create both the Customer Journey Map and Personas which in turn create the Persona Journey Maps that influence further UX Implementations." loading="lazy" decoding="async" width="1429" height="938">
+        <figcaption>The Prioritization Matrix with Opportunities and Solutions listed next to it after ranking.</figcaption>
+      </figure>
+ 
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 4 -->  
+  
+
+     
+      <h2 id="workshops">04 / Workshops</h2>
+
+      <p>We conducted two Workshops with different teams at GAIM. After the creation of the Insights we conducted a cross-functional session using the Themes in them. Participants from marketing, development and sales ideated around user needs to generate some solutions, which became some of the early entries into the OST.</p>    
+
+      
+      <figure>
+        <img src="../projectpics/CJM/MAP4.webp" alt="Screenshot of three user personas mapped across the seven phases of the same customer journey map as before." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>Workshop 1 that took place using the Insights as a resource.</figcaption>
+      </figure>
+        
+        
+      <p>After the creation of the CJM and User Personas, another Workshop was held using these UX Deliverables. Teams were split and asked to ideate while embodying the Personas assigned to them. This brought empathy and specificity to their choices. These Workshops were carried out on live Miro sessions, so that everything was well-documented digitally.</p>    
+
+      <figure>
+        <img src="../projectpics/MANUAL/MAN10.webp" alt="Screenshot of three user personas mapped across the seven phases of the same customer journey map as before." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>Workshop 2 that took place using the User Personas and CJM as resources.</figcaption>
+      </figure>  
+        
+      <figure>
+        <img src="../projectpics/MANUAL/MAN9.webp" alt="Screenshot of three user personas mapped across the seven phases of the same customer journey map as before." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>The entire Workshop space on the Miro Board.</figcaption>
+      </figure>
+
+        
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 5 -->  
+
+     
+      <h2 id="manual">05 / Manual Redesign</h2> 
+ 
+     
+      <p>One prominent opportunity that emerged on the OST using 
+      the Prioritisation Matrix during the second Workshop, was the need 
+      to redesign the <span class="footnote" data-note="According to the Insights, many users were not able
+      to even commplete the onboarding process due to there being structural errors in the flow of the onboarding process
+      within the User Manual.">GAIM User Manual</span>. I took up this task individually 
+      as an example to show how this UX workflow could lead to actionable 
+      tasks that promote real change.</p>    
+
+      
+      <figure>
+        <img src="../projectpics/MANUAL/MAN6.webp" alt="Screenshot of three user personas mapped across the seven phases of the same customer journey map as before." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>Note-taking during a Blind Test.</figcaption>
+      </figure>
+      
+      
+      
+      <p>The redesign happend in multiple iterations and among 
+      collaboration with the marketing team. Multiple <span class="footnote" data-note="Contextual Inquiries with participants
+      unfamiliar with the GAIM system.">Blind Tests</span> 
+      had been conducted at early stages of the UX Research, whose 
+      Insights played a key role during this redesign. Similar Blind Tests 
+      were conducted after for every iteration of this redesign.</p>    
+
+      <figure>
+        <img src="../projectpics/MANUAL/MAN3.webp" alt="Screenshot of three user personas mapped across the seven phases of the same customer journey map as before." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>Task Flows for the final version of the User Manual.</figcaption>
+      </figure> 
+      
+      
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- SEC 6 -->  
+  
+
+     
+      <h2 id="workflow">06 / UX Workflow at GAIM</h2> 
+ 
+      <p>Through this project at GAIM, a standardization of the UX Workflow had been put in place. Later UX Teams as well as other employees at GAIM, had access to all the project data and processes through an actionable Miro Board which collated all the UX Deliverables with explanations and prompts.</p>    
+
+      <figure>
+        <img src="../projectpics/MANUAL/MAN1.webp" alt="Screenshot of three user personas mapped across the seven phases of the same customer journey map as before." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>A flowchart depicting the UX Workflow at GAIM used since the project.</figcaption>
+      </figure>
+      
+      <figure>
+        <img src="../projectpics/MANUAL/MAN8.webp" alt="Screenshot of three user personas mapped across the seven phases of the same customer journey map as before." loading="lazy" decoding="async" width="1920" height="1080">
+        <figcaption>The whole actionable Miro Board containing all the UX Deliverables.</figcaption>
+      </figure> 
+      
+      <div class="image-pair">
+        <a href="https://www.gaim.com" target="_blank" class="article-footer-link">
+          [ VIEW GAIM.COM ↗ ]
+        </a>
+      </div>      
+
+  
+  
+      
+<div class="share-cluster">
+  <span class="share-label">DISTRIBUTE RECORD:</span>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A49667%2Fdesignrec%2FDES-05.html" id="share-linkedin" class="share-link" target="_blank" rel="noopener noreferrer">[ in ]</a>
+  <a href="https://api.whatsapp.com/send?text=Reimagining%20a%20Smartphone%20Duty-Free%20Experience%20for%20Heinemann%20%7C%20Jason%20Mendes%20http%3A%2F%2Flocalhost%3A49667%2Fdesignrec%2FDES-05.html" id="share-whatsapp" class="share-link" target="_blank" rel="noopener noreferrer">[ wa ]</a>
+  <a href="mailto:?subject=Reimagining%20a%20Smartphone%20Duty-Free%20Experience%20for%20Heinemann%20%7C%20Jason%20Mendes&amp;body=Check out this record: http%3A%2F%2Flocalhost%3A49667%2Fdesignrec%2FDES-05.html" id="share-email" class="share-link">[ ✉ ]</a>
+  
+  <button id="share-copy" class="share-link" style="background: none; border: none; padding: 0; cursor: pointer;">[ copy ]</button>
+</div>
+
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- NEXT RECORD -->  
+
+
+      <div class="project-pipeline">
+        <h2 id="record">next record</h2>
+        <a href="DES-06.html" class="pipeline-link">
+          Pillowtalk<span class="arrow-nudge">↗</span>
+        </a>
+      </div>
+
+</div>
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- LEDGER INDEX -->  
+   
+   
+    <aside class="ledger-index tile-in-delay-delay">
+      <a href="#ux" class="ledger-link active">01 / Communicating UX Deliverables </a>
+      <a href="#ost" class="ledger-link">02 / Opportunity Solution Trees</a>
+      <a href="#matrix" class="ledger-link">03 / Prioritization Matrix</a>
+      <a href="#workshops" class="ledger-link">04 / Workshops</a>
+      <a href="#manual" class="ledger-link">05 / Manual Redesign</a>
+      <a href="#workflow" class="ledger-link">06 / UX Workflow at GAIM</a>
+      <a href="#record" class="ledger-link">Next Record</a>
+    </aside>
+
+  </div>
+
+
+</article>
+
+</main>
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------->        
+          
+<!-- FOOTER-->  
+
+
+<div class="bottom-left-footer">   
+  <footer class="footer">
+    <p class="rights-reserved"> © 2026 Jason Mendes</p>
+  </footer>
+</div> 
+
+<script src="../animations.js"></script>
+<script src="../cursor.js"></script>
+<script src="../progress.js"></script>
+<script src="../physics.js"></script>
+<script src="../terminal.js"></script>
+<script src="../overlay.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+/* ========================================== */
+/* MASTER OVERLAY: TERMINAL STYLE             */
+/* ========================================== */
+
+.index-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  
+  /* Terminal Dark Glass Background */
+  background-color: rgba(26, 26, 26, 0.4) !important;
+  background-image: none !important;
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  
+  z-index: 9999; /* Matches terminal z-index */
+  
+  display: flex; flex-direction: column; justify-content: center;
+  align-items: flex-start; /* Snaps everything to the left like the terminal */
+  padding: 0 var(--global-padding);
+  box-sizing: border-box;
+  
+  /* Terminal Fade Physics */
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.index-overlay.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* THE BULLETPROOF SCROLL LOCK (Mobile Only) */
+.scroll-lock {
+  overflow: hidden !important;
+  touch-action: none !important;
+}
+
+/* THE FIX: Disables the scroll lock on Desktop. 
+The scrollbar stays permanently visible, preventing any layout shifts! */
+@media (min-width: 900px) {
+  .scroll-lock {
+    overflow: auto !important;
+    touch-action: auto !important;
+  }
+}
+
+/* ========================================== */
+/* THE ESCAPE HATCH (Left Aligned & Monochrome)*/
+/* ========================================== */
+
+.overlay-close-btn {
+  position: absolute;
+  /* Adjust this top value if it is slightly higher or lower than your navbar text */
+  top: 2rem; 
+  left: var(--global-padding);
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--bg-color); /* Strict White */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  padding: 0;
+}
+
+.overlay-close-btn:hover {
+  opacity: 1; /* Brightens on hover, no color shift */
+}
+
+/* ========================================== */
+/* GLOBAL OVERLAY LINK (Desktop & Mobile)     */
+/* ========================================== */
+
+.overlay-home-link {
+  display: inline-block;
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--bg-color); 
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  margin-bottom: 2.5rem; 
+  border-bottom: 1px solid rgba(244, 244, 240, 0.3);
+  padding-bottom: 0.2rem;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.overlay-home-link:hover {
+  opacity: 1;
+  border-bottom-color: var(--bg-color);
+}
+
+/* ========================================== */
+/* MONOCHROME TYPOGRAPHY                      */
+/* ========================================== */
+
+.massive-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.giant-link {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 8rem); 
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--bg-color); /* Strict White */
+  text-decoration: none;
+  transition: opacity 0.4s ease, transform 0.2s ease;
+  width: max-content;
+}
+
+.massive-nav:hover .giant-link {
+  opacity: 0.3; 
+}
+
+.massive-nav .giant-link:hover {
+  opacity: 1;
+  transform: translateX(10px); /* Terminal mechanical nudge */
+}
+
+.overlay-footer {
+  margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1.5rem;
+  border-top: 1px solid rgba(244, 244, 240, 0.2); 
+  padding-top: 2rem;
+}
+
+.overlay-footer a {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.9rem;
+  color: var(--bg-color); 
+  text-decoration: none;
+  padding-bottom: 0.2rem; 
+  border-bottom: 1px solid rgba(244, 244, 240, 0.2); 
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  width: max-content; 
+}
+
+.overlay-footer a:hover {
+  opacity: 1;
+  border-bottom-color: var(--bg-color);
+}
+
+/* Fika & CV Links */
+.overlay-footer a.fika-link {
+  font-weight: 700;
+  opacity: 0.9;
+  border-bottom-color: rgba(244, 244, 240, 0.5); 
+}
+
+.overlay-footer a.fika-link:hover {
+  opacity: 1;
+  border-bottom-color: var(--bg-color);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 800px) {
+  .overlay-footer { margin-top: 3rem; gap: 1rem; }
+  .overlay-footer a { font-size: 0.8rem; }
+  .giant-link { font-size: clamp(2.5rem, 8vh, 4rem) !important; line-height: 0.8; }
+}
+
+
+
+
+
+
+
+
+
+/* ========================================== */
+/* OVERLAY SCROLL DIRECTORY (For Record Pages)*/
+/* ========================================== */
+
+.overlay-scroll-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 50vh; 
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  padding: 2rem 0;
+  margin-bottom: 1rem;
+  border-top: 1px solid rgba(244, 244, 240, 0.2);
+  border-bottom: 1px solid rgba(244, 244, 240, 0.2);
+}
+
+.overlay-scroll-area::-webkit-scrollbar { display: none; }
+
+.overlay-section-title {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.85rem;
+  /* THE FIX: Replaced Terracotta with faded white */
+  color: var(--bg-color); 
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.overlay-record-link {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--bg-color); 
+  text-decoration: none;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+  opacity: 0.5;
+  
+  /* Single-line clipping with ellipsis */
+  display: block;
+  width: 100%;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  
+  /* THE FIX: Prevents Flexbox from squishing the height of the links */
+  flex-shrink: 0; 
+}
+
+/* Hover Physics */
+.overlay-scroll-area:hover .overlay-record-link {
+  opacity: 0.2; 
+}
+
+/* Active & Hover States: No color change, just full opacity and a nudge */
+.overlay-scroll-area .overlay-record-link:hover,
+.overlay-record-link.active {
+  opacity: 1;
+  transform: translateX(10px); 
+}
+
+
+/* THE FIX: Forces overlays to respect the visible scrollbar */
+.index-overlay,
+#terminal-overlay,
+#examiner-overlay {
+  width: 100% !important;
+}

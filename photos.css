@@ -1,0 +1,586 @@
+html, body {
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+}
+}
+
+
+/* Premium Static Paper Texture */
+body {
+  background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+}
+
+
+
+/* =========================================================================== */
+
+
+
+
+/* ========================= */
+/* Navbar Menu Toggle        */
+/* ========================= */
+
+.menu-btn {
+  font-family: 'iA Writer Duospace', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  padding: 0; /* Resets default button padding */
+}
+
+.menu-btn:hover {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+
+
+/* =========================================================================== */
+
+
+
+
+/* ========================= */
+/* Layout & Intro Typography */
+/* ========================= */
+
+.content {
+  padding: 8rem var(--global-padding) 6rem var(--global-padding);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.hero-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.mono-kicker {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-color); 
+  letter-spacing: 0.15em;
+  
+}
+
+.intro-text h1 {
+  font-size: clamp(3.5rem, 12vw, 15rem); 
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.accent-mark { color: var(--accent-color); }
+
+.mono-intro {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+
+
+
+/* =========================================================================== */
+
+
+
+
+/* ========================= */
+/* Asymmetrical Magazine Grid*/
+/* ========================= */
+
+.asymmetric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  grid-auto-rows: 300px; 
+  gap: 1rem;
+  margin-top: -3rem;
+  /* THE MAGIC WORD: Backfills blank spaces with smaller images */
+  grid-auto-flow: dense; 
+}
+
+
+.asymmetric-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* CHANGED: Better signal for clickable gallery */
+  cursor: pointer; 
+  background-color: rgba(26, 26, 26, 0.05);
+  /* REMOVED: filter: grayscale(100%) ... */
+  
+  /* UPDATED: Focusing transition on transform for performance */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+  
+  /* Helps keep the image sharp when scaling */
+  will-change: transform; 
+}
+
+/* The Magic: Creating the asymmetrical pattern */
+/* Makes the 1st, 8th, 15th image huge (spans 2 columns, 2 rows) */
+.asymmetric-grid img:nth-child(7n + 1) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+/* Makes the 4th, 11th, 18th image wide (spans 2 columns, 1 row) */
+.asymmetric-grid img:nth-child(7n + 4) {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+/* Makes the 6th, 13th, 20th image tall (spans 1 column, 2 rows) */
+.asymmetric-grid img:nth-child(7n + 6) {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.asymmetric-grid img:hover {
+  /* CHANGED: Subtle, minimal scale-up (consistency exception) */
+  transform: scale(1.007); 
+  /* ADDED: Explicitly state full opacity */
+  opacity: 1; 
+}
+
+
+
+
+/* =========================================================================== */
+
+
+
+
+/* ========================= */
+/* Repaired Lightbox         */
+/* ========================= */
+
+/* ========================= */
+/* Frosted Museum Lightbox   */
+/* ========================= */
+
+.lightbox {
+  position: fixed; 
+  inset: 0;
+  
+  /* 1. Exactly matching your navbar's frosted glass */
+  background: rgba(244, 244, 240, 0.7); 
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  z-index: 9999; 
+  opacity: 0; 
+  pointer-events: none;
+  transition: opacity 0.4s ease; 
+}
+
+.lightbox.show { 
+  opacity: 1; 
+  pointer-events: auto; 
+}
+
+.lightbox-content {
+  background: var(--bg-color); /* The physical off-white frame */
+  padding: 1.5rem 1.5rem 4rem 1.5rem; 
+  position: relative;
+  max-width: 90vw; 
+  max-height: 90vh;
+  
+  /* 2. Deepened the shadow slightly so it pops against the light background */
+  box-shadow: 0 24px 60px rgba(26, 26, 26, 0.15);
+  
+  transform: translateY(20px); 
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.lightbox.show .lightbox-content { 
+  transform: translateY(0); 
+}
+
+/* Ensure the image scales properly inside the new frame */
+.lightbox img {
+  width: auto; 
+  height: auto; 
+  max-width: 100%; 
+  max-height: 75vh; 
+  display: block;
+}
+
+
+/* Position the caption INSIDE the white frame (Bottom Left) */
+.lightbox-caption {
+  position: absolute;
+  bottom: 1.5rem; 
+  left: 1.5rem; 
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.85rem; 
+  font-weight: 700; 
+  color: var(--text-color);
+  letter-spacing: 0.05em;
+}
+
+/* Position the metadata OUTSIDE the white frame (Bottom Left) */
+.lightbox-exif {
+  position: absolute;
+  bottom: -2rem; /* Pushes the text strictly below the white box */
+  left: 0; /* Aligns perfectly with the physical left edge of the white box */
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.6rem; 
+  color: var(--text-color); /* Dark ink text on the frosted glass */
+  opacity: 0.8;
+  text-align: left;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ========================= */
+/* Mobile Lightbox Fixes     */
+/* ========================= */
+@media (max-width: 800px) {
+  .lightbox-content {
+    /* Shrinks the box slightly on phones to create a safe margin away from the screen edges */
+    max-width: 76vw; 
+  }
+  
+  .lightbox-caption {
+    bottom: 1.2rem; 
+    left: 0.8rem;
+    font-size: 0.75rem; /* Shrinks the caption slightly so it breathes */
+  }
+  
+  .lightbox-exif {
+    bottom: -1.5rem; /* Adds more vertical breathing room below the box */
+    left: 0;
+    font-size: 0.6rem; /* Scales down the system data */
+    width: 100%; /* Ensures the EXIF matches the width of the box */
+    white-space: normal; /* Allows the machine data to wrap safely onto two lines if needed */
+    line-height: 1.4;
+  }
+}
+
+
+
+
+
+/* =========================================================================== */
+
+
+
+
+/* ========================= */
+/* Mobile Adjustments        */
+/* ========================= */
+
+@media (max-width: 800px) {
+  /* 1. Simplify the grid to 2 columns and reduce the base row height */
+  .asymmetric-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px; 
+    gap: 0.5rem; /* Tighter gaps for phone screens */
+  }
+
+  /* 2. Reset all the desktop spans so they don't break the smaller grid */
+  .asymmetric-grid img {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+
+  /* 3. Create a new, mobile-friendly asymmetrical pattern */
+  /* Makes every 5th image a massive feature photo that spans the whole screen */
+  .asymmetric-grid img:nth-child(5n + 1) {
+    grid-column: span 2 !important;
+    grid-row: span 2 !important; 
+  }
+}
+
+
+
+/* ========================= */
+/* Gallery Layout            */
+/* ========================= */
+
+.gallery-layout-wrapper {
+  display: flex;
+  flex-direction: column; 
+  gap: 3rem;
+}
+
+/* Change this in casestudy.css */
+@media (min-width: 900px) {
+  .gallery-layout-wrapper {
+    flex-direction: row;
+    align-items: flex-start; 
+    justify-content: space-between;
+  }
+
+  .gallery-flow {
+    flex: 1; 
+    min-width: 0; 
+    padding-right: 4rem; 
+  }
+}
+
+
+
+
+/* ========================================== */
+/* ONE-TIME HARDWARE ENTRANCE ANIMATION       */
+/* ========================================== */
+@keyframes oneTimeFade {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================= */
+/* Sidebar Directory (Desktop)*/
+/* ========================= */
+
+.sidebar-directory {
+  position: sticky;
+  top: 8rem; 
+  display: flex;
+  flex-direction: column;
+  width: 280px; 
+  flex-shrink: 0;
+  
+  max-height: calc(100vh - 10rem); 
+  overflow-y: auto; 
+  overscroll-behavior: contain; 
+  
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  
+  /* THE FIX: Native one-time entrance animation (0.4s delay to match 'delay-delay') */
+  animation: oneTimeFade 0.8s cubic-bezier(0.2, 1, 0.3, 1) 0.4s both;
+  
+  /* GPU Acceleration: Prevents WebKit browsers from flashing sticky elements during repaints */
+  will-change: transform, opacity; 
+  
+  /* THE FIX: Smoothly animate any layout shifts */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.4s ease, 
+              left 0.4s ease;
+  
+}
+
+/* Cloaks the scrollbar for Chrome, Safari, and newer Edge browsers */
+.sidebar-directory::-webkit-scrollbar {
+  display: none; 
+}
+
+.sidebar-label {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+/* Individual Record Blocks */
+.sidebar-record {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.2);
+  text-decoration: none;
+  color: var(--text-color);
+  transition: opacity 0.4s ease;
+}
+
+/* Adds a top border only to the first item for perfect framing */
+.sidebar-record:first-of-type {
+  border-top: 1px solid rgba(26, 26, 26, 0.2);
+}
+
+/* Hover Physics (Matches your Design/Community pages) */
+.sidebar-directory:hover .sidebar-record { opacity: 0.3; }
+.sidebar-directory .sidebar-record:hover { opacity: 1; }
+
+.sidebar-record:hover .sr-title { color: var(--accent-color); }
+.sidebar-record:hover .sr-action { color: var(--accent-color); opacity: 1; }
+.sidebar-record:hover .arrow { transform: translate(3px, -3px); }
+
+/* Typography */
+.sr-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.sr-tag { font-weight: 700; color: var(--text-color); }
+
+.sr-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 1.6rem; /* Scaled down perfectly for the 280px column */
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.sr-action {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.sr-action .arrow {
+  display: inline-block;
+  margin-left: 0.3rem;
+  transition: transform 0.3s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* Hide on mobile (Mobile users rely on the HUD or Main Grid) */
+@media (max-width: 899px) {
+  .sidebar-directory {
+    display: none;
+  }
+}
+
+
+
+
+
+
+/* ========================= */
+/* Mobile HUD Ledger System  */
+/* ========================= */
+
+/* Completely hide the HUD system on desktop screens */
+.mobile-hud-btn,
+.mobile-hud-overlay {
+  display: none; 
+}
+
+/* Activate the system only for mobile and tablets */
+@media (max-width: 899px) {
+  
+  /* The Floating Button */
+  .mobile-hud-btn {
+    display: block;
+    position: fixed;
+    bottom: 2rem;
+    right: 1.5rem;
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: 0.8rem;
+    color: var(--bg-color); /* Inverted text */
+    background-color: var(--text-color); /* Inverted background */
+    border: none;
+    padding: 0.8rem 1.2rem;
+    z-index: 999;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s ease;
+  }
+
+  .mobile-hud-btn:active {
+    transform: scale(0.92);
+  }
+
+  /* The Fullscreen Overlay */
+  .mobile-hud-overlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 10000; /* Sits above everything, including the navbar */
+    flex-direction: column;
+    padding: 4rem 2rem;
+    box-sizing: border-box;
+    
+    /* Hidden by default using opacity so we can animate it */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-hud-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Overlay Typography */
+  .hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.2);
+    padding-bottom: 1rem;
+  }
+
+  .hud-title, .hud-close {
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    letter-spacing: 0.1em;
+  }
+
+  .hud-close {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .hud-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .hud-link {
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-left: 2px solid transparent;
+    padding-left: 1rem;
+    opacity: 0.5;
+  }
+
+  /* Tap feedback */
+  .hud-link:active,
+  .hud-link.active {
+    opacity: 1;
+    color: var(--accent-color);
+    border-left-color: var(--accent-color);
+  }
+}

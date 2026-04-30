@@ -1,0 +1,338 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  
+  background-color: var(--bg-color);
+  /* This creates a 20px dot grid */
+  background-image: radial-gradient(circle, #b3b3b3 0.79px, transparent 0.2px);
+  background-size: 30px 30px;
+  background-attachment: fixed;
+  /* Slight transparency so the dots are subtle */
+  color: var(--text-color);
+  overflow-x: hidden; 
+  overflow-y: auto; 
+  cursor: default;
+}
+
+
+
+/* =========================================================================== */
+
+
+
+/* Main Container */
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 var(--global-padding);
+  box-sizing: border-box;
+}
+
+.top-section {
+  width: 100%;
+  max-width: 1600px;
+}
+
+.top-left-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+}
+
+
+
+/* =========================================================================== */
+
+
+
+
+/* ========================= */
+/* Landing Page Typography   */
+/* ========================= */
+
+.hero-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem; /* Spacing between the mono text and giant text */
+  width: 100%;
+  margin-top: -6rem; /* Gives it breathing room below the navbar */
+}
+
+/* 1. Monospace Intro */
+.mono-intro h1 {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-color);
+  opacity: 0.7;
+  letter-spacing: 0.05em;
+}
+
+
+/* 2. Massive Brutalist Nav */
+.massive-hero-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.giant-link {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: clamp(4rem, 10vw, 12rem); 
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--text-color);
+  text-decoration: none;
+  /* Removes the transform transition, matching the Writing page exactly */
+  transition: opacity 0.4s ease, color 0.4s ease;
+  width: max-content;
+}
+
+/* Focus Hover Effect (Smooth Fade, No Movement) */
+.massive-hero-nav:hover .giant-link {
+  opacity: 0.3; /* Gently dims the un-hovered links */
+}
+
+.massive-hero-nav .giant-link:hover {
+  opacity: 1;
+  color: #C85A32;
+  /* The transform: translateX nudge has been completely removed */
+}
+
+/* ========================= */
+/* Giant Link Arrow Pointers */
+/* ========================= */
+
+.giant-link::after {
+  content: " ↗"; 
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.4em; /* Scales perfectly relative to the massive text */
+  font-weight: 400; /* Keeps the arrow slightly thinner than the bold 700 text for a refined look */
+  opacity: 0.2; /* Very subtle default state */
+  display: inline-block;
+  margin-left: 0.2em;
+  transition: opacity 0.4s ease, transform 0.4s ease, color 0.6s ease;
+}
+
+/* Hover Interaction */
+.massive-hero-nav .giant-link:hover::after {
+  opacity: 1;
+  color: var(--text-color);
+  transform: translate(2px, -1px); /* A sharp, satisfying nudge up and to the right */
+}
+
+
+
+/* =========================================================================== */
+
+
+
+
+/* ========================= */
+/* Journey Projection (Hook) */
+/* ========================= */
+
+.journey-projection {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  /* The Animation Setup */
+  opacity: 0;
+  clip-path: inset(0 100% 0 0); /* Hides the text by clipping the right side */
+  transition: opacity 0.4s ease, clip-path 0.6s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.journey-projection.is-visible {
+  opacity: 1;
+  clip-path: inset(0 0 0 0); /* Wipes open to reveal the text */
+}
+
+#journey-text {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.9;
+  
+  /* Minimalist framing */
+  padding-left: 1rem;
+  border-left: 2px solid var(--text-color);
+}
+
+
+/* ----------------------------------------- */
+/* 1. MASSIVE MONITORS (1400px and up)       */
+/* Sits in the center-right void             */
+/* ----------------------------------------- */
+@media (min-width: 1400px) {
+  .journey-projection {
+    right: 8vw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    max-width: 340px;
+  }
+  #journey-text {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--accent-color);
+    text-align: left;
+  }
+}
+
+/* ----------------------------------------- */
+/* 2. LAPTOPS & TABLETS (900px to 1399px)    */
+/* Anchors to bottom-right to avoid overlap  */
+/* ----------------------------------------- */
+@media (max-width: 1399px) and (min-width: 900px) {
+  .journey-projection {
+    right: var(--global-padding);
+    bottom: 4.5rem; 
+    top: auto;
+    transform: none;
+    max-width: 300px;
+  }
+  #journey-text {
+    font-size: 0.85rem; /* Scales down slightly for tighter screens */
+    padding-right: 1.5rem;
+    border-left: none; /* Removes left border */
+    border-right: 1px solid var(--accent-color); /* Adds right border */
+    text-align: right; /* Flips the text alignment to hug the screen edge */
+  }
+}
+
+/* ----------------------------------------- */
+/* 3. MOBILE SCREENS (Below 900px)           */
+/* Hidden, as hover doesn't exist on touch   */
+/* ----------------------------------------- */
+@media (max-width: 899px) {
+  .journey-projection {
+    display: none;
+  }
+}
+
+
+/* =========================================================================== */
+
+
+
+/* 3. Monospace Utility & Socials */
+.mono-utility {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem; 
+  margin-top: 1.5rem;
+}
+
+.mono-utility a {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--text-color);
+  padding: 0 0 0.3rem 0; 
+  border-bottom: 1px solid rgba(26, 26, 26, 0.2); 
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.mono-utility a:hover {
+  opacity: 1;
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+.mono-utility a.fika-link {
+  font-weight: 700;
+  color: var(--accent-color);
+  border-bottom-color: rgba(200, 90, 50, 0.3); 
+  opacity: 1;
+}
+
+.mono-utility a.fika-link:hover {
+  border-bottom-color: var(--accent-color);
+}
+
+
+/* Mobile Refinement for Mono Utility */
+@media (max-width: 800px) {
+  .mono-utility {
+    gap: 1rem; /* Tightens the horizontal/vertical spacing */
+    margin-top: -0.2rem;
+  }
+
+  .mono-utility a {
+    font-size: 0.75rem; /* Scales down from 0.9rem */
+    padding-bottom: 0.2rem; /* Thinner padding for a more compact look */
+  }
+
+  /* Ensures the arrows don't look oversized compared to the new text size */
+  .quickarrow {
+    font-size: 0.7rem;
+  }
+}
+
+
+/* 1. The Default State */
+.quickarrow {
+  display: inline-block;
+  margin-left: 0.1rem;
+  transition: transform 0.3s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* 2. The Hover State */s
+a:hover .quickarrow {
+  transform: translate(1px, -1px); /* Kinetic nudge */
+}
+
+
+/* ========================= */
+/* Mobile Adjustments        */
+/* ========================= */
+@media (max-width: 600px) {
+
+  /* 1. The Kill-Switch: Strictly disables scrolling on the index page */
+  body.page-index {
+    overflow: hidden !important;
+  }
+
+  /* 2. Container Lock: Fits exactly into the mobile viewport */
+  .landing-page {
+    height: 100dvh !important; 
+    min-height: 100dvh !important;
+    justify-content: center !important; 
+    padding-top: 4rem !important; /* Space for the top navbar */
+    padding-bottom: 3rem !important; /* Space for the bottom footer */
+    box-sizing: border-box;
+  }
+
+  .hero-content-wrapper {
+    margin-top: 0 !important; /* Removes negative desktop margins */
+    gap: 1.5rem; /* Tightens the vertical space between blocks */
+  }
+
+  /* 3. Height-Aware Typography */
+  .massive-hero-nav {
+    gap: 0; /* Removes excess space between links */
+  }
+
+  .giant-link {
+    /* CRITICAL: Uses 'vh' instead of 'vw' so the text shrinks if the screen is short */
+    font-size: clamp(2.5rem, 8vh, 4rem) !important; 
+  }
+
+  /* 4. Utility Compression */
+  .mono-utility {
+    gap: 0.8rem 1.2rem;
+    flex-direction: row; /* Keeps them horizontal to save vertical real estate */
+    margin-top: 0;
+  }
+}
+
