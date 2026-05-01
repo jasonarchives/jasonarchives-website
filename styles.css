@@ -19,6 +19,7 @@ body, html {
 
 
 
+
 /* =========================================================================== */
 
 
@@ -336,64 +337,40 @@ a:hover .quickarrow {
     margin-top: 0;
   }
 }
-
 /* =========================================================================== */
-/* VERTICAL COMPRESSION: HEIGHT-AWARE SCALING                                  */
+/* VERTICAL COMPRESSION: HEIGHT-AWARE SCALING (DESKTOP ONLY)                   */
 /* =========================================================================== */
 
-/* 1. Moderate Compression (Standard Laptops: Height under 850px) */
-@media (max-height: 850px) {
+/* 1. Moderate Compression (Standard Laptops: Height under 850px, but wider than mobile) */
+@media (max-height: 850px) and (min-width: 801px) {
   .landing-page {
-    /* Tightens the top padding safely above the navbar */
     padding-top: max(110px, 12vh) !important;
     padding-bottom: 2rem !important;
   }
 
   .giant-link {
-    /* Shrinks the maximum font size slightly */
     font-size: clamp(3rem, min(8vw, 11vh), 7rem) !important;
     line-height: 0.85;
   }
 
-  .hero-content-wrapper {
-    gap: 0.8rem; /* Tightens the space between the links */
-  }
-
-  .mono-utility {
-    margin-top: 1rem; /* Brings the footer utilities closer */
-  }
+  .hero-content-wrapper { gap: 0.8rem; }
+  .mono-utility { margin-top: 1rem; }
 }
 
-/* 2. Extreme Compression (Short Laptops / High Scaling: Height under 700px) */
-@media (max-height: 700px) {
+/* 2. Extreme Compression (Short Laptops / High Scaling: Height under 700px, but wider than mobile) */
+@media (max-height: 700px) and (min-width: 801px) {
   .landing-page {
-    /* Squeezes the padding to the absolute minimum safe zone */
     padding-top: max(95px, 10vh) !important;
     padding-bottom: 1rem !important;
   }
 
   .giant-link {
-    /* Aggressively shrinks the font size to fit the screen */
     font-size: clamp(2.5rem, min(7vw, 10vh), 5rem) !important;
     line-height: 0.8;
   }
 
-  .hero-content-wrapper {
-    gap: 0.5rem; /* Packs the links tightly together */
-  }
-
-  .mono-intro h1 {
-    font-size: 0.85rem; /* Shrinks the top monospace text */
-    margin-bottom: 0.5rem;
-  }
-
-  .mono-utility {
-    margin-top: 0.5rem;
-    gap: 1rem;
-  }
-
-  .mono-utility a {
-    font-size: 0.8rem; /* Shrinks the footer links */
-    padding-bottom: 0.1rem;
-  }
+  .hero-content-wrapper { gap: 0.5rem; }
+  .mono-intro h1 { font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .mono-utility { margin-top: 0.5rem; gap: 1rem; }
+  .mono-utility a { font-size: 0.8rem; padding-bottom: 0.1rem; }
 }
