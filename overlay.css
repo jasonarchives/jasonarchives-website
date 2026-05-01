@@ -13,17 +13,16 @@
   
   z-index: 9999;
   
-  display: flex; flex-direction: column;
-  /* THE FIX: 'safe center' prevents pushing content out of bounds */
-  justify-content: safe center;
+  display: flex;
+  flex-direction: column;
+  /* THE FIX: Start from the top down, don't force center */
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 0 var(--global-padding);
   box-sizing: border-box;
-  
-  /* THE FIX: Allows the menu to scroll on super short landscape screens */
+
   overflow-y: auto;
 
-  /* Terminal Fade Physics */
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -56,14 +55,18 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
 /* ========================================== */
 
 .overlay-close-btn {
-  position: absolute;
-  /* Adjust this top value if it is slightly higher or lower than your navbar text */
-  top: 2rem; 
-  left: var(--global-padding);
+  /* THE FIX: Make it relative so it physically takes up space in the document flow */
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-top: 2rem;    /* Distance from the top of the screen */
+  margin-bottom: 1rem; /* Bumper space below it */
+  flex-shrink: 0;      /* Prevents the button from ever getting squished */
+
   font-family: 'iA Writer Duospace', monospace;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--text-color); /* THE FIX: Dynamic Text Color */
+  color: var(--text-color);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -73,6 +76,25 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
   padding: 0;
 }
 
+/* ========================================== */
+/* THE CONTENT WRAPPER (Auto-Centering)       */
+/* ========================================== */
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  /* THE FIX: Automatically pushes the content to the vertical center of the remaining space! */
+  margin-top: auto;
+  margin-bottom: auto;
+
+  /* Safety padding at the bottom so you can scroll past the footer on tiny screens */
+  padding-bottom: 3rem;
+}
+
+.overlay-close-btn:hover {
+  opacity: 1;
+}
 .overlay-close-btn:hover {
   opacity: 1; /* Brightens on hover, no color shift */
 }
@@ -90,8 +112,6 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
   text-decoration: none;
   letter-spacing: 0.1em;
 
-  /* THE FIX: This 5rem top margin creates a permanent forcefield around the absolute Close button */
-  margin-top: 5rem;
   margin-bottom: 2.5rem; 
 
   border-bottom: 1px solid rgba(var(--rgb-text), 0.3);

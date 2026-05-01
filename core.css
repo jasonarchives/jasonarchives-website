@@ -39,8 +39,8 @@ main.tile-container,
 /* 3. Aspect-Ratio Aware Typography */
 .page-hero, 
 .giant-link {
-  /* THE FIX: Capped the maximum width-scaling so it doesn't blow up on Windows monitors */
-  font-size: clamp(3.5rem, 8vw, 8.5rem) !important;
+/* It takes whichever is SMALLER: 8% of the width, or 12% of the height */
+  font-size: clamp(3rem, min(8vw, 12vh), 8.5rem) !important;
   line-height: 0.9;
 }
 
