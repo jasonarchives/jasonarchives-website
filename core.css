@@ -20,31 +20,28 @@ html, body {
   width: 100% !important;
 }
 
-/* 2. Fluid Vertical Padding for ALL Main Pages */
-
-/* 2. Fluid Vertical Padding & Ultra-Wide Monitor Lock */
-
+/* 2. Bulletproof Vertical Padding & Ultra-Wide Monitor Lock */
 main.tile-container, 
 .dossier-content, 
 .content, 
 .landing-page {
-  /* THE FIX: Increased minimum top padding to 7rem (112px) to safely clear the 90px navbar on short/wide screens */
-  padding-top: clamp(7rem, 15vh, 10rem) !important;
-  padding-bottom: clamp(3rem, 8vh, 6rem) !important;
+  /* THE FIX: Hard minimum of 140px guarantees the 90px navbar NEVER covers content */
+  padding-top: max(140px, 15vh) !important;
+  padding-bottom: clamp(4rem, 10vh, 8rem) !important;
   box-sizing: border-box;
 
-  /* THE WIDE-SCREEN FIX: Stops content from stretching/squishing on 21:9 or large Windows monitors */
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
+  /* THE WIDE-SCREEN FIX: Stops content from stretching/squishing on 21:9 monitors */
+  width: 100% !important;
+  max-width: 1400px !important; /* Locks the maximum width */
+  margin: 0 auto !important;    /* Keeps the locked container perfectly centered */
 }
 
 /* 3. Aspect-Ratio Aware Typography */
-
 .page-hero, 
 .giant-link {
-  font-size: clamp(3.5rem, min(9vw, 15vh), 10rem) !important; 
-  line-height: 0.85;
+  /* THE FIX: Capped the maximum width-scaling so it doesn't blow up on Windows monitors */
+  font-size: clamp(3.5rem, 8vw, 8.5rem) !important;
+  line-height: 0.9;
 }
 
 /* 4. Ultra-Wide Monitor Lock */
@@ -617,13 +614,23 @@ body::-webkit-scrollbar-thumb:hover,
 
 
 /* ========================================== */
-/* INDEX PAGE SPECIFIC ALIGNMENT              */
+/* WINDOWS OVERRIDE: SAFE CENTERING           */
 /* ========================================== */
 
 .landing-page {
-  /* Ensures the index text centers perfectly in the available space below the navbar */
-  min-height: calc(100vh - var(--nav-height));
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  min-height: 100vh;
+
+  /* THE FIX: Safe centering ensures that if the screen is too short,
+     it aligns to the top (under our 140px padding) instead of pushing off-screen */
+  justify-content: safe center;
+  align-items: flex-start;
+}
+
+/* Ensure the inner content doesn't break the flex bounds */
+.top-section {
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 100%;
 }
