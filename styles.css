@@ -28,9 +28,11 @@ body, html {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* THE FIX: 'safe center' stops the text from pushing off the top of the screen */
+  justify-content: safe center;
   align-items: flex-start;
-  padding: 0 var(--global-padding);
+  /* THE FIX: Hard padding guarantees it never hits the navbar */
+  padding: 140px var(--global-padding) 4rem var(--global-padding);
   box-sizing: border-box;
 }
 
@@ -47,13 +49,6 @@ body, html {
   width: 100%;
 }
 
-
-
-/* =========================================================================== */
-
-
-
-
 /* ========================= */
 /* Landing Page Typography   */
 /* ========================= */
@@ -62,10 +57,13 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1rem; /* Spacing between the mono text and giant text */
+  gap: 1rem;
   width: 100%;
-  margin-top: -6rem; /* Gives it breathing room below the navbar */
+  /* THE FIX: Removed margin-top: -6rem; which was yanking the text behind the navbar */
 }
+
+
+
 
 /* 1. Monospace Intro */
 .mono-intro h1 {
