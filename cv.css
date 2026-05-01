@@ -105,8 +105,16 @@
 .dossier-row {
   display: grid;
   grid-template-columns: 350px 1fr;
-  border-top: 2px solid rgba(26, 26, 26, 0.2); 
+
+  /* UPDATE THIS: Replaces the hardcoded 26,26,26 with your variable */
+  border-top: 2px solid rgba(var(--rgb-text), 0.2);
+
   padding: 4rem 0;
+}
+
+/* ADD THIS: To handle the bottom border of the very last row (replacing your inline HTML styles) */
+.dossier-row:last-child {
+  border-bottom: 2px solid rgba(var(--rgb-text), 0.2);
 }
 
 .dossier-label {
@@ -211,7 +219,16 @@
   backdrop-filter: blur(12px) saturate(120%);
   -webkit-backdrop-filter: blur(12px) saturate(120%);
   z-index: 1000;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.05);
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.05);
+}
+
+/* ========================================== */
+/* DARK MODE OVERRIDES                        */
+/* ========================================== */
+
+html[data-theme="dark"] .navbar {
+  /* Swaps the frosted white for a frosted charcoal */
+  background: rgba(28, 28, 26, 0.8);
 }
 
 .nav-left {
@@ -258,18 +275,21 @@
 body, html {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100vh;
+
   font-family: 'SF Pro Display', -apple-system, sans-serif;
   
   background-color: var(--bg-color);
-  background-image: radial-gradient(circle, #b3b3b3 0.79px, transparent 0.2px);
-  background-size: 30px 30px;
+  background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+  background-repeat: repeat;
   background-attachment: fixed;
+  background-blend-mode: multiply;
+
   color: var(--text-color);
-  overflow-x: hidden; 
-  overflow-y: auto; 
+  overflow-x: hidden;
   cursor: default;
 }
+
 
 /* Main Container */
 .landing-page {
@@ -295,6 +315,29 @@ body, html {
   width: 100%;
 }
 
+
+
+
+/* ========================================== */
+/* DARK MODE TEXTURE REPAIR                   */
+/* ========================================== */
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] {
+  background-blend-mode: overlay;
+
+  /* THE FIX: Lowered opacity from 0.97 to 0.80 to let the texture breathe */
+  background-image: linear-gradient(rgba(28, 28, 26, 0.80), rgba(28, 28, 26, 0.80)),
+                    url("https://www.transparenttextures.com/patterns/p6.png");
+}
+
+
+
+
+
+
+
+
 /* =========================================================================== */
 /* MASTER PRINT SYSTEM (MUST REMAIN AT THE ABSOLUTE BOTTOM OF THIS FILE)       */
 /* =========================================================================== */
@@ -304,6 +347,15 @@ body, html {
     margin: 0.6cm; /* TIGHTENED: Maximizes the physical paper boundaries */
   }
   
+
+  html, body {
+    background-color: white !important;
+    background-image: none !important;
+    color: black !important;
+  }
+
+
+
   /* 1. Kill all backgrounds, animations, and FORCE VISIBILITY */
   * {
     animation: none !important;

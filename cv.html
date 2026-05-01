@@ -6,6 +6,26 @@
 
 <!-- SEO title & meta --> 
   <title>CV | Jason Mendes</title>
+
+  <link rel="stylesheet" href="theme.css">
+
+  <script>
+  (function() {
+    document.documentElement.classList.add('no-transition');
+    const savedTheme = localStorage.getItem('os-theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.documentElement.classList.remove('no-transition');
+      }, 100);
+    });
+  })();
+  </script>
+
   <meta name="title" content="CV | Jason Mendes">
   <meta name="description" content="Download or Print my CV">
 
@@ -30,6 +50,7 @@
   <link rel="stylesheet" href="cv.css">
   <link rel="stylesheet" href="terminal.css">  
   <link rel="stylesheet" href="overlay.css"> 
+  <link rel="stylesheet" href="theme.css">
   
 </head>
 <body>
@@ -49,6 +70,8 @@
    
     <span id="desktop-terminal-hint" class="terminal-hint tile-in-delay-delay" style="margin-left: auto;">[PRESS ⌘K FOR QUICK SEARCH]</span>
 
+    <!-- ADD THIS: MOBILE THEME TOGGLE -->
+    <button id="mobile-theme-toggle" class="mobile-theme-toggle magnetic-btn">[ ◐ ]</button>
   </div>
 </nav>
 
@@ -208,7 +231,7 @@
     </div>
 
    
-       <div class="dossier-row" style="border-bottom: px solid rgba(26, 26, 26, 0.2);">
+       <div class="dossier-row">
       <div class="dossier-meta">[04 / PREFERRED TOOLKIT &amp; LANGUAGES]</div>
       <div class="dossier-items">
         
@@ -247,7 +270,7 @@
    
    
    
-    <div class="dossier-row" style="border-bottom: 2px solid rgba(26, 26, 26, 0.2);">
+    <div class="dossier-row">
       
       <div class="dossier-meta" style="display: flex; flex-direction: column; align-items: flex-start;">
         <span>[05 / PHILOSOPHY &amp; PERSONAL GROWTH]</span>
@@ -371,11 +394,20 @@ function filterItems(tag, buttonElement) {
 
 
 
-
+<script src="theme.js"></script>
 <script src="physics.js"></script>
 <script src="terminal.js"></script>
 <script src="overlay.js"></script>
 
+
+<!-- DESKTOP THEME TOGGLE -->
+<div class="os-theme-toggle-desktop" id="desktop-theme-toggle">
+  <div class="theme-label" id="theme-label">[ MODE: LIGHT ]</div>
+  <div class="theme-controls">
+    <button class="theme-btn" data-set-theme="light">[◯ LIGHT]</button>
+    <button class="theme-btn" data-set-theme="dark">[◐ DARK]</button>
+  </div>
+</div>
 
 
 
