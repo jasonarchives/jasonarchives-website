@@ -5,9 +5,12 @@
 #terminal-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
-  background-color: rgba(26, 26, 26, 0.4); 
-  backdrop-filter: blur(24px) saturate(150%);
-  -webkit-backdrop-filter: blur(24px) saturate(150%);
+
+  /* THE FIX: Matches the exact frosted glass logic of the navbar */
+  background-color: rgba(var(--rgb-bg), 0.85);
+
+backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
   z-index: 9999;
   
   display: flex; flex-direction: column; justify-content: center; 
@@ -22,14 +25,18 @@
 
 .terminal-container { 
   width: 100%; max-width: 1600px; 
-  padding: 0; color: var(--bg-color); 
+  padding: 0;
+  /* THE FIX: Standard text color */
+  color: var(--text-color);
 }
 
 .terminal-input-wrapper { display: flex; align-items: center; margin-bottom: 1.5rem; width: 100%; }
 .terminal-prompt { display: none; }
 
 #terminal-input {
-  background: transparent; border: none; color: var(--bg-color); 
+  background: transparent; border: none;
+  /* THE FIX: Standard text color */
+  color: var(--text-color);
   text-align: left;
   font-family: 'SF Pro Display', sans-serif; 
   font-size: clamp(2rem, 4vw, 3.5rem); 
@@ -38,7 +45,8 @@
   width: 100%; outline: none;
 }
 
-#terminal-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+/* THE FIX: Ghostly placeholder using the text variable */
+#terminal-input::placeholder { color: rgba(var(--rgb-text), 0.25); }
 
 /* The Scrollbar Cloak */
 #terminal-suggestions { 
@@ -54,7 +62,7 @@
   -ms-overflow-style: none;
 }
 
-/* Eradicates the scrollbar in WebKit (Chrome, Safari, iOS, newer Edge) */
+/* Eradicates the scrollbar in WebKit */
 #terminal-suggestions::-webkit-scrollbar { 
   display: none; 
 }
@@ -71,14 +79,19 @@
 
 .suggestion-cmd { 
   font-family: 'iA Writer Duospace', monospace; 
-  font-weight: 700; color: var(--bg-color); 
+  font-weight: 700;
+  /* THE FIX: Standard text color */
+  color: var(--text-color);
   font-size: clamp(1rem, 2vw, 1.25rem); 
   transition: all 0.2s ease;
 }
 
 .suggestion-desc { 
   font-family: 'SF Pro Display', sans-serif; 
-  font-size: 0.9rem; color: var(--bg-color); opacity: 0.7;
+  font-size: 0.9rem;
+  /* THE FIX: Standard text color */
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 /* The Exit Hint */
@@ -89,7 +102,8 @@
   font-family: 'iA Writer Duospace', monospace;
   font-size: 0.75rem; 
   letter-spacing: 0.05em;
-  color: var(--bg-color);
+  /* THE FIX: Standard text color */
+  color: var(--text-color);
   opacity: 0.3;
   pointer-events: none;
 }

@@ -6,11 +6,11 @@
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
   
-  /* Terminal Dark Glass Background */
-  background-color: rgba(26, 26, 26, 0.4) !important;
+  /* THE FIX: Dynamic Smoked Glass */
+  background-color: rgba(var(--rgb-bg), 0.95) !important;
   background-image: none !important;
-  backdrop-filter: blur(24px) saturate(150%);
-  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
   
   z-index: 9999; /* Matches terminal z-index */
   
@@ -59,7 +59,7 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
   font-family: 'iA Writer Duospace', monospace;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--bg-color); /* Strict White */
+  color: var(--text-color); /* THE FIX: Dynamic Text Color */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -82,11 +82,11 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
   font-family: 'iA Writer Duospace', monospace;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--bg-color); 
+  color: var(--text-color); /* THE FIX: Dynamic Text Color */
   text-decoration: none;
   letter-spacing: 0.1em;
   margin-bottom: 2.5rem; 
-  border-bottom: 1px solid rgba(244, 244, 240, 0.3);
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.3); /* THE FIX: Dynamic Border */
   padding-bottom: 0.2rem;
   transition: all 0.2s ease;
   opacity: 0.7;
@@ -94,7 +94,7 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
 
 .overlay-home-link:hover {
   opacity: 1;
-  border-bottom-color: var(--bg-color);
+  border-bottom-color: var(--text-color);
 }
 
 /* ========================================== */
@@ -113,7 +113,7 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.04em;
-  color: var(--bg-color); /* Strict White */
+  color: var(--text-color); /* THE FIX: Dynamic Text Color */
   text-decoration: none;
   transition: opacity 0.4s ease, transform 0.2s ease;
   width: max-content;
@@ -133,17 +133,17 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
   display: flex;
   flex-wrap: wrap; 
   gap: 1.5rem;
-  border-top: 1px solid rgba(244, 244, 240, 0.2); 
+  border-top: 1px solid rgba(var(--rgb-text), 0.2); /* THE FIX: Dynamic Border */
   padding-top: 2rem;
 }
 
 .overlay-footer a {
   font-family: 'iA Writer Duospace', monospace;
   font-size: 0.9rem;
-  color: var(--bg-color); 
+  color: var(--text-color); /* THE FIX: Dynamic Text Color */
   text-decoration: none;
   padding-bottom: 0.2rem; 
-  border-bottom: 1px solid rgba(244, 244, 240, 0.2); 
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.2); /* THE FIX: Dynamic Border */
   transition: all 0.3s ease;
   opacity: 0.6;
   width: max-content; 
@@ -151,19 +151,19 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
 
 .overlay-footer a:hover {
   opacity: 1;
-  border-bottom-color: var(--bg-color);
+  border-bottom-color: var(--text-color);
 }
 
 /* Fika & CV Links */
 .overlay-footer a.fika-link {
   font-weight: 700;
   opacity: 0.9;
-  border-bottom-color: rgba(244, 244, 240, 0.5); 
+  border-bottom-color: rgba(var(--rgb-text), 0.5); /* THE FIX: Dynamic Border */
 }
 
 .overlay-footer a.fika-link:hover {
   opacity: 1;
-  border-bottom-color: var(--bg-color);
+  border-bottom-color: var(--text-color);
 }
 
 /* Mobile Adjustments */
@@ -198,8 +198,8 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
   -ms-overflow-style: none;
   padding: 2rem 0;
   margin-bottom: 1rem;
-  border-top: 1px solid rgba(244, 244, 240, 0.2);
-  border-bottom: 1px solid rgba(244, 244, 240, 0.2);
+  border-top: 1px solid rgba(var(--rgb-text), 0.2); /* THE FIX: Dynamic Border */
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.2); /* THE FIX: Dynamic Border */
 }
 
 .overlay-scroll-area::-webkit-scrollbar { display: none; }
@@ -207,8 +207,7 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
 .overlay-section-title {
   font-family: 'iA Writer Duospace', monospace;
   font-size: 0.85rem;
-  /* THE FIX: Replaced Terracotta with faded white */
-  color: var(--bg-color); 
+  color: var(--text-color); /* THE FIX: Dynamic Text Color */
   opacity: 0.5;
   letter-spacing: 0.1em;
   margin-bottom: 0.5rem;
@@ -220,7 +219,7 @@ The scrollbar stays permanently visible, preventing any layout shifts! */
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: var(--bg-color); 
+  color: var(--text-color); /* THE FIX: Dynamic Text Color */
   text-decoration: none;
   transition: opacity 0.3s ease, transform 0.2s ease;
   opacity: 0.5;

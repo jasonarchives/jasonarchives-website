@@ -1,0 +1,132 @@
+/* ========================================== */
+/* OS THEME TOGGLE: MOBILE (NAVBAR)           */
+/* ========================================== */
+
+.mobile-theme-toggle {
+  display: none !important;
+  background: none;
+  border: none;
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 1rem;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0;
+  /* THE FIX: Ensures it stays on the right even if the hint is missing */
+  margin-left: 1.5rem;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.mobile-theme-toggle:hover {
+  color: var(--accent-color);
+}
+
+@media (max-width: 899px) {
+  .mobile-theme-toggle {
+    display: inline-block !important;
+    /* On mobile, if the hint is hidden, this ensures it stays far right */
+    margin-left: auto !important;
+  }
+}
+
+/* ========================================== */
+/* OS THEME TOGGLE: DESKTOP (ARCHITECTURAL)   */
+/* ========================================== */
+
+.os-theme-toggle-desktop {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 9998; /* Sits just below your full-screen overlays */
+  display: flex;
+  align-items: center;
+  padding-right: 0.5rem; /* Snugs it to the right margin */
+}
+
+/* THE FIX: The Invisible Hitbox Bridge */
+.os-theme-toggle-desktop::before {
+  content: "";
+  position: absolute;
+  /* Extends the hover zone slightly above and below so it doesn't close if your hand shakes */
+  top: -20px;
+  bottom: -20px;
+  right: 0;
+  /* Creates a wide, invisible net to the left to catch the mouse as you move to click */
+  width: 200px;
+  z-index: -1;
+}
+
+@media (max-width: 899px) {
+  .os-theme-toggle-desktop {
+    display: none; /* Strictly hidden on mobile */
+  }
+}
+
+/* 1. The Resting State (Vertical Typography) */
+.theme-label {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: 0.1em;
+  opacity: 0.3; /* Ghostly print ink */
+  cursor: default;
+
+  /* The Architectural Print Rotation */
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg); /* Flips it so it reads top-to-bottom, facing inward */
+
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+/* 2. The Hidden Toggle Mechanism */
+.theme-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: absolute;
+  right: var(--global-padding); /* Pushes the buttons exactly to your global layout grid */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(20px); /* Starts slightly off-screen */
+  transition: all 0.4s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.theme-btn {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-color);
+
+  /* THE FIX: Replaced 'transparent' with your solid background variable */
+  background: var(--bg-color);
+
+  border: 1px solid rgba(var(--rgb-text), 0.2);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* Reverses the colors for the active/hover state */
+.theme-btn:hover, .theme-btn.active {
+  border-color: var(--text-color);
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+
+/* 3. The Kinetic Hover Physics */
+.os-theme-toggle-desktop:hover .theme-label {
+  opacity: 0;
+  transform: rotate(180deg) translateX(-10px); /* Slides away and vanishes */
+}
+
+.os-theme-toggle-desktop:hover .theme-controls {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0); /* Snaps into place */
+}

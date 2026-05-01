@@ -9,6 +9,29 @@
 
 <!-- SEO title & meta -->    
   <title>Community | Jason Mendes</title>
+
+
+<script>
+  (function() {
+    // 1. Add a class to kill all transitions immediately
+    document.documentElement.classList.add('no-transition');
+
+    const savedTheme = localStorage.getItem('os-theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+
+    // 2. Wait a tiny heartbeat, then allow transitions again
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.documentElement.classList.remove('no-transition');
+      }, 100);
+    });
+  })();
+</script>
+
   <meta name="title" content="Community | Jason Mendes">
   <meta name="description" content="Community collaboration is where my passion for design, my love for art, my need for documenting, and my appreciation for people come together to build something beautiful and long-lasting.">
 
@@ -26,11 +49,13 @@
   <link rel="icon" href="favicon.ico?v=2" sizes="any">
 
 <!-- Styles & Preloads -->
+
   <link rel="stylesheet" href="core.css"/>  <!-- Primary CSS -->
-  <link rel="stylesheet" href="design.css"/> <!-- Secondary CSS -->
+  <link rel="stylesheet" href="listpage.css"/> <!-- Secondary CSS -->
   <link rel="stylesheet" href="cursor.css"> <!-- Accesory CSS  -->
   <link rel="stylesheet" href="terminal.css">  
   <link rel="stylesheet" href="overlay.css">  
+  <link rel="stylesheet" href="theme.css"/>
 
 <script type="application/ld+json">
 {
@@ -62,6 +87,9 @@
     </div>
    
     <span id="desktop-terminal-hint" class="terminal-hint tile-in-delay-delay" style="margin-left: auto;">[PRESS ⌘K FOR QUICK SEARCH]</span>
+
+    <!-- MOBILE THEME TOGGLE (Hidden on Desktop) -->
+      <button id="mobile-theme-toggle" class="mobile-theme-toggle magnetic-btn">[ ◐ ]</button>
 
   </div>
 </nav>
@@ -107,10 +135,12 @@
     <div class="mono-kicker tile-in">
       <span>[RECORDS : 2018–2025]</span>
     </div>
-      
-    <div class="mono-intro tile-in-delay" style="max-width: 600px; margin-top: 1rem; margin-bottom: 4rem;">
-      <span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-size: medium;">Community collaboration is where my passion for design, my love for art, my need for documenting, and my appreciation for people come together to build something beautiful and long-lasting.</span><br>
+
+        <div class="mono-intro tile-in-delay" style="max-width: 600px; margin-top: 1rem; margin-bottom: 4rem;">
+      <span>Community collaboration is where my passion for design, my love for art, my need for documenting, and my appreciation for people come together to build something beautiful and long-lasting.</span><br>
     </div>
+
+
   </section>
 
   <div class="filter-buttons tile-in-delay-delay">
@@ -222,11 +252,25 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-
+<script src="theme.js"></script>
 <script src="cursor.js"></script>
 <script src="physics.js"></script>
 <script src="terminal.js"></script>
 <script src="overlay.js"></script>
+
+
+<!-- DESKTOP THEME TOGGLE (Hidden on Mobile) -->
+<div class="os-theme-toggle-desktop" id="desktop-theme-toggle">
+  <!-- The Resting Vertical Spine -->
+  <div class="theme-label" id="theme-label">[ MODE: LIGHT ]</div>
+  <!-- The Hover Controls -->
+  <div class="theme-controls">
+    <button class="theme-btn" data-set-theme="light">[◯ LIGHT]</button>
+    <button class="theme-btn" data-set-theme="dark">[◐ DARK]</button>
+  </div>
+</div>
+
+
 
 </body>
 </html>

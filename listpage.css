@@ -4,9 +4,10 @@ html, body {
   font-family: 'SF Pro Display', -apple-system, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
-  overflow-y: scroll; 
+  overflow-y: auto;
   overflow-x: hidden;
 }
+
 
 /* Premium Static Paper Texture */
 body {
@@ -19,8 +20,6 @@ body {
 
 
 /* =========================================================================== */
-
-
 
 
 
@@ -48,35 +47,27 @@ body {
 }
 
 
+
 /* =========================================================================== */
 
 
 
 
-/* ========================= */
-/* Layout & Hero             */
-/* ========================= */
-
-.content {
-  padding: 8rem var(--global-padding) 6rem var(--global-padding);
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
+/* Massive Hero Header */
 .page-hero {
-  font-size: clamp(3.5rem, 12vw, 12rem); 
+  font-size: clamp(3.5rem, 12vw, 12rem);
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.04em;
   color: var(--text-color);
-  margin: 0 0 2rem 0; 
+  margin: 0 0 2rem 0;
 }
 
 .mono-kicker {
   font-family: 'iA Writer Duospace', monospace;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--accent-color); 
+  color: var(--accent-color);
   letter-spacing: 0.15em;
 }
 
@@ -88,7 +79,12 @@ body {
   opacity: 0.8;
 }
 
-.accent-mark { color: var(--accent-color); }
+.accent-mark {
+  color: var(--accent-color);
+}
+
+
+
 
 
 
@@ -99,26 +95,50 @@ body {
 
 
 /* ========================= */
+/* Layout System             */
+/* ========================= */
+
+.content {
+  padding: 8rem var(--global-padding) 6rem var(--global-padding);
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.view-section {
+  display: none;
+  width: 100%;
+}
+
+.view-section.active {
+  display: block;
+}
+
+
+
+/* =========================================================================== */
+
+
+/* ========================= */
 /* Filters                   */
 /* ========================= */
 
 .filter-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.8rem; 
-  margin-bottom: 1rem; /* CHANGED: Was 4rem, now matches design.css */
+  gap: 1.8rem;
+  margin-bottom: 1rem;
   font-family: 'iA Writer Duospace', monospace;
 }
 
-
 .filter-buttons button {
-  font-family: inherit; 
+  font-family: inherit;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.2); 
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.2);
   color: var(--text-color);
-  padding: 0 0 0.3rem 0; 
-  font-size: 0.95rem; 
+  padding: 0 0 0.3rem 0;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -131,15 +151,8 @@ body {
 .filter-buttons button.active {
   font-weight: 700;
   color: var(--accent-color);
-  border-bottom-color: rgba(200, 90, 50, 0.3); 
+  border-bottom-color: rgba(200, 90, 50, 0.3);
 }
-
-
-
-/* =========================================================================== */
-
-
-
 
 /* ========================= */
 /* Article Grid List         */
@@ -148,20 +161,18 @@ body {
 .article-list {
   display: flex;
   flex-direction: column;
-
 }
 
 .article-row {
   display: grid;
   grid-template-columns: 200px 1fr 200px;
   gap: 2rem;
-  padding: 2rem 0; /* CHANGED: Was 3rem 0, now matches design.css */
-  border-bottom: 1px solid rgba(26, 26, 26, 0.2);
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.2);
   text-decoration: none;
   color: var(--text-color);
-  transition: opacity 0.4s ease; 
+  transition: opacity 0.4s ease;
 }
-
 
 /* Focus Hover Effect */
 .article-list:hover .article-row {
@@ -191,6 +202,7 @@ body {
   color: var(--accent-color);
   letter-spacing: 0.05em;
   margin-bottom: -1rem;
+  text-transform: uppercase;
 }
 
 /* The center content column */
@@ -201,6 +213,7 @@ body {
 }
 
 .a-title {
+  font-family: 'SF Pro Display', sans-serif;
   font-size: 2.2rem;
   font-weight: 600;
   line-height: 1.1;
@@ -245,30 +258,27 @@ body {
 }
 
 .article-row:hover .arrow {
-  transform: translate(3px, -3px); /* Kinetic nudge */
+  transform: translate(3px, -3px);
 }
-
-
-
-
-/* =========================================================================== */
-
-
 
 /* ========================= */
 /* Mobile Adjustments        */
 /* ========================= */
 
 @media (max-width: 800px) {
-
+  /* 1. Collapse the 3-column grid into a vertical stack */
+  .article-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 2rem 0;
+  }
 
   /* 2. Scale down the massive article titles slightly for phones */
   .a-title {
     font-size: 1.8rem;
   }
 
-  /* 3. Re-align the 'Read on Medium' link */
-  /* By default it was pinned to the right (flex-end). On mobile, it looks better on the left. */
+  /* 3. Re-align the action link */
   .a-action {
     justify-content: flex-start;
     text-align: left;
@@ -276,18 +286,20 @@ body {
   }
 }
 
-@media (max-width: 800px) {
-  /* 1. Collapse the 3-column grid into a vertical stack */
-  .article-row {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 2rem 0; /* CHANGED: Was 2.5rem 0 */
-  }
-  /* ... rest of the mobile CSS remains exactly the same ... */
+/* ========================================== */
+/* DARK MODE TEXTURE REPAIR                   */
+/* ========================================== */
 
+html[data-theme="dark"] body {
+  /* We switch from 'multiply' to 'screen' or 'overlay' for dark surfaces */
+  background-blend-mode: overlay;
 
+  /* We dim the texture so it doesn't create that white 'vibrating' look */
+  opacity: 1;
+}
 
-/* =========================================================================== */
-
-
-
+/* If the pattern is still too bright, we target the body background specifically */
+html[data-theme="dark"] {
+  background-image: linear-gradient(rgba(28, 28, 26, 0.97), rgba(28, 28, 26, 0.97)),
+                    url("https://www.transparenttextures.com/patterns/p6.png");
+}

@@ -6,7 +6,8 @@ body, html {
   
   background-color: var(--bg-color);
   /* This creates a 20px dot grid */
-  background-image: radial-gradient(circle, #b3b3b3 0.79px, transparent 0.2px);
+/* This creates a 20px dot grid that shifts colors automatically */
+  background-image: radial-gradient(circle, rgba(var(--rgb-text), 0.15) 0.79px, transparent 0.2px);
   background-size: 30px 30px;
   background-attachment: fixed;
   /* Slight transparency so the dots are subtle */
@@ -238,7 +239,9 @@ body, html {
   text-decoration: none;
   color: var(--text-color);
   padding: 0 0 0.3rem 0; 
-  border-bottom: 1px solid rgba(26, 26, 26, 0.2); 
+  /* Uses the dynamic variable so borders invert in dark mode */
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.2);
+
   transition: all 0.3s ease;
   opacity: 0.8;
 }
@@ -287,7 +290,7 @@ body, html {
   transition: transform 0.3s cubic-bezier(0.45, 0, 0.55, 1);
 }
 
-/* 2. The Hover State */s
+/* 2. The Hover State */
 a:hover .quickarrow {
   transform: translate(1px, -1px); /* Kinetic nudge */
 }
