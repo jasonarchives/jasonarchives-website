@@ -81,7 +81,10 @@ function toggleTerminal() {
     overlay.classList.toggle("is-active");
     
     if (overlay.classList.contains("is-active")) {
-      document.body.classList.add("scroll-lock");
+      // THE FIX: Mobile-only scroll lock
+      if (window.innerWidth < 900) {
+        document.body.classList.add("scroll-lock");
+      }
       
       input.value = ""; 
       renderSuggestions([]); 
@@ -97,8 +100,7 @@ function toggleTerminal() {
     }
   }
   
-  
-  
+
   // 5. The Autocomplete Engine
   input.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase();

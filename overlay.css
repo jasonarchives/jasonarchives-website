@@ -15,13 +15,15 @@
   
   display: flex;
   flex-direction: column;
-  /* THE FIX: Start from the top down, don't force center */
   justify-content: flex-start;
   align-items: flex-start;
   padding: 0 var(--global-padding);
   box-sizing: border-box;
 
   overflow-y: auto;
+
+  /* THE NEW FIX: Prevents scroll-chaining to the body without needing overflow: hidden */
+  overscroll-behavior: contain;
 
   visibility: hidden;
   opacity: 0;
@@ -35,19 +37,10 @@
   pointer-events: auto;
 }
 
-/* THE BULLETPROOF SCROLL LOCK (Mobile Only) */
+/* THE BULLETPROOF SCROLL LOCK (Applied via JS to Mobile Only) */
 .scroll-lock {
   overflow: hidden !important;
   touch-action: none !important;
-}
-
-/* THE FIX: Disables the scroll lock on Desktop. 
-The scrollbar stays permanently visible, preventing any layout shifts! */
-@media (min-width: 900px) {
-  .scroll-lock {
-    overflow: auto !important;
-    touch-action: auto !important;
-  }
 }
 
 /* ========================================== */

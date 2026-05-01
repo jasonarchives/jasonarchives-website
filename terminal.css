@@ -6,10 +6,8 @@
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
 
-  /* THE FIX: Matches the exact frosted glass logic of the navbar */
   background-color: rgba(var(--rgb-bg), 0.85);
-
-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
   -webkit-backdrop-filter: blur(12px) saturate(120%);
   z-index: 9999;
   
@@ -17,6 +15,9 @@ backdrop-filter: blur(12px) saturate(120%);
   align-items: flex-start; 
   padding: 0 var(--global-padding); 
   box-sizing: border-box;
+
+  /* THE FIX: Traps scrolling inside the terminal */
+  overscroll-behavior: contain;
   
   opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
 }

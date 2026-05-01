@@ -70,7 +70,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 1.5rem;
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
 
 .mono-kicker {
@@ -183,8 +183,7 @@ body {
 .lightbox {
   position: fixed; 
   inset: 0;
-  
-  /* 1. Exactly matching your navbar's frosted glass */
+
   background: rgba(var(--rgb-bg), 0.8);
   backdrop-filter: blur(12px) saturate(120%);
   -webkit-backdrop-filter: blur(12px) saturate(120%);
@@ -196,6 +195,9 @@ body {
   opacity: 0; 
   pointer-events: none;
   transition: opacity 0.4s ease; 
+
+  /* THE FIX: Traps scrolling inside the lightbox so the background stays frozen */
+  overscroll-behavior: contain;
 }
 
 .lightbox.show { 
@@ -425,6 +427,7 @@ border-top: 1px solid rgba(var(--rgb-text), 0.2);
 .sidebar-record:hover .sr-title { color: var(--accent-color); }
 .sidebar-record:hover .sr-action { color: var(--accent-color); opacity: 1; }
 .sidebar-record:hover .arrow { transform: translate(3px, -3px); }
+
 
 /* Typography */
 .sr-meta {

@@ -698,6 +698,7 @@
 </div>
 
 
+
 <aside class="sidebar-directory">
   <span class="sidebar-label">[RECORDS]</span>
 
@@ -777,7 +778,12 @@ document.addEventListener("DOMContentLoaded", () => {
       lightboxExif.textContent = img.dataset.exif || ''; 
       
       lightbox.classList.add("show");
-      body.classList.add('scroll-lock');
+
+      // THE FIX: Only lock the scroll on mobile devices (under 900px).
+      // This mathematically guarantees your desktop sidebars and scrollbars remain untouched.
+      if (window.innerWidth < 900) {
+        body.classList.add('scroll-lock');
+      }
     });
   });
 
@@ -786,6 +792,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lightbox.classList.remove("show");
 
     setTimeout(() => {
+      // Safe to run globally; if it's not there, it does nothing.
       body.classList.remove('scroll-lock');
 
       // Wipe data after fade
@@ -830,6 +837,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+
+
 
 <script src="theme.js"> </script>
 <script src="cursor.js"> </script>

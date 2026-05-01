@@ -7,9 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.querySelector('.navbar');
   const closeBtn = document.getElementById('overlay-close-btn');
 
-  function openOverlay() {
+ function openOverlay() {
     overlay.classList.add('active');
-    body.classList.add('scroll-lock'); 
+
+    // THE FIX: Only lock the scroll on mobile devices (under 900px).
+    // This mathematically guarantees your desktop sidebars and scrollbars remain untouched.
+    if (window.innerWidth < 900) {
+      body.classList.add('scroll-lock');
+    }
     
     // Fade out navbar to prevent bleed-through
     if (navbar) {
@@ -30,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Wait for the 0.4s CSS glass fade to finish before unlocking the screen
     setTimeout(() => {
+      // It's safe to run the remove command globally; if it's not there, it does nothing.
       body.classList.remove('scroll-lock'); 
     }, 400);
   }
