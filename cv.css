@@ -368,10 +368,12 @@ html[data-theme="dark"] {
     visibility: visible !important; 
   }
 
-  /* 2. Hide all digital UI Elements & Excluded Content */
+ /* 2. Hide all digital UI Elements & Excluded Content */
   .navbar, .bottom-left-footer, #crosshair-cursor, .back-to-top, 
   .index-overlay, .print-hide, #terminal-overlay, .floating-print-btn,
-  .mobile-home-link, .hide-on-print { 
+  .mobile-home-link, .hide-on-print,
+
+  .os-theme-toggle-desktop, .mobile-theme-toggle {
     display: none !important; 
   }
 
