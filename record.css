@@ -46,8 +46,10 @@ body {
   letter-spacing: 0.05em;
   border-bottom: 1px solid rgba(var(--rgb-text), 0.2);
   padding-bottom: 1rem;
-}
 
+  /* THE FIX: Explicitly bind the text to your dynamic theme variable */
+  color: var(--text-color);
+}
 /* ========================= */
 /* The Master Grids          */
 /* ========================= */
@@ -247,6 +249,12 @@ body {
   padding-bottom: 0.5rem;
 }
 
+figcaption {
+  color: var(--text-color);
+  font-family: 'iA Writer Duospace', monospace;
+  opacity: 0.8; /* Keeps it slightly faded for that editorial look */
+}
+
 .editorial-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -262,13 +270,14 @@ body {
 
 
 .meta-data {
-  /* Gives the brackets a distinct, stamped look */
   display: inline-block;
   margin-right: 1rem;
   font-weight: 600;
+
+  /* THE FIX: Explicitly bind the text to your dynamic theme variable */
+  color: var(--text-color);
 }
 
-/* Removes the margin from the last item so it aligns perfectly with the right edge */
 .meta-data:last-child {
   margin-right: 0;
 }

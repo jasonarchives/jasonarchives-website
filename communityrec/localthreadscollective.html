@@ -7,6 +7,28 @@
   <meta name="robots" content="index, follow, max-image-preview:large">  
 
   <meta name="theme-color" content="#F4F4F0"> <title>Local Threads Collective | Jason Mendes</title>
+
+<script>
+  (function() {
+    // 1. Add a class to kill all transitions immediately
+    document.documentElement.classList.add('no-transition');
+
+    const savedTheme = localStorage.getItem('os-theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+
+    // 2. Wait a tiny heartbeat, then allow transitions again
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.documentElement.classList.remove('no-transition');
+      }, 100);
+    });
+  })();
+</script>
+
   <meta name="title" content="Local Threads Collective | Jason Mendes">
   <meta name="description" content="Becoming a part of a much-needed slow moving community in Mumbai's Suburbia.">
   <meta name="author" content="Jason Mendes">
@@ -51,12 +73,13 @@
   <link rel="stylesheet" href="../core.css"/>  
   <link rel="stylesheet" href="../record.css"/> 
   <link rel="stylesheet" href="../progress.css"/> 
+  <link rel="stylesheet" href="../overlay.css"/>
   <link rel="stylesheet" href="../animations.css"> 
-  <link rel="stylesheet" href="../overlay.css"> 
-
-  <link rel="stylesheet" href="../terminal.css"/> 
+  <link rel="stylesheet" href="../terminal.css">
+  <link rel="stylesheet" href="../theme.css">
 
 </head>
+
 <body>
 
 
@@ -74,6 +97,10 @@
     </div>
    
     <span id="desktop-terminal-hint" class="terminal-hint tile-in-delay-delay" style="margin-left: auto;">[PRESS ⌘K FOR QUICK SEARCH]</span>
+
+    <!-- MOBILE THEME TOGGLE (Hidden on Desktop) -->
+    <button id="mobile-theme-toggle" class="mobile-theme-toggle magnetic-btn">[ ◐ ]</button>
+
 
   </div>
 </nav>
@@ -511,6 +538,7 @@
   </footer>
 </div> 
 
+<script src="../theme.js"></script>
 <script src="../animations.js"></script>
 <script src="../cursor.js"></script>
 <script src="../progress.js"></script>
@@ -518,6 +546,21 @@
 <script src="../physics.js"></script>
 <script src="../terminal.js"></script>
 <script src="../overlay.js"></script>
+
+
+
+<!-- DESKTOP THEME TOGGLE (Hidden on Mobile) -->
+<div class="os-theme-toggle-desktop" id="desktop-theme-toggle">
+  <!-- The Resting Vertical Spine -->
+  <div class="theme-label" id="theme-label">[ MODE: LIGHT ]</div>
+  <!-- The Hover Controls -->
+  <div class="theme-controls">
+    <button class="theme-btn" data-set-theme="light">[◯ LIGHT]</button>
+    <button class="theme-btn" data-set-theme="dark">[◐ DARK]</button>
+  </div>
+</div>
+
+
 
 </body>
 </html>
