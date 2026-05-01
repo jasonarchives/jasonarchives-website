@@ -22,13 +22,21 @@ html, body {
 
 /* 2. Fluid Vertical Padding for ALL Main Pages */
 
+/* 2. Fluid Vertical Padding & Ultra-Wide Monitor Lock */
+
 main.tile-container, 
 .dossier-content, 
 .content, 
 .landing-page {
-  padding-top: clamp(4rem, 10vh, 8rem) !important;
+  /* THE FIX: Increased minimum top padding to 7rem (112px) to safely clear the 90px navbar on short/wide screens */
+  padding-top: clamp(7rem, 15vh, 10rem) !important;
   padding-bottom: clamp(3rem, 8vh, 6rem) !important;
   box-sizing: border-box;
+
+  /* THE WIDE-SCREEN FIX: Stops content from stretching/squishing on 21:9 or large Windows monitors */
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 /* 3. Aspect-Ratio Aware Typography */
@@ -147,7 +155,7 @@ a:hover .arrow1 {
 /* =========================================================================== */
 
 :root {
-  /* LAYOUT VARIABLES (Preserved!) */
+  /* LAYOUT VARIABLES (Preserved) */
   --shared-text-size: 1.05rem; 
   --global-padding: 2rem;
 
@@ -157,6 +165,10 @@ a:hover .arrow1 {
   --accent-color: #C85A32;   /* Sophisticated Terracotta */
   --rgb-text: 26, 26, 26;
   --rgb-bg: 244, 244, 240;
+
+  /* Defining the height of the navbar */
+  --nav-height: 90px;
+
 }
 
 /* 1. System Preference Detection */
@@ -599,4 +611,19 @@ body::-webkit-scrollbar-thumb:hover,
   .terminal-hint {
     display: none !important;
   }
+}
+
+
+
+
+/* ========================================== */
+/* INDEX PAGE SPECIFIC ALIGNMENT              */
+/* ========================================== */
+
+.landing-page {
+  /* Ensures the index text centers perfectly in the available space below the navbar */
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
