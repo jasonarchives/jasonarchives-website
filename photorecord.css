@@ -1,0 +1,544 @@
+/* =========================================================================== */
+/* photorecord.css - SEAMLESS EDITORIAL LAYOUT FOR PHOTO RECORDS               */
+/* =========================================================================== */
+
+/* Premium Static Paper Texture */
+body {
+  background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+  background-color: var(--bg-color);
+}
+
+/* ========================= */
+/* Global Layout Resets      */
+/* ========================= */
+.content {
+  padding-left: var(--global-padding);
+  padding-right: var(--global-padding);
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* ========================= */
+/* Header Typography         */
+/* ========================= */
+.article-header {
+  margin-bottom: 6rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  color: var(--text-color);
+}
+
+.article-subtitle {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  max-width: 95%;
+}
+
+.article-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(var(--rgb-text), 0.2);
+  padding-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.meta-details {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.meta-divider {
+  opacity: 0.5;
+}
+
+.dossier-brief {
+  margin-top: 2rem;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.9;
+
+  text-align: justify; /* Creates the strict print-block look */
+  -webkit-hyphens: auto;
+  hyphens: auto; /* Allows words to break smoothly to prevent weird spacing */
+
+}
+
+/* ========================= */
+/* THE TEXT RIVER            */
+/* ========================= */
+.text-river {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.text-river p {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.9;
+  margin-bottom: 2rem;
+
+  text-align: justify; /* Creates the strict print-block look */
+  -webkit-hyphens: auto;
+  hyphens: auto; /* Allows words to break smoothly to prevent weird spacing */
+
+}
+
+/* =========================================================================== */
+/* EDITORIAL PRINT SPREAD (2-COLUMN)                                           */
+/* =========================================================================== */
+.print-spread {
+  max-width: 1000px; /* Wider to accommodate columns */
+  margin: 0 auto;
+  column-count: 2;
+  column-gap: 4rem;
+}
+
+.print-spread p {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.9;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+/* =========================================================================== */
+/* THE WHITESPACE VOIDS                                                        */
+/* =========================================================================== */
+.void-small { height: 6rem; }
+.void-medium { height: 12rem; }
+.void-massive { height: 25rem; }
+
+/* =========================================================================== */
+/* STRUCTURED RANDOMNESS: IMAGE SCALING & POSITIONING                          */
+/* =========================================================================== */
+.essay-body img {
+  display: block;
+  height: auto;
+  cursor: zoom-in;
+}
+
+.examinable-image {
+  cursor: zoom-in;
+}
+
+.img-standard {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.img-monolith {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
+
+.img-pull-left {
+  width: 100%;
+  max-width: 850px;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.img-pull-right {
+  width: 100%;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.img-offset-left {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  transform: translateX(-15%);
+}
+
+.img-offset-right {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  transform: translateX(15%);
+}
+
+.img-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.img-pair img {
+  width: 100%;
+}
+
+/* =========================================================================== */
+/* MICRO-TYPOGRAPHY / MARGINALIA                                               */
+/* =========================================================================== */
+.marginalia-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.marginalia-text {
+  position: absolute;
+  top: 0;
+  left: -2.5rem;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg); /* Reads top to bottom */
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.marginalia-text.right {
+  left: auto;
+  right: -2.5rem;
+  transform: none; /* Reads top to bottom natively */
+}
+
+/* ========================= */
+/* Mobile Essay Adjustments  */
+/* ========================= */
+@media (max-width: 900px) {
+  .text-river {
+    max-width: 100%;
+  }
+
+  .print-spread {
+    column-count: 1; /* Collapses the print spread into a single readable column */
+    max-width: 100%;
+  }
+
+  .img-pull-left,
+  .img-pull-right,
+  .img-offset-left,
+  .img-offset-right {
+    transform: none;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .img-standard {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  .img-pair {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  /* Translates sideways desktop marginalia into clean horizontal mobile labels */
+  .marginalia-text,
+  .marginalia-text.right {
+    position: static;
+    writing-mode: horizontal-tb;
+    transform: none;
+    margin-bottom: 1rem;
+    margin-left: 0;
+  }
+
+  .void-small { height: 4rem; }
+  .void-medium { height: 8rem; }
+  .void-massive { height: 15rem; }
+}
+
+/* =========================================================================== */
+/* THE TRIPTYCH                                                                */
+/* =========================================================================== */
+.img-triptych {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* THE FIX: This forces the huge photos to shrink and fit perfectly inside their 3 columns */
+.img-triptych img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .img-triptych {
+    grid-template-columns: 1fr; /* Stacks vertically on mobile */
+    gap: 4rem;
+  }
+}
+
+
+/* =========================================================================== */
+/* ASYMMETRICAL DIPTYCH                                                        */
+/* =========================================================================== */
+.img-asymmetric {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr; /* The left image is 2.5x larger */
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: end; /* Aligns them at the bottom for a grounded feel */
+}
+
+/* Add a reverse class if you want the big image on the right */
+.img-asymmetric.reverse {
+  grid-template-columns: 1fr 2.5fr;
+}
+
+.img-asymmetric img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 800px) {
+  .img-asymmetric, .img-asymmetric.reverse {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
+
+/* =========================================================================== */
+/* THE FILM SEQUENCE (UNCROPPED GRID)                                          */
+/* =========================================================================== */
+.img-sequence {
+  display: grid;
+  /* Automatically calculates how many images can fit while staying readable */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem; /* Clean breathing room between the frames */
+  max-width: 1200px;
+  margin: 0 auto;
+
+  /* CRITICAL: If you mix landscape and portrait photos, this keeps them
+     anchored to the top of the row instead of stretching them vertically */
+  align-items: start;
+}
+
+.img-sequence img {
+  width: 100%;
+  height: auto; /* CRITICAL: Never crops, maintains the exact aspect ratio */
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .img-sequence {
+    /* On mobile, we force 2 columns so it still feels like a sequence
+       rather than just a long vertical scroll of single images */
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+
+/* =========================================================================== */
+/* SMALL INSET IMAGE (RIGHT ALIGNED)                                           */
+/* =========================================================================== */
+.img-inset-right {
+  width: 100%;
+  max-width: 450px; /* Distinctly smaller than the pull-right or standard images */
+  margin-left: auto;
+  margin-right: 0;
+  height: auto; /* Strictly enforces the native aspect ratio without cropping */
+  display: block;
+}
+
+/* On mobile screens, pushing a small image to the right creates awkward
+   blank gaps. This gracefully scales it back to a standard center view. */
+@media (max-width: 800px) {
+  .img-inset-right {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* =========================================================================== */
+/* CHAPTER HEADING                                                             */
+/* =========================================================================== */
+.chapter-heading {
+  max-width: 680px; /* Aligns perfectly with the left edge of your text river */
+  margin: 0 auto;
+  /* Removed text-align: center so it naturally left-aligns */
+}
+
+.chapter-title {
+  font-family: 'SF Pro Display', sans-serif;
+  /* Scaled up to perfectly match your main .article-title h1 */
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 0.9; /* Tightened line height for massive text */
+  letter-spacing: -0.04em;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* ========================= */
+/* Examiner Overlay          */
+/* ========================= */
+#examiner-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-color: var(--bg-color);
+  z-index: 10000;
+  display: flex; justify-content: center; align-items: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  cursor: zoom-out;
+}
+#examiner-overlay.active { opacity: 1; pointer-events: all; }
+#examiner-overlay img { max-width: 95vw; max-height: 95vh; object-fit: contain; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+
+/* ========================= */
+/* UI Hiding Logic           */
+/* ========================= */
+body.hide-ui-mode .navbar,
+body.hide-ui-mode .bottom-left-footer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ========================= */
+/* Cinematic Scroll          */
+/* ========================= */
+.horizontal-scroll-track { position: relative; width: 100%; margin-top: 10rem; }
+.horizontal-scroll-camera { position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; background-color: var(--bg-color); display: flex; align-items: center; z-index: 500; }
+.horizontal-scroll-strip { display: flex; height: 100vh; width: max-content; will-change: transform; }
+.horizontal-slide { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; padding: 4rem; box-sizing: border-box; }
+.horizontal-slide img { max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid rgba(var(--rgb-text), 0.2); box-shadow: 0 20px 60px rgba(0,0,0,0.05); }
+
+.end-slide { background-color: var(--text-color); color: var(--bg-color); justify-content: flex-start; padding-left: 10vw; }
+.end-slide .pipeline-link:hover { color: var(--accent-color) !important; }
+.pipeline-label { font-family: 'iA Writer Duospace', monospace; font-size: 0.85rem; color: var(--text-color); opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.pipeline-link { font-family: 'SF Pro Display', sans-serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; color: var(--text-color); text-decoration: none; transition: opacity 0.4s ease, color 0.4s ease; margin-bottom: 2rem; }
+.pipeline-link .arrow-nudge { font-family: 'iA Writer Duospace', monospace; font-size: 0.5em; opacity: 0.3; display: inline-block; margin-left: 0.2em; transition: opacity 0.4s ease, transform 0.4s ease, color 0.6s ease; }
+
+/* ========================= */
+/* Sharing Cluster           */
+/* ========================= */
+.share-cluster {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 6rem;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid rgba(var(--rgb-text), 0.2);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.share-label {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+}
+
+.share-link {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.share-link:hover {
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 800px) {
+  .share-cluster {
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 4rem;
+  }
+}
+
+/* =========================================================================== */
+/* NAV UTILITIES                                                               */
+/* =========================================================================== */
+
+.menu-btn {
+  font-family: 'iA Writer Duospace', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  padding: 0;
+}
+
+.menu-btn:hover {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* =========================================================================== */
+/* DARK MODE TEXTURE REPAIR                                                    */
+/* =========================================================================== */
+
+html[data-theme="dark"] body {
+  background-image: linear-gradient(rgba(28, 28, 26, 0.95), rgba(28, 28, 26, 0.95)),
+                    url("https://www.transparenttextures.com/patterns/p6.png") !important;
+  background-blend-mode: normal !important;
+}
