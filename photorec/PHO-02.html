@@ -4,23 +4,19 @@
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="robots" content="index, follow, max-image-preview:large">  
+  <meta name="robots" content="index, follow, max-image-preview:large">
 
   <meta name="theme-color" content="#F4F4F0"> <title>Expressions at 8mm | Jason Mendes Photography</title>
 
 <script>
   (function() {
-    // 1. Add a class to kill all transitions immediately
     document.documentElement.classList.add('no-transition');
-
     const savedTheme = localStorage.getItem('os-theme');
     if (savedTheme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
     }
-
-    // 2. Wait a tiny heartbeat, then allow transitions again
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.documentElement.classList.remove('no-transition');
@@ -31,16 +27,15 @@
 
 
   <meta name="title" content="Expressions at 8mm | Jason Mendes Photography">
-  <meta name="description" content="A photo-essay documenting my journey capturing human expressions with the Samyang 8mm Wide-Angle lens.">
+  <meta name="description" content="Documenting my journey capturing human expressions with the Samyang 8mm Wide-Angle lens.">
   <meta name="author" content="Jason Mendes">
-
 
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://jasonarchives.online/photorec/PHO-02.html">
   <meta property="og:title" content="Expressions at 8mm | Jason Mendes Photography">
-  <meta property="og:description" content="A photo-essay documenting my journey capturing human expressions with the Samyang 8mm Wide-Angle lens.">
+  <meta property="og:description" content="Documenting my journey capturing human expressions with the Samyang 8mm Wide-Angle lens.">
   <meta property="og:image" content="https://jasonarchives.online/preview/PHO02.jpg">
-  <meta property="og:image:width" content="1200"> 
+  <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <link rel="canonical" href="https://jasonarchives.online/photorec/PHO-02.html">
@@ -66,508 +61,405 @@
       }
     },
     "datePublished": "2026-04-22",
-    "dateModified": "2026-05-01",
-    "description": "A photo-essay documenting my journey capturing human expressions with the Samyang 8mm Wide-Angle lens."
+    "dateModified": "2026-05-02",
+    "description": "Documenting my journey capturing human expressions with the Samyang 8mm Wide-Angle lens."
   }
   </script>
 
-  <link rel="stylesheet" href="../cursor.css"> 
-  <link rel="stylesheet" href="../core.css"/> 
-  <link rel="stylesheet" href="../overlay.css"/>  
 
-  <link rel="stylesheet" href="../progress.css"/> 
-  <link rel="stylesheet" href="../animations.css"> 
-  <link rel="stylesheet" href="../record.css"/> 
-  <link rel="stylesheet" href="../terminal.css"/> 
+  <link rel="stylesheet" href="../photorecord.css"/>
+  <link rel="stylesheet" href="../cursor.css">
+  <link rel="stylesheet" href="../core.css"/>
+  <link rel="stylesheet" href="../overlay.css"/>
+  <link rel="stylesheet" href="../progress.css"/>
+  <link rel="stylesheet" href="../animations.css">
+  <link rel="stylesheet" href="../terminal.css"/>
   <link rel="stylesheet" href="../theme.css"/>
 
 </head>
 <body>
 
-
-
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-          
-<!-- NAVBAR -->  
-
+<!-- NAVBAR -->
 <nav class="navbar">
   <div style="display: flex; align-items: center; width: 100%; position: relative;">
-    
     <div class="nav-right tile-in-delay-delay" style="display: flex; align-items: center;">
       <button id="menu-toggle" class="menu-btn magnetic-btn">[←ARCHIVE]</button>
     </div>
-   
     <span id="desktop-terminal-hint" class="terminal-hint tile-in-delay-delay" style="margin-left: auto;">[PRESS ⌘K FOR QUICK SEARCH]</span>
-
-    <!-- MOBILE THEME TOGGLE (Hidden on Desktop) -->
     <button id="mobile-theme-toggle" class="mobile-theme-toggle magnetic-btn">[ ◐ ]</button>
-
-
   </div>
 </nav>
 
-
-<!-------------------------------------------------------------------------------------------------------------------------------------->        
-          
-<!-- OVERLAY -->  
-
-  
-
+<!-- OVERLAY -->
 <div id="index-overlay" class="index-overlay">
   <button id="overlay-close-btn" class="overlay-close-btn">[ ✕ CLOSE ]</button>
   <div class="overlay-content" style="width: 100%;">
-    
     <a href="../photos.html" class="overlay-home-link">[← BACK TO PHOTOS]</a>
-    
-    <!-- THE NEW SCROLLABLE DIRECTORY -->
     <div class="overlay-scroll-area">
       <span class="overlay-section-title">[RECORDS]</span>
-      
-      <!-- Adding the 'active' class colors the current record Terracotta -->
       <a href="PHO-01.html" class="overlay-record-link">PHO-01: Midnight in Uppsala<span class="arrow1">↗</span></a>
       <a href="PHO-02.html" class="overlay-record-link active">PHO-02: Expressions at 8mm<span class="arrow1">↗</span></a>
-      <a href="PHO-03.html" class="overlay-record-link">PHO-03: Coming Soon<span class="arrow1">↗</span></a>
-
+      <a href="PHO-03.html" class="overlay-record-link">PHO-03: Under the Sun<span class="arrow1">↗</span></a>
     </div>
-
-    <!-- GLOBAL NAV RELEGATED TO FOOTER -->
     <div class="overlay-footer">
       <a href="../index.html">Home <span class="arrow">↗</span></a>
       <a href="../design.html">Designs<span class="arrow">↗</span></a>
       <a href="../writings.html">Writings<span class="arrow">↗</span></a>
       <a href="../community.html">Community<span class="arrow">↗</span></a>
     </div>
-
   </div>
-</div>
-
-<!-------------------------------------------------------------------------------------------------------------------------------------->
-
-
-
-
-<button id="mobile-ledger-btn" class="mobile-hud-btn">[↑INDEX]</button>
-
-<div id="mobile-ledger-overlay" class="mobile-hud-overlay">
-  <div class="hud-header">
-    <span class="hud-title">[↓INDEX]</span>
-    <button id="close-hud-btn" class="hud-close">[ ✕ ]</button>
-  </div>
-  <nav class="hud-nav">
-    <a href="#sec-01" class="hud-link active">A Pause in Copenhagen</a>
-        <a href="#sec-02" class="hud-link">Gask på Västgöta</a>
-
-        <a href="#sec-03" class="hud-link">Baras Enkelt</a>
-        <a href="#sec-04" class="hud-link">Midsommar '23</a>
-  </nav>
 </div>
 
 <main class="content tile-container">
   <article class="project-content active">
 
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-
-<!-- HEADER -->   
-
+    <!-- HEADER -->
     <header class="article-header tile-in">
       <h1 class="article-title">Expressions at 8mm</h1>
-      <div class="article-meta">[RECORD: PHO-02]</div>
-      <p class="dossier-brief">
 
-      In 2021, I purchased a 
-      Samyang 8mm Manual Wide-Angle lens for my 
-      EF-mount camera. Most lenses allow me to hide behind the camera. 
-     A 50 or a 200 would let me observe from a safe 
-     distance, capturing candid moments without altering 
-     the room's chemistry. 
-     <br><br>
-     The 8mm destroys that distance for me. 
-     It has a bulbous, protruding front element that looks less 
-     like a traditional camera and more like a massive glass eye. 
-     When I point it at someone, they can’t ignore it. The 
-     resulting poses are a mix of natural and performative, 
-     but always exaggerated by design, while being deeply aware of the machine &amp; human in front of them.
-    <br><br>
-     I have to invade personal space, often standing just inches away from people.
-     I find this proximity so fascinating. I love it when I can see them leaning into
-     the lens distortion, throwing their hands out, tilting their heads, my lens literally bending
-     light in front of me. This record is a series of these light-bending images, from photoshoots at &nbsp;Pax et Bellum dinner parties, to Midsommar celebrations, and my best friends casually posing on a street corner in Copenhagen.
-     
-      </p>
+      <h2 class="article-subtitle">Documenting my journey capturing human expressions with the Samyang 8mm Wide-Angle lens.</h2>
 
-    </header>
-
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-          
-<!-- CONTENT --> 
-
-    <div class="dossier-master-grid">
-
-      <div class="dossier-body tile-in-delay">
-
-
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-          
-<!-- SEC 1 --> 
-
-        <figure class="evidence-block">
-          <img src="../photos/PHO02/PHO02-5.webp" alt="A woman and a man posing for a photograph from a wide angle lens on the streets of Copenhagen, Denmark by Jason Mendes" class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ AMARGERTORV, KØBENHAVN ]</span>
-            <span class="meta-data">[ A PAUSE IN COPENHAGEN ]</span>
-            <span class="meta-data">[ DECEMBER 2021 ]</span>
-          </figcaption>
-        </figure>
-
-
-        <div id="sec-01" class="dossier-split">
-          <div class="field-notes">
-            <h3 class="notes-heading">A Pause in Copenhagen</h3>
-            <p>Our last morning in Copenhagen was 
-            spent walking the high streets in 
-            pursuit of Guinness. As Rasmus made attempts to chart 
-            a course back to the larger group, Tien stepped into the frame of the 8mm, 
-            looking exactly as effortlessly badass as she always does.
-
-            </p>
-          </div>
-
-          <figure class="evidence-block">
-            <img src="../photos/PHO02/PHO02-4.webp" alt="A woman and a man posing for a photograph from a wide angle lens on the streets of Copenhagen, Denmark by Jason Mendes" class="examinable-image">
-            <figcaption class="evidence-metadata">
-              <span class="meta-data">[ AMARGERTORV, KØBENHAVN ]</span>
-              <span class="meta-data">DECEMBER 2021</span>
-            </figcaption>
-          </figure>
+      <div class="article-meta">
+        <span class="meta-tag">[RECORD: PHO-02]</span>
+        <div class="meta-details">
+          <span class="meta-author">By Jason Mendes</span>
+          <span class="meta-divider">//</span>
+          <span class="meta-date">Photo Series from 2021—2023</span>
         </div>
-        
-        
-        <figure class="evidence-block">
-          <img src="../photos/PHO02/PHO02-6.webp" alt="A woman and a man posing for a photograph from a wide angle lens on the streets of Copenhagen, Denmark by Jason Mendes" class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ AMARGERTORV, KØBENHAVN ]</span>
-            <span class="meta-data">[ A PAUSE IN COPENHAGEN ]</span>
-            <span class="meta-data">[ DECEMBER 2021 ]</span>
-          </figcaption>
-        </figure>
-
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-
-<!-- SEC 2 --> 
-
-
-
-
-        <figure class="evidence-block">
-          <img src="../photos/PHO02/PHO02-13.webp" alt="Members of Pax et Bellum from Uppsala University at a Gask at Västgöta Nation, by Jason Mendes" class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ VÄSTGÖTA NATION, UPPSALA ]</span>
-            <span class="meta-data">[ GASK PÅ VÄSTGÖTA ]</span>
-            <span class="meta-data">[ JANUARY 2023 ]</span>
-          </figcaption>
-        </figure>
-
-
-
-
-
-
-<div id="sec-02" class="dossier-split inverted">
-  
-  <div class="field-notes">
-    <h3 class="notes-heading">Gask På Västgöta</h3>
-    <p>My second time photographing the Pax et Bellum semester dinner with 
-    the setting shifted to the beautiful, historic halls of 
-    Västgöta Nation. While the architecture demanded a certain 
-    formality, the evening quickly dissolved into something much 
-    warmer. It was a night defined by loud celebrations, smooth dancing,
-    and the realization that the humanitarians throw the best parties in Uppsala.
-    
-
-    </p>
-  </div>
-
-  <figure class="evidence-block">
-    <img src="../photos/PHO02/PHO02-16.webp" alt="Members of Pax et Bellum from Uppsala University at a Gask at Västgöta Nation, by Jason Mendes" class="examinable-image">
-    <figcaption class="evidence-metadata">
-      <span class="meta-data">[ VÄSTGÖTA NATION, UPPSALA ]</span>
-      <span class="meta-data">[ JANUARY 2023 ]</span>
-    </figcaption>
-  </figure>
-
-
-</div>
-
-
-        <figure  class="evidence-block">
-          <img src="../photos/PHO02/PHO02-14.webp" alt="Members of Pax et Bellum from Uppsala University posing for a photo at a Gask in Västgöta Nation, by Jason Mendes" class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ VÄSTGÖTA NATION, UPPSALA ]</span>
-            <span class="meta-data">[ GASK PÅ VÄSTGÖTA ]</span>
-            <span class="meta-data">[ JANUARY 2023 ]</span>
-          </figcaption>
-        </figure>
-        
-          <figure  class="evidence-block">
-          <img src="../photos/PHO02/PHO02-15.webp" alt="Two members of Pax et Bellum from Uppsala University dancing at a Gask in Västgöta Nation, by Jason Mendes" class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ VÄSTGÖTA NATION, UPPSALA ]</span>
-            <span class="meta-data">[ GASK PÅ VÄSTGÖTA ]</span>
-            <span class="meta-data">[ JANUARY 2023 ]</span>
-          </figcaption>
-        </figure>
-  
-
-       
-       
-
-
-
-
-       
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-          
-<!-- SEC 3 --> 
-
-       
-        <figure class="evidence-block">
-          <img src="../photos/PHO02/PHO02-2.webp" alt="Two men posing for a photo showing finger signs, at Baras Enkelt in Stockholm, by Jason Mendes." class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ SKÅNEGATAN, STOCKHOLM ]</span>
-            <span class="meta-data">[ BARAS ENKELT ]</span>
-            <span class="meta-data">[ SEPTEMBER 2022 ]</span>
-          </figcaption>
-        </figure>
-
-
-<div id="sec-03" class="dossier-split inverted">
-  
-  <div class="field-notes">
-    <h3 class="notes-heading">Baras Enkelt</h3>
-    <p>Enkelt was my introduction to the Baras locations 
-    in Stockholm. It became a permanent fixture during my night outs, mainly for its cozy atmosphere. The lighting in there was 
-    impossibly dim, and forcing an 8mm lens with an f/3.5 limit
-    into that darkness was a constant struggle. Nevertheless, fascinated by the bulbous lens, 
-    Thomas and Giorgios couldn't stop performing for the camera.
-    </p>
-  </div>
-
-  <figure class="evidence-block">
-    <img src="../photos/PHO02/PHO02-3.webp" alt="A glass of Norrlands Guld beer, with a group of people, talking in the background, at Baras Enkelt in Stockholm, by Jason Mendes." class="examinable-image">
-    <figcaption class="evidence-metadata">
-      <span class="meta-data">[ SKÅNEGATAN, STOCKHOLM ]</span>
-      <span class="meta-data">[ SEPTEMBER 2022 ]</span>
-    </figcaption>
-  </figure>
-
-</div>
-
-
-        <figure class="evidence-block">
-          <img src="../photos/PHO02/PHO02-1.webp" alt="Two men posing for a photo showing finger signs, at Baras Enkelt in Stockholm, by Jason Mendes." class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ SKÅNEGATAN, STOCKHOLM ]</span>
-            <span class="meta-data">[ BARAS ENKELT ]</span>
-            <span class="meta-data">[ SEPTEMBER 2022 ]</span>
-          </figcaption>
-        </figure>
-
-
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-          
-<!-- SEC 4 --> 
-
-
-
-        <figure class="evidence-block">
-          <img src="../photos/PHO02/PHO02-17.webp" alt="A group of three friends posing for a photo taken with a camera flash, in Stockholm, by Jason Mendes." class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ VEGA, STOCKHOLM ]</span>
-            <span class="meta-data">[ MIDSOMMAR '23 ]</span>
-            <span class="meta-data">[ JUNE 2023 ]</span>
-          </figcaption>
-        </figure>
-        
-        
-        <figure class="evidence-block">
-          <img src="../photos/PHO02/PHO02-18.webp" alt="A girl posing with her tongue out, for a photo in Stockholm, by Jason Mendes" class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ VEGA, STOCKHOLM]</span>
-            <span class="meta-data">[ MIDSOMMAR '23 ]</span>
-            <span class="meta-data">[ JUNE 2023 ]</span>
-          </figcaption>
-        </figure>
-
-
-
-
-
-
-<div id="sec-04" class="dossier-split inverted">
-  
-  <div class="field-notes">
-    <h3 class="notes-heading">Midsommar '23</h3>
-    <p>That Midsommar, we were all together. 
-    I will always be grateful the 8mm was there to 
-    document it. The proximity required by 
-    the lens didn't distort the emotion, instead it magnified 
-    our final, unfiltered expressions. It is a visual 
-    testament to our pure joy, that we were living 
-    entirely in the present, celebrating as if it 
-    were our last night together.
-
-    </p>
-  </div>
-
-  <figure class="evidence-block">
-    <img src="../photos/PHO02/PHO02-8.webp" alt="A group of people posing for a group photo at a Midsummer celebration in Stockholm, by Jason Mendes." class="examinable-image">
-    <figcaption class="evidence-metadata">
-      <span class="meta-data">[ VEGA, STOCKHOLM ]</span>
-      <span class="meta-data">[ JUNE 2023 ]</span>
-    </figcaption>
-  </figure>
-
-
-</div>
-
-
-        <figure  class="evidence-block">
-          <img src="../photos/PHO02/PHO02-9.webp" alt="A group of people having discussions with a man showing a hand sign, by Jason Mendes." class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ VEGA, STOCKHOLMv ]</span>
-            <span class="meta-data">[ MIDSOMMAR '23 ]</span>
-            <span class="meta-data">[ JUNE 2023 ]</span>
-          </figcaption>
-        </figure>
-        
-          <figure  class="evidence-block">
-          <img src="../photos/PHO02/PHO02-19.webp" alt="Two men kicking towards the camera during a Midsommar celebration in Stockholm, by Jason Mendes" class="examinable-image">
-          <figcaption class="evidence-metadata">
-            <span class="meta-data">[ VEGA, STOCKHOLM ]</span>
-            <span class="meta-data">[ MIDSOMMAR '23 ]</span>
-            <span class="meta-data">[ JUNE 2023 ]</span>
-          </figcaption>
-        </figure>
-  
-
-
-
-
-
-
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-          
-<!-- SHARING --> 
-
-
-        <div class="share-cluster">
-          <span class="share-label">DISTRIBUTE RECORD:</span>
-          <a href="#" id="share-linkedin" class="share-link" target="_blank" rel="noopener noreferrer">[ in ]</a>
-          <a href="#" id="share-whatsapp" class="share-link" target="_blank" rel="noopener noreferrer">[ wa ]</a>
-          <a href="#" id="share-email" class="share-link">[ ✉ ]</a>
-          <button id="share-copy" class="share-link" style="background: none; border: none; padding: 0; cursor: pointer;">[ copy ]</button>
-        </div>
-
-
-<!--------------------------------------------------------------------------------------------------------------------------------------->        
-          
-<!-- NEXT --> 
-
-
-
-<div class="scroll-telemetry tile-in-delay-delay">
-  <div class="cascade-arrows">
-    <span class="telemetry-arrow a1">↓</span>
-    <span class="telemetry-arrow a2">↓</span>
-    <span class="telemetry-arrow a3">↓</span>
-  </div>
-</div>
-
-
       </div>
 
+      <p class="dossier-brief">
+        In 2021, I purchased a
+        Samyang 8mm Manual Wide-Angle lens for my
+        EF-mount camera. Most lenses allowed me to hide behind the camera.
+        A 50 or a 200 would let me observe from a safe
+        distance, capturing candid moments without altering
+        the room's chemistry.
+        <br><br>
+        The 8mm destroyed that distance for me.
+        It had a bulbous, protruding front element that looked less
+        like a traditional camera and more like a massive glass eye.
+        When I pointed it at someone, they couldn't ignore it. The
+        resulting poses were a mix of natural and performative,
+        but always exaggerated by design, while being deeply aware of the machine &amp; human in front of them.
+        <br><br>
+        I had to invade personal space, often standing just inches away from people.
+        I found this proximity so fascinating. I loved it when I could see them leaning into
+        the lens distortion, throwing their hands out, tilting their heads, my lens was literally bending
+        light in front of me. This record is a series of these light-bending images, from photoshoots at &nbsp;Pax et Bellum dinner parties, to Midsommar celebrations, and my best friends casually posing on a street corner in Copenhagen.
      
-     
-     
-     
-     
-     
-     
-      <aside class="ledger-index tile-in-delay-delay">
+      </p>
+    </header>
 
-        <a href="#sec-01" class="ledger-link active">A Pause in Copenhagen</a>
-        <a href="#sec-02" class="ledger-link">Gask På Västgöta</a>
+    <!-- CONTENT STREAM -->
+    <div class="essay-body tile-in-delay">
 
-        <a href="#sec-03" class="ledger-link">Baras Enkelt</a>
-        <a href="#sec-04" class="ledger-link">Midsommar ‘23</a>
-       
-      </aside>
+      <div class="void-medium"></div>
 
-    </div>
+      <img src="../photos/PHO02/PHO02-6.webp" class="img-monolith examinable-image"
+      alt="A woman standing under the canopy of a palm tree, with the shadow of its leaves projecting on her face" loading="lazy" decoding="async">
+
+      <div class="void-medium"></div>
+
+
+
+
+
+
+
+      <!-- SEC 1: An Afternoon Under A Canopy -->
+      <div class="chapter-heading">
+        <h3 class="chapter-title">Visiting Cities</h3>
+      </div>
+
+      <div class="text-river">
+        <p>
+          Traveling through different cities with the 8mm
+          lens reshaped how I documented these
+          urban experiences. It stopped being about just capturing
+          the grand architecture of a new place and instead
+          became an intimate exploration of how my friends
+          occupied these foreign spaces. The bulbous glass
+          element demanded attention, it pulled people out of
+          their environment and forced an interaction.
+        </p>
+      </div>
+
+      <div class="void-small"></div>
+
+      <div class="img-pair">
+        <img src="../photos/PHO02/PHO02-4.webp" class="examinable-image"
+        alt="A woman looking at the camera through palm leaves with sunlight falling onto the iris of her eyes" loading="lazy" decoding="async">
+        <img src="../photos/PHO02/PHO02-1.webp" class="examinable-image"
+        alt="A woman dressed in a maroon Saree, fiddling with pam leaves with the sun falling on her body" loading="lazy" decoding="async">
+      </div>
+
+      <div class="void-medium"></div>
+
+      <div class="print-spread">
+        <p>
+          Whether we were spending our final morning in Copenhagen walking the high
+          streets in pursuit of Guinness, or retreating into the dim, cozy interior
+          of Baras Enkelt in Stockholm, the reaction to the lens remained universally theatrical.
+
+          As Rasmus attempted to chart a course back to our group,
+          Tien stepped effortlessly into the frame, looking as badass as she always did.
+          Amidst the corners of Baras Enkelt, where forcing an f/3.5 lens
+          into the shadows was a constant battle, Thomas and Giorgios
+          couldn't resist leaning in and performing for the camera. The 8mm, with all of its distortions, exaggerated
+          the emotions on the already exaggerated people.
+        </p>
+      </div>
+
+      <div class="void-medium"></div>
+
+      <div class="marginalia-wrapper">
+        <span class="marginalia-text right">[ SHOT AT 50MM F1.8 ]</span>
+        <img src="../photos/PHO02/PHO02-3.webp" class="img-standard examinable-image"
+        alt="A woman looking forward through palm tree leaves, with the shadows of the leaves projected onto her face" loading="lazy" decoding="async">
+      </div>
+
+      <div class="void-small"></div>
+
+      <div class="text-river">
+        <p>
+          These cities served as wildly different backdrops, but the 8mm lens acted as a
+          bizarre anchor. It turned pauses in foreign streets and pubs
+          into playful performances that magnified their personalities and documenting the messy interactions
+          between my friends and the camera.
+        </p>
+      </div>
+
+      <div class="void-small"></div>
+
+
+      <img src="../photos/PHO02/PHO02-5.webp" class="img-monolith examinable-image"
+      alt="A woman standing under the canopy of a palm tree, with the shadow of its leaves projecting on her face" loading="lazy" decoding="async">
+
+
+
+
+      <div class="void-massive"></div>
+
+
+
+
+
+
+
+      <!-- SEC 2: Gask på Västgöta -->
+      <div class="chapter-heading">
+        <h3 class="chapter-title">Gask på Västgöta</h3>
+      </div>
+
+      <div class="text-river">
+        <p>
+          This was my second time photographing the Pax et Bellum semester dinner and I
+          saw the setting shifted to the beautiful, historic halls of
+          Västgöta Nation. While the grand architecture of the room
+          initially demanded a certain level of formality,
+          the evening quickly dissolved into something much warmer and
+          less rigid.
+        </p>
+      </div>
+
+      <div class="void-medium"></div>
+
+      <div class="img-asymmetric reverse">
+        <img src="../photos/PHO02/PHO02-21.webp" class="examinable-image"
+        alt="Silhouettes of two men standing at a beach in Goa" loading="lazy" decoding="async">
+        <img src="../photos/PHO02/PHO02-16.webp" class="examinable-image"
+        alt="A picture of a woman's legs while she is standig on the wet sand at Gorai Beach, Mumbai" loading="lazy" decoding="async">
+      </div>
+
+      <div class="void-small"></div>
+
+      <img src="../photos/PHO02/PHO02-22.webp" class="img-monolith examinable-image"
+      alt="A woman standing under the canopy of a palm tree, with the shadow of its leaves projecting on her face" loading="lazy" decoding="async">
+
+
+      <div class="void-small"></div>
+
+      <div class="img-asymmetric">
+        <img src="../photos/PHO02/PHO02-13.webp" class="examinable-image"
+        alt="Silhouette of a woman playing with her long hair" loading="lazy" decoding="async">
+        <img src="../photos/PHO02/PHO02-20.webp" class="examinable-image"
+        alt="Silhouette of a woman where she is throwing her curly hair backwards" loading="lazy" decoding="async">
+      </div>
+
+      <div class="void-medium"></div>
+
+      <div class="print-spread">
+        <p>
+           The 8mm lens was perfectly suited for this location. As
+           the space filled with energy, the massive field of view allowed
+           me to capture the entirety of the celebration, while remaining
+           physically close to people. By getting right into the middle of
+           the dance floor, the lens distortion captured the joyful
+           chaos of the night, freezing the motion of the room in a
+           way a standard portrait lens never could. When the massive group piled onto
+            the vintage sofa by the fireplace, under those beautiful
+            oil paintings, the lens didn't just fit every smiling face
+            into the frame. Instead, the distortion wrapped the
+            room's historic walls and heavy curtains right around their
+            laughter.
+        </p>
+      </div>
+
+      <div class="void-medium"></div>
+
+
+
+      <div class="marginalia-wrapper">
+        <span class="marginalia-text right">[ SHOT AT 8MM F3.5 ]</span>
+        <img src="../photos/PHO02/PHO02-14.webp" class="img-standard examinable-image"
+        alt="Silhouettes of boys playing football on Suruchi Beach, Mumbai" loading="lazy" decoding="async">
+      </div>
+
+      <div class="void-massive"></div>
+
+
+
+
+      <div class="text-river">
+        <p>
+          As the night progressed, the 8mm erased the formality of the gask and became
+          the perfect glass to use around that crowd.
+          It was a night defined by loud
+          celebrations, smooth dancing, and the realization that the humanitarians
+          threw the best parties in Uppsala.
+        </p>
+      </div>
+
+      <div class="void-medium"></div>
+
+      <img src="../photos/PHO02/PHO02-15.webp" class="img-monolith examinable-image"
+      alt="Silhouettes of two men standing by a silhouetted treeline, at Suruchi Beach, Mumbai" loading="lazy" decoding="async">
+
+      <div class="void-massive"></div>
+
+
+
+
+
+
+
+      <!-- SEC 3: Midsommar '23 -->
+      <div class="chapter-heading">
+        <h3 class="chapter-title">Midsommar '23</h3>
+      </div>
+
+      <div class="text-river">
+        <p>
+          That Midsommar, we were all together in Stockholm.
+          I will always be grateful the 8mm was there to document it.
+          The proximity required by the lens didn't distort our emotions, instead, it magnified our
+          final, unfiltered expressions.
+        </p>
+      </div>
+
+      <div class="void-medium"></div>
+
+      <div class="img-asymmetric">
+        <img src="../photos/PHO02/PHO02-17.webp" class="examinable-image"
+        alt="Silhouette of a woman playing with her long hair" loading="lazy" decoding="async">
+        <img src="../photos/PHO02/PHO02-8.webp" class="examinable-image"
+        alt="Silhouette of a woman where she is throwing her curly hair backwards" loading="lazy" decoding="async">
+      </div>
+
+
+
+      <div class="void-medium"></div>
+
+      <img src="../photos/PHO02/PHO02-19.webp" class="img-monolith examinable-image"
+      alt="A woman collecting flowers from the bushes to make a Midsummer Crown at a Midsummer celebration in Uppsala Sweden" loading="lazy" decoding="async">
+
+      <div class="void-medium"></div>
+
+      <div class="text-river">
+        <p>
+          Because the lens required me to invade personal space,
+          I captured every laugh, exaggerated pose, and kicked leg with
+          clarity. It was a visual testament to our pure joy,
+          proving that we were living entirely in the present,
+          celebrating as if it were our last night together.
+        </p>
+      </div>
+
+      <div class="void-medium"></div>
+
+      <img src="../photos/PHO02/PHO02-10.webp" class="img-standard examinable-image"
+      alt="Shadows of me and my friend and a Maypole on the ground, at a Midsummer celebration in Sweden" loading="lazy" decoding="async">
+
+      <div class="void-medium"></div>
+
+      <div class="img-pair">
+        <img src="../photos/PHO02/PHO02-12.webp" class="examinable-image"
+        alt="Portrait of a woman standing beside a Maypole at a Swedish Midsummer celebration" loading="lazy" decoding="async">
+        <img src="../photos/PHO02/PHO02-11.webp" class="examinable-image"
+        alt="Portrait of a woman standing beside a Maypole at a Swedish Midsummer celebration" loading="lazy" decoding="async">
+      </div>
+
+      <div class="void-massive"></div>
+
+      <div class="text-river">
+        <p>
+          The wide-angle distortion didn't just record a scene, but it demanded
+          active participation from everyone in front of it. Looking back at
+          these photos from that Midsummer, they feel less like photos from some event,
+          and more like a pure, immersive memory of our youth.
+        </p>
+      </div>
+
+      <div class="void-massive"></div>
+
+      <img src="../photos/PHO02/PHO02-18.webp" class="img-monolith examinable-image"
+      alt="Wide shot of a Maypole at a Midsummer celebration in Uppsala, Sweden" loading="lazy" decoding="async">
+
+      <div class="void-medium"></div>
+
+      <!-- SHARING CLUSTER -->
+      <div class="share-cluster">
+        <span class="share-label">DISTRIBUTE RECORD:</span>
+        <a href="#" id="share-linkedin" class="share-link" target="_blank" rel="noopener noreferrer">[ in ]</a>
+        <a href="#" id="share-whatsapp" class="share-link" target="_blank" rel="noopener noreferrer">[ wa ]</a>
+        <a href="#" id="share-email" class="share-link">[ ✉ ]</a>
+        <button id="share-copy" class="share-link" style="background: none; border: none; padding: 0; cursor: pointer;">[ copy ]</button>
+      </div>
+
+    </div> <!-- End of essay-body -->
   </article>
 </main>
 
-
-
-
-
+<!-- CINEMATIC HORIZONTAL SCROLL -->
 <section class="horizontal-scroll-track" id="horizontal-track">
   <div class="horizontal-scroll-camera">
     <div class="horizontal-scroll-strip" id="horizontal-strip">
-      
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-5.webp" alt="Moving">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-13.webp" alt="Norrsken">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-2.webp" alt="Lauren">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-15.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-19.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-4.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-14.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-16.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-1.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-17.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-3.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-6.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-18.webp" alt="Domkyrka">
-      </div>
-      <div class="horizontal-slide">
-        <img src="../photos/PHO02/PHO02-8.webp" alt="Domkyrka">
-      </div>
 
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-1.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-16.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-17.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-6.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-8.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-21.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-19.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-13.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-3.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-15.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-22.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-18.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-5.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-20.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-11.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-10.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="horizontal-slide"><img src="../photos/PHO02/PHO02-4.webp" alt="" loading="lazy" decoding="async"></div>
 
       <div class="horizontal-slide end-slide">
         <div class="end-slide-content">
           <h2 class="pipeline-label" style="color: var(--bg-color);">NEXT RECORD</h2>
-          <a href="PHO-03.html" class="pipeline-link" style="color: var(--bg-color);">Coming soon&nbsp;<span class="arrow-nudge">↗</span>
-          </a>
-          
+          <a href="PHO-03.html" class="pipeline-link" style="color: var(--bg-color);">Under the Sun<span class="arrow-nudge">↗</span></a>
           <br><br>
           <h2 class="pipeline-label" style="color: var(--bg-color); margin-top: 2rem;">OR</h2>
-          
           <button id="btn-return-top" class="pipeline-link" style="color: var(--bg-color); background: none; border: none; padding: 0; cursor: pointer; text-align: left;">
             Re-examine Record<span class="arrow-nudge">↑</span>
           </button>
@@ -578,14 +470,15 @@
   </div>
 </section>
 
+<!-- EXAMINER LIGHTBOX -->
 <div id="examiner-overlay" class="hidden"></div>
 
-
-<div class="bottom-left-footer">  
+<!-- FOOTER -->
+<div class="bottom-left-footer">
   <footer class="footer">
     <p class="rights-reserved"> © 2026 Jason Mendes</p>
   </footer>
-</div> 
+</div>
 
 <script src="../theme.js"></script>
 <script src="../animations.js"></script>
@@ -596,19 +489,14 @@
 <script src="../terminal.js"></script>
 <script src="../overlay.js"></script>
 
-
-<!-- DESKTOP THEME TOGGLE (Hidden on Mobile) -->
+<!-- DESKTOP THEME TOGGLE -->
 <div class="os-theme-toggle-desktop" id="desktop-theme-toggle">
-  <!-- The Resting Vertical Spine -->
   <div class="theme-label" id="theme-label">[ MODE: LIGHT ]</div>
-  <!-- The Hover Controls -->
   <div class="theme-controls">
     <button class="theme-btn" data-set-theme="light">[◯ LIGHT]</button>
     <button class="theme-btn" data-set-theme="dark">[◐ DARK]</button>
   </div>
 </div>
-
-
 
 </body>
 </html>
