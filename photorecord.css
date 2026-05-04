@@ -139,7 +139,30 @@ body {
   opacity: 0.9;
   margin-top: 0;
   margin-bottom: 2rem;
+  text-align: justify; /* Creates the strict print-block look */
+  -webkit-hyphens: auto;
+  hyphens: auto; /* Allows words to break smoothly to prevent weird spacing */
 }
+
+/* =========================================================================== */
+/* THE SQUARE PORTRAIT (CENTERED)                                              */
+/* =========================================================================== */
+.img-square {
+  display: block;
+  width: 100%;
+  max-width: 550px; /* Keeps it contained and intimate on desktop */
+  margin: 0 auto; /* Centers the image */
+  aspect-ratio: 1 / 1; /* Strictly enforces a perfect square */
+  object-fit: cover; /* Ensures the image fills the square flawlessly without warping */
+}
+
+/* On mobile, we remove the max-width restriction so it spans edge-to-edge */
+@media (max-width: 800px) {
+  .img-square {
+    max-width: 100%;
+  }
+}
+
 
 /* =========================================================================== */
 /* THE WHITESPACE VOIDS                                                        */
