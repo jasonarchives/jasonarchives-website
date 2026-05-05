@@ -23,6 +23,7 @@ body {
 }
 
 
+
 /* ========================= */
 /* Header Typography         */
 /* ========================= */
@@ -369,6 +370,7 @@ body.hide-ui-mode .navbar, body.hide-ui-mode .bottom-left-footer, body.hide-ui-m
 /* ========================= */
 .team-list { display: flex; flex-direction: column; gap: 0.6rem; }
 .team-link { font-family: 'iA Writer Duospace', monospace; color: var(--text-color); text-decoration: none; border-bottom: 1px dotted rgba(var(--rgb-text), 0.4); width: max-content; transition: all 0.2s ease; }
+.team-link1 { font-family: 'iA Writer Duospace', monospace; color: var(--text-color); text-decoration: none; border-bottom: 1px dotted rgba(var(--rgb-text), 0.4); width: max-content; transition: all 0.2s ease; }
 .team-link .arrow { display: inline-block; font-size: 0.85em; margin-left: 0.4rem; opacity: 0.4; transition: transform 0.2s cubic-bezier(0.45, 0, 0.55, 1), opacity 0.2s; }
 .team-link:hover { color: var(--accent-color); border-bottom: 1px solid var(--accent-color); }
 .team-link:hover .arrow { opacity: 1; transform: translate(3px, -3px); }
@@ -391,6 +393,7 @@ body.hide-ui-mode .navbar, body.hide-ui-mode .bottom-left-footer, body.hide-ui-m
 
 .reel-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; width: 100%; }
 .reel-container { width: 100%; display: flex; flex-direction: column; }
+.reel-container1 { width: 50%; display: flex; flex-direction: column; }
 .mono-label { display: block; font-family: 'iA Writer Duospace', monospace; font-size: 0.75rem; opacity: 0.5; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .instagram-media { border: 1px solid rgba(26, 26, 26, 0.1) !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; margin: 0 !important; min-width: 100% !important; width: 100% !important; }
 
