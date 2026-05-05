@@ -177,3 +177,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(note);
   });
 });
+
+// ==========================================
+// LIVE IST CLOCK (FOOTER)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const footerTimeElement = document.getElementById("footer-local-time");
+
+  if (footerTimeElement) {
+    setInterval(() => {
+      // Force the time to calculate based on the Asia/Kolkata timezone
+      const options = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false // Set to true if you prefer AM/PM instead of 24-hour time
+      };
+
+      const formatter = new Intl.DateTimeFormat([], options);
+      footerTimeElement.textContent = `—  ${formatter.format(new Date())} IST `;
+
+    }, 1000); // Updates every 1000 milliseconds (1 second)
+  }
+});
