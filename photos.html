@@ -11,9 +11,9 @@
   <title>Photos | Jason Mendes</title>
 
 
-  <script>
+<script>
   (function() {
-    // 1. Add a class to kill all transitions immediately
+    // Kill all transitions immediately
     document.documentElement.classList.add('no-transition');
 
     const savedTheme = localStorage.getItem('os-theme');
@@ -23,7 +23,7 @@
       document.documentElement.setAttribute('data-theme', 'light');
     }
 
-    // 2. Wait a tiny heartbeat, then allow transitions again
+    // Allow transitions again
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.documentElement.classList.remove('no-transition');

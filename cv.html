@@ -9,22 +9,26 @@
 
   <link rel="stylesheet" href="theme.css">
 
-  <script>
+<script>
   (function() {
+    // Kill all transitions immediately
     document.documentElement.classList.add('no-transition');
+
     const savedTheme = localStorage.getItem('os-theme');
     if (savedTheme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
     }
+
+    // Allow transitions again
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.documentElement.classList.remove('no-transition');
       }, 100);
     });
   })();
-  </script>
+</script>
 
   <meta name="title" content="CV | Jason Mendes">
   <meta name="description" content="Download or Print my CV">
