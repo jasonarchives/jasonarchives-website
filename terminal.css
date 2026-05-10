@@ -56,6 +56,10 @@
   
   max-height: 40vh; 
   overflow-y: auto; 
+
+  /* THE FIX: Lock the horizontal axis so the browser cannot pan sideways */
+  overflow-x: hidden;
+
   overscroll-behavior: contain;
   
   /* Eradicates the scrollbar in Firefox and Edge */

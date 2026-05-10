@@ -15,6 +15,7 @@ html, body {
 }
 
 
+
 /* Fix Full-Screen Overlay from extending past the scrollbar */
 .index-overlay {
   width: 100% !important;
@@ -176,6 +177,11 @@ a:hover .arrow1 {
     --rgb-text: 212, 212, 208; /* Softened text for transparency */
     --rgb-bg: 28, 28, 26;      /* Softened background for glass */
   }
+}
+
+::selection {
+      background-color: rgba(212, 82, 35, 0.92);
+      color: #F4F4F0;
 }
 
 /* 2. Manual Override (Toggled via JavaScript) */
@@ -378,6 +384,73 @@ body::-webkit-scrollbar-thumb:hover,
   95%, 100% { transform: translateY(-4.8rem); }
 }
 
+
+
+/* ========================================== */
+/* FLOATING HUD BREADCRUMB                    */
+/* ========================================== */
+
+.floating-breadcrumb {
+  /* Layout: Locked to the absolute top-center of the screen */
+  position: fixed;
+  top: 1.8rem; /* Adjust this slightly to align with your navbar's height */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050; /* Ensures it floats above everything */
+
+  /* Typography & Vibe */
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.7rem; /* Slightly smaller for a sleeker look */
+  letter-spacing: 0.15em;
+  color: var(--text-color);
+
+  /* The Requested Low Opacity */
+  opacity: 0.35;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  line-height: 1; /* Prevents invisible bounding box issues */
+  transition: opacity 0.3s ease;
+}
+
+/* Brightens up when the user hovers over it to click a link */
+.floating-breadcrumb:hover {
+  opacity: 1;
+}
+
+.floating-breadcrumb .crumb-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.floating-breadcrumb .crumb-link:hover {
+  color: var(--accent-color);
+}
+
+/* Erase your current .current-crumb ::after and ::before rules */
+
+/* The Active Page Indicator */
+.floating-breadcrumb .current-crumb {
+  opacity: 1;
+  color: var(--text-color);
+  position: relative;
+  /* THE FIX: Strips away the ugly default browser underline */
+  text-decoration: none !important;
+}
+
+/* The Structural Underline (Keep this exactly as is) */
+
+
+
+/* ------------------------------------------ */
+/* MOBILE HIDE RULE                           */
+/* ------------------------------------------ */
+@media (max-width: 800px) {
+  .floating-breadcrumb {
+    display: none !important;
+  }
+}
 
 
 /* =========================================================================== */
@@ -634,3 +707,78 @@ body::-webkit-scrollbar-thumb:hover,
   margin-bottom: auto;
   width: 100%;
 }
+
+
+/* FOCUS STATES */
+:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 4px;
+  border-radius: 2px;
+  transition: outline-offset 0.2s ease;
+}
+
+/* For your magnetic buttons, make the focus feel like a targeting system */
+.magnetic-btn:focus-visible {
+  outline: 1px dashed var(--text-color);
+  background-color: rgba(var(--rgb-text), 0.05);
+}/* Add this to your core.css */
+:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 4px;
+  border-radius: 2px;
+  transition: outline-offset 0.2s ease;
+}
+
+/* For your magnetic buttons, make the focus feel like a targeting system */
+.magnetic-btn:focus-visible {
+  outline: 1px dashed var(--text-color);
+  background-color: rgba(var(--rgb-text), 0.05);
+}
+
+
+/* ========================================== */
+/* SYSTEM BOOT SEQUENCE                       */
+/* ========================================== */
+
+/* Update this specific block in your CSS */
+.boot-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: var(--bg-color);
+  z-index: 99999;
+  display: flex; justify-content: center; align-items: center;
+
+  /* THE TWEAK: Changed from 1.2s to 2.5s for a long, slow dissolve */
+  transition: opacity 2.5s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The state triggered by JavaScript to dissolve the screen */
+.boot-overlay.is-hidden {
+  opacity: 0;
+  filter: blur(24px); /* Creates a heavy, dreamlike blur */
+  pointer-events: none;
+}
+
+.boot-text-container {
+  /* Matches your terminal input styling perfectly */
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+}
+
+/* The blinking terminal cursor */
+.boot-cursor {
+  color: var(--accent-color);
+  margin-left: 6px;
+  animation: boot-blink 1s step-start infinite;
+}
+
+@keyframes boot-blink {
+  50% { opacity: 0; }
+}
+
+

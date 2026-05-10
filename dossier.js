@@ -122,3 +122,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+// ==========================================
+// DARKROOM DEVELOPMENT PROTOCOL
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const darkroomPhotos = document.querySelectorAll('.darkroom-photo');
+
+  darkroomPhotos.forEach(photo => {
+    // If the image is already downloaded (cached by the browser), develop it immediately
+    if (photo.complete) {
+      photo.classList.add('is-developed');
+    } else {
+      // Otherwise, wait for it to finish downloading, then develop it
+      photo.addEventListener('load', () => {
+        photo.classList.add('is-developed');
+      });
+    }
+  });
+});
