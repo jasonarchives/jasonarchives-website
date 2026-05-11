@@ -5,9 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
   let sessionLedger = JSON.parse(sessionStorage.getItem("jasonSessionLedger")) || [];
   const now = new Date();
   const timeString = now.toLocaleTimeString('en-US', { hour12: false });
-  let pageName = document.title.split('|')[0].trim(); // Grabs clean page title
+
+  // Grabs clean page title
+  let pageName = document.title.split('|')[0].trim();
+
+  // THE FIX: Intercept the home page title and rename it for the terminal
+  if (pageName === "Jason Mendes") {
+    pageName = "Home"; // Change this to "Home" or "Root" if you prefer
+  }
 
   const newEntry = { time: timeString, action: "VIEW", target: pageName, url: window.location.href };
+
+
   const lastEntry = sessionLedger[sessionLedger.length - 1];
 
   if (!lastEntry || lastEntry.target !== newEntry.target) {
