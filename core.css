@@ -781,4 +781,31 @@ body::-webkit-scrollbar-thumb:hover,
   50% { opacity: 0; }
 }
 
+/* Assuming your main website content is wrapped in a tag like <main> or <div id="page-wrapper"> */
+/* If you don't have a wrapper, you can apply this directly to an element that holds your grid/content */
+.archive-content {
+  transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 2.5s ease;
+}
+
+/* When the body has the 'is-booting' class, push the content back */
+body.is-booting .archive-content {
+  transform: scale(0.96);
+  opacity: 0;
+}
+
+/* 🟢 NEW: ASCII Progress Bar Styling */
+.boot-progress-bar {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+  color: var(--text-color); /* You can change this to var(--accent-color) if you want it to pop */
+  opacity: 0; /* Hidden until the JS triggers it */
+  white-space: pre; /* Forces the browser to respect exact spacing */
+  letter-spacing: 0.05em;
+}
+
+
+
+
+
 

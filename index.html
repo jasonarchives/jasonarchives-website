@@ -113,8 +113,11 @@
 
 
 <div id="boot-sequence" class="boot-overlay">
-  <div class="boot-text-container">
-    <span id="boot-text"></span><span class="boot-cursor">█</span>
+  <div class="boot-text-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
+    <div>
+      <span id="boot-text"></span><span class="boot-cursor">█</span>
+    </div>
+    <div id="boot-progress" class="boot-progress-bar"></div>
   </div>
 </div>
 
