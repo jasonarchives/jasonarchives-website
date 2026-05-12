@@ -749,9 +749,15 @@ body::-webkit-scrollbar-thumb:hover,
   z-index: 99999;
   display: flex; justify-content: center; align-items: center;
 
-  /* THE TWEAK: Changed from 1.2s to 2.5s for a long, slow dissolve */
-  transition: opacity 2.5s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+  /* 🟢 UPGRADE: Changed from 2.5s to 0.8s for rapid entry */
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ensure the wrapper transition matches */
+.archive-content {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.8s ease;
 }
 
 /* The state triggered by JavaScript to dissolve the screen */
@@ -781,12 +787,6 @@ body::-webkit-scrollbar-thumb:hover,
   50% { opacity: 0; }
 }
 
-/* Assuming your main website content is wrapped in a tag like <main> or <div id="page-wrapper"> */
-/* If you don't have a wrapper, you can apply this directly to an element that holds your grid/content */
-.archive-content {
-  transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 2.5s ease;
-}
 
 /* When the body has the 'is-booting' class, push the content back */
 body.is-booting .archive-content {

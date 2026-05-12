@@ -1,5 +1,5 @@
 // ==========================================
-// SYSTEM BOOT PROTOCOL: TYPEWRITER + ASCII BAR
+// SYSTEM BOOT PROTOCOL: TYPEWRITER + ASCII BAR (OPTIMIZED)
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
   const bootOverlay = document.getElementById("boot-sequence");
@@ -8,67 +8,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!bootOverlay || !bootText || !bootProgress) return;
 
-  // 1. The Safety Lock (Prevents double-running and jumbled text)
+  // 1. The Safety Lock
   if (bootOverlay.hasAttribute("data-booting")) return;
   bootOverlay.setAttribute("data-booting", "true");
 
-  // 2. Check memory
+  // 2. Check memory (Instant bypass)
   const hasBooted = sessionStorage.getItem("jasonArchiveBoot");
   if (hasBooted) {
     bootOverlay.style.display = "none";
+    document.body.classList.remove("is-booting");
+    document.body.style.overflow = "";
     return;
   }
 
   // Lock scrolling
   document.body.style.overflow = "hidden";
-  document.body.classList.add("is-booting"); // For Z-Axis scale effect
+  document.body.classList.add("is-booting");
 
   // 3. Variables
   const stringToType = "loading jasonarchives.online";
   let charIndex = 0;
-
-  // Progress Bar Variables
   let progressPercent = 0;
-  const totalBlocks = 20; // The physical length of the bar
+  const totalBlocks = 20;
 
   bootText.textContent = "";
   bootProgress.textContent = "";
 
-  // 4. The Mechanical Typing Engine
+  // 4. The Mechanical Typing Engine (Sped up)
   function typeWriter() {
-    bootProgress.style.opacity = "0.7"; // Reveal the progress bar
+    bootProgress.style.opacity = "0.7";
 
     if (charIndex < stringToType.length) {
       bootText.textContent += stringToType.charAt(charIndex);
       charIndex++;
 
-      const speed = Math.floor(Math.random() * 80) + 60;
+      // ⚡ Faster typing (20ms - 60ms)
+      const speed = Math.floor(Math.random() * 40) + 20;
       setTimeout(typeWriter, speed);
     } else {
-      // When typing finishes, lock the cursor and force bar to 100%
       document.querySelector(".boot-cursor").classList.add("is-solid");
       updateProgressBar(100);
 
-      setTimeout(initiateFade, 1500);
+      // ⚡ Shorter pause before fading (400ms)
+      setTimeout(initiateFade, 400);
     }
   }
 
   // 5. The ASCII Progress Bar Engine
   function fillProgressBar() {
-    // Only fill while the text is still typing
     if (progressPercent < 100 && charIndex < stringToType.length) {
-      // Jump by random amounts (1% to 6%)
-      const jump = Math.floor(Math.random() * 6) + 1;
-      progressPercent = Math.min(progressPercent + jump, 99); // Hold at 99% max
+      // ⚡ Slightly larger jumps so it keeps pace with the faster text
+      const jump = Math.floor(Math.random() * 8) + 2;
+      progressPercent = Math.min(progressPercent + jump, 99);
 
       updateProgressBar(progressPercent);
 
-      const speed = Math.floor(Math.random() * 70) + 30;
+      const speed = Math.floor(Math.random() * 40) + 20;
       setTimeout(fillProgressBar, speed);
     }
   }
 
-  // Helper function to draw the raw ASCII blocks
   function updateProgressBar(percent) {
     const filledCount = Math.floor((percent / 100) * totalBlocks);
     const emptyCount = totalBlocks - filledCount;
@@ -79,33 +78,33 @@ document.addEventListener("DOMContentLoaded", () => {
     bootProgress.textContent = `[${filledStr}${emptyStr}] ${percent.toString().padStart(3, '0')}%`;
   }
 
-  // 6. The Dissolve Sequence (Asset-Aware)
+  // 6. The Dissolve Sequence (Now completely independent of images)
   function initiateFade() {
-    // Hold here until all images on the page load
-    if (document.readyState !== "complete") {
-      setTimeout(initiateFade, 100);
-      return;
-    }
-
     bootOverlay.classList.add("is-hidden");
     document.body.classList.remove("is-booting");
 
+    // ⚡ Matches the 0.8s CSS transition time perfectly
     setTimeout(() => {
       bootOverlay.style.display = "none";
       document.body.style.overflow = "";
       sessionStorage.setItem("jasonArchiveBoot", "true");
-    }, 2500);
+    }, 800);
   }
 
-  // Start BOTH engines simultaneously 800ms after load
+  // 7. ⚡ THE HARD FAILSAFE
+  // Mathematically forces the screen to clear after 2.5s maximum, no matter what happens
+  setTimeout(() => {
+    if (!bootOverlay.classList.contains("is-hidden")) {
+      initiateFade();
+    }
+  }, 2500);
+
+  // Start BOTH engines almost instantly after DOM loads (100ms)
   setTimeout(() => {
     typeWriter();
     fillProgressBar();
-  }, 800);
+  }, 100);
 });
-
-
-
 
 
 
