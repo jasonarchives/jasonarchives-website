@@ -1,0 +1,74 @@
+{
+  "nodes": [
+    { "id": "Design Archive", "group": "supernode", "desc": "Portfolio of UX Research and Experience Design case studies, documenting curiosity about human behavior and digital systems.", "url": "/design.html" },
+    { "id": "Photos Archive", "group": "supernode", "desc": "A visual ledger and photography archive ranging from intimate portraits to long-exposure landscape photography.", "url": "/photos.html" },
+    { "id": "Community Archive", "group": "supernode", "desc": "Articles and writings documenting the intersections of human-computer interaction, physical architecture, and digital interfaces.", "url": "/community.html" },
+    { "id": "Writings Archive", "group": "supernode",  "desc": "Community collaboration projects combining design, art, and archival documentation.", "url": "/writings.html" },
+
+    { "id": "DES-01", "label": "Creatives for Collectives", "desc": "A co-creation workshop framework.", "group": "record", "url": "/designrec/DES-01.html" },
+    { "id": "DES-02", "label": "Reimagining Duty Free", "desc": "UX research and spatial design.", "group": "record", "url": "/designrec/DES-02.html" },
+    { "id": "DES-03", "label": "Uppsala Bicycle Parking", "desc": "Urban infrastructure analysis.", "group": "record", "url": "/designrec/DES-03.html" },
+    { "id": "DES-04", "label": "Journey Mapping", "desc": "User flow and pain point discovery.", "group": "record", "url": "/designrec/DES-04.html" },
+    { "id": "DES-05", "label": "OST & Manual Redesign", "desc": "Information architecture overhaul.", "group": "record", "url": "/designrec/DES-05.html" },
+
+    { "id": "PHO-01", "label": "Midnight in Uppsala", "desc": "Night photography and urban isolation.", "group": "record", "url": "/photorec/PHO-01.html" },
+    { "id": "PHO-02", "label": "Expressions at 8mm", "desc": "Wide-angle portraiture.", "group": "record", "url": "/photorec/PHO-02.html" },
+    { "id": "PHO-03", "label": "Under the Sun", "desc": "Daylight exposure studies.", "group": "record", "url": "/photorec/PHO-03.html" },
+
+    { "id": "COM-01", "label": "Local Threads Collective", "desc": "Community building and event design.", "group": "record", "url": "/communityrec/localthreadscollective.html" },
+    { "id": "COM-02", "label": "Västmanlands Dalarna Nation", "desc": "Student nation organization.", "group": "record", "url": "/communityrec/vdalanation.html" },
+
+    { "id": "WRT-01", "label": "Slowing Down with Resistance", "desc": "Thoughts on production culture.", "group": "record", "url": "https://medium.com", "external": true },
+    { "id": "WRT-02", "label": "A Seat on Skåne Expressen", "desc": "Observational travel writing.", "group": "record", "url": "https://medium.com", "external": true },
+    { "id": "WRT-03", "label": "Finding Threads", "desc": "Connecting local communities.", "group": "record", "url": "https://medium.com", "external": true },
+    { "id": "WRT-04", "label": "Inside Puben", "desc": "Reflections behind the bar.", "group": "record", "url": "https://medium.com", "external": true },
+    { "id": "WRT-05", "label": "Humans, Cameras and Experience", "desc": "The philosophy of documentation.", "group": "record", "url": "https://medium.com", "external": true },
+
+    { "id": "Uppsala", "group": "tag" },
+    { "id": "Sweden", "group": "tag" },
+    { "id": "India", "group": "tag" },
+    { "id": "Medium", "group": "tag" },
+    { "id": "UX/UI", "group": "tag" }
+  ],
+  "links": [
+    { "source": "Design Archive", "target": "DES-01", "type": "main" },
+    { "source": "Design Archive", "target": "DES-02", "type": "main" },
+    { "source": "Design Archive", "target": "DES-03", "type": "main" },
+    { "source": "Design Archive", "target": "DES-04", "type": "main" },
+    { "source": "Design Archive", "target": "DES-05", "type": "main" },
+
+    { "source": "Photos Archive", "target": "PHO-01", "type": "main" },
+    { "source": "Photos Archive", "target": "PHO-02", "type": "main" },
+    { "source": "Photos Archive", "target": "PHO-03", "type": "main" },
+
+    { "source": "Community Archive", "target": "COM-01", "type": "main" },
+    { "source": "Community Archive", "target": "COM-02", "type": "main" },
+
+    { "source": "Writings Archive", "target": "WRT-01", "type": "main" },
+    { "source": "Writings Archive", "target": "WRT-02", "type": "main" },
+    { "source": "Writings Archive", "target": "WRT-03", "type": "main" },
+    { "source": "Writings Archive", "target": "WRT-04", "type": "main" },
+    { "source": "Writings Archive", "target": "WRT-05", "type": "main" },
+
+    { "source": "COM-01", "target": "India", "type": "sub" },
+    { "source": "DES-01", "target": "India", "type": "sub" },
+
+    { "source": "PHO-01", "target": "Uppsala", "type": "sub" },
+    { "source": "DES-03", "target": "Uppsala", "type": "sub" },
+    { "source": "COM-02", "target": "Uppsala", "type": "sub" },
+    { "source": "WRT-04", "target": "Uppsala", "type": "sub" },
+
+    { "source": "WRT-02", "target": "Sweden", "type": "sub" },
+    { "source": "Uppsala", "target": "Sweden", "type": "sub" },
+
+    { "source": "DES-02", "target": "UX/UI", "type": "sub" },
+    { "source": "DES-04", "target": "UX/UI", "type": "sub" },
+    { "source": "DES-05", "target": "UX/UI", "type": "sub" },
+
+    { "source": "WRT-01", "target": "Medium", "type": "sub" },
+    { "source": "WRT-02", "target": "Medium", "type": "sub" },
+    { "source": "WRT-03", "target": "Medium", "type": "sub" },
+    { "source": "WRT-04", "target": "Medium", "type": "sub" },
+    { "source": "WRT-05", "target": "Medium", "type": "sub" }
+  ]
+}

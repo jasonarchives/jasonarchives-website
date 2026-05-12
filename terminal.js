@@ -49,7 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
     { cmd: "/communityrec/localthreadscollective", url: `${base}/communityrec/localthreadscollective.html`, desc: "Record: Local Threads Collective" },  
     { cmd: "/communityrec/vdalanation", url: `${base}/communityrec/vdalanation.html`, desc: "Record: Västmanlands Dalarna Nation" }, 
 
-  
+    { cmd: "/atlas", url: `${base}/atlas.html`, desc: "System Atlas: Interactive Network Map" },
+    { cmd: "map", url: `${base}/atlas.html`, desc: "System Atlas: Interactive Network Map" },
+
+
     { cmd: "clear", url: "ACTION_CLEAR", desc: "Clear terminal input" },
     // 🟢 NEW: Added the burn notice command!
     { cmd: "burn", url: "ACTION_BURN", desc: "Purge active session telemetry" },

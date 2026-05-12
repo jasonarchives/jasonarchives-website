@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas | Jason Mendes</title>
+
+  <link rel="stylesheet" href="core.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <style>
+    body.page-atlas {
+      margin: 0; padding: 0;
+      overflow: hidden;
+      background-color: var(--bg-color);
+    }
+
+    #atlas-container {
+      width: 100vw; height: 100vh;
+      position: absolute; top: 0; left: 0;
+      cursor: grab;
+
+      /* 🟢 THE FIX: Hardware Acceleration Locks.
+         This forces the map into a dedicated GPU layer so the browser never deletes it */
+      transform: translateZ(0);
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    #atlas-container:active { cursor: grabbing; }
+
+    /* D3 Styling */
+    .link-main { stroke: var(--text-color); stroke-opacity: 0.6; stroke-width: 1.5px; }
+    .link-sub { stroke: var(--text-color); stroke-opacity: 0.2; stroke-width: 1px; stroke-dasharray: 4,4; transition: stroke-opacity 0.3s; }
+
+    .node-super { fill: var(--bg-color); stroke: var(--text-color); stroke-width: 2px; }
+    .node-record { fill: var(--text-color); }
+
+    .label-super { font-family: 'iA Writer Duospace', monospace; font-size: 14px; fill: var(--text-color); font-weight: bold; pointer-events: none; }
+    .label-record { font-family: 'SF Pro Display', sans-serif; font-size: 11px; fill: var(--text-color); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+    .label-tag { font-family: 'iA Writer Duospace', monospace; font-size: 11px; fill: var(--text-color); opacity: 0.5; cursor: pointer; letter-spacing: 0.1em; }
+
+    .is-dimmed { opacity: 0.05 !important; }
+    .is-highlighted { opacity: 1 !important; fill: var(--accent-color) !important; stroke: var(--accent-color) !important; }
+
+    /* HUD Elements */
+    .hud-overlay {
+      position: absolute; top: 2rem; left: 2rem;
+      font-family: 'iA Writer Duospace', monospace; font-size: 0.75rem;
+      color: var(--text-color); opacity: 0.5; pointer-events: none;
+    }
+
+    /* System Navigation (Top Right) */
+    .system-nav {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      z-index: 100;
+    }
+
+    .system-nav-btn {
+      background: transparent;
+      border: none;
+      font-family: 'iA Writer Duospace', monospace;
+      font-size: 0.85rem;
+      color: var(--text-color);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      padding: 0;
+
+      /* 🟢 THE FIX: Explicit transitions prevent tearing */
+      transition: transform 0.2s ease, color 0.2s ease;
+      will-change: transform;
+    }
+
+    .system-nav-btn:hover {
+      color: var(--accent-color);
+    }
+
+    /* 🟢 THE FIX: 3D transforms keep the button in the GPU layer while hovering */
+    .system-nav-btn.btn-back:hover { transform: translate3d(-4px, 0, 0); }
+    .system-nav-btn.btn-home:hover { transform: translate3d(0, -2px, 0); }
+
+
+    /* Miro-Style Zoom Controls */
+    .zoom-controls {
+      position: absolute; bottom: 2rem; right: 2rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      z-index: 100;
+    }
+    .zoom-btn {
+      background: transparent;
+      border: 1px solid rgba(var(--rgb-text), 0.2);
+      color: var(--text-color);
+      width: 2.5rem; height: 2.5rem;
+      display: flex; justify-content: center; align-items: center;
+      font-family: 'iA Writer Duospace', monospace; font-size: 1.2rem;
+      cursor: pointer;
+
+      /* 🟢 THE FIX: Explicit transitions */
+      transition: border-color 0.2s ease, color 0.2s ease;
+      will-change: border-color, color;
+    }
+    .zoom-btn:hover {
+      border-color: var(--text-color);
+      color: var(--accent-color);
+    }
+    .zoom-label {
+      font-family: 'iA Writer Duospace', monospace; font-size: 0.6rem;
+      color: var(--text-color); opacity: 0.5; text-align: center; margin-bottom: 0.2rem;
+    }
+
+    /* Subtitle Styling */
+    .label-desc {
+      font-family: 'iA Writer Duospace', monospace;
+      font-size: 8px;
+      fill: var(--text-color);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="page-atlas">
+
+  <div class="hud-overlay">
+    [ SYSTEM ATLAS ]<br>
+    INTERACTION: PAN / ZOOM / ISOLATE
+  </div>
+
+  <div class="system-nav">
+    <button class="system-nav-btn btn-back" onclick="routeOut('back')">[ ← BACK ]</button>
+    <button class="system-nav-btn btn-home" onclick="routeOut('home')">[ ⌂ HOME ]</button>
+  </div>
+
+  <div class="zoom-controls">
+    <div class="zoom-label" id="zoom-percent">100%</div>
+    <button class="zoom-btn" id="zoom-in">+</button>
+    <button class="zoom-btn" id="zoom-reset">⌂</button>
+    <button class="zoom-btn" id="zoom-out">-</button>
+  </div>
+
+  <svg id="atlas-container"></svg>
+
+  <script>
+    window.routeOut = function(destination) {
+      document.body.style.transition = "opacity 0.4s ease";
+      document.body.style.opacity = 0;
+
+      setTimeout(() => {
+        if (destination === 'back') {
+          if (document.referrer.includes(window.location.hostname) && document.referrer !== "") {
+            window.history.back();
+          } else {
+            window.location.href = '/index.html';
+          }
+        } else if (destination === 'home') {
+          window.location.href = '/index.html';
+        }
+      }, 400);
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      const svg = d3.select("#atlas-container")
+        .attr("viewBox", [0, 0, width, height]);
+
+      const g = svg.append("g");
+      let activeNode = null;
+
+      const zoom = d3.zoom()
+        .scaleExtent([0.2, 3])
+        .on("zoom", (event) => {
+          g.attr("transform", event.transform);
+          document.getElementById("zoom-percent").innerText = Math.round(event.transform.k * 100) + "%";
+        });
+
+      svg.call(zoom);
+
+      d3.select("#zoom-in").on("click", () => svg.transition().duration(400).call(zoom.scaleBy, 1.4));
+      d3.select("#zoom-out").on("click", () => svg.transition().duration(400).call(zoom.scaleBy, 0.7));
+
+      d3.json("archive-map.json").then(data => {
+
+        const simulation = d3.forceSimulation(data.nodes)
+          .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => d.type === "main" ? 120 : 180))
+          .force("charge", d3.forceManyBody().strength(-300))
+          .force("center", d3.forceCenter(width / 2, height / 2))
+          .force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 50 : 20))
+          .force("x", d3.forceX(width / 2).strength(d => d.group === "supernode" ? 0.08 : 0))
+          .force("y", d3.forceY(height / 2).strength(d => d.group === "supernode" ? 0.08 : 0));
+
+        const link = g.append("g")
+          .selectAll("line")
+          .data(data.links)
+          .join("line")
+          .attr("class", d => d.type === "main" ? "link-main" : "link-sub");
+
+        const node = g.append("g")
+          .selectAll("g")
+          .data(data.nodes)
+          .join("g")
+          .style("cursor", "pointer")
+          .call(drag(simulation));
+
+        // Draw Shapes and Typography
+        node.each(function(d) {
+          const el = d3.select(this);
+
+          if (d.group === "supernode") {
+            el.append("circle").attr("r", 35).attr("class", "node-super");
+            // Shifted the main title up slightly (dy: -2) to make room
+            el.append("text").text(d.id).attr("dy", -2).attr("text-anchor", "middle").attr("class", "label-super");
+
+            // 🟢 THE FIX: Add the hidden description to supernodes, centered beneath the title
+            if (d.desc) {
+                el.append("text").text(d.desc).attr("dy", 16).attr("text-anchor", "middle").attr("class", "label-desc");
+            }
+
+          } else if (d.group === "record") {
+            el.append("circle").attr("r", 6).attr("class", "node-record");
+            el.append("text").text(d.label).attr("dx", 12).attr("dy", 4).attr("class", "label-record");
+            // The contextual subtitle
+            if (d.desc) {
+                el.append("text").text(d.desc).attr("dx", 12).attr("dy", 18).attr("class", "label-desc");
+            }
+          } else if (d.group === "tag") {
+            el.append("text").text(`[ ${d.id.toUpperCase()} ]`).attr("dy", 4).attr("text-anchor", "middle").attr("class", "label-tag");
+          }
+        });
+
+        function getNeighbors(nodeData) {
+          return data.links.filter(l => l.source.id === nodeData.id || l.target.id === nodeData.id)
+                           .map(l => l.source.id === nodeData.id ? l.target.id : l.source.id);
+        }
+
+        function resetGraph() {
+          if (!activeNode) return;
+
+          const prevNode = data.nodes.find(n => n.id === activeNode);
+          if (prevNode) { prevNode.fx = null; prevNode.fy = null; }
+          activeNode = null;
+
+          node.classed("is-dimmed", false);
+          node.selectAll("circle").classed("is-highlighted", false);
+          node.selectAll(".label-record").style("opacity", 0);
+          node.selectAll(".label-desc").style("opacity", 0);
+          link.classed("is-dimmed", false);
+
+          simulation.force("link").distance(d => d.type === "main" ? 120 : 180);
+          simulation.force("charge").strength(-300);
+          simulation.force("collide").radius(d => d.group === "supernode" ? 50 : 20);
+
+          simulation.alpha(0.8).restart();
+          svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+        }
+
+        svg.on("click", resetGraph);
+        d3.select("#zoom-reset").on("click", resetGraph);
+
+        node.on("mouseover", function(event, d) {
+          if (activeNode) return;
+          const neighbors = getNeighbors(d);
+
+          node.classed("is-dimmed", n => n.id !== d.id && !neighbors.includes(n.id));
+          d3.select(this).select("circle").classed("is-highlighted", true);
+          node.selectAll(".label-record").style("opacity", n => (n.id === d.id || neighbors.includes(n.id)) ? 1 : 0);
+          link.classed("is-dimmed", l => l.source.id !== d.id && l.target.id !== d.id);
+        })
+        .on("mouseout", function() {
+          if (activeNode) return;
+          node.classed("is-dimmed", false);
+          node.selectAll("circle").classed("is-highlighted", false);
+          node.selectAll(".label-record").style("opacity", 0);
+          link.classed("is-dimmed", false);
+        });
+
+        node.on("click", function(event, d) {
+          event.stopPropagation();
+
+          if (activeNode === d.id) {
+            if (d.url) {
+              if (d.external) window.open(d.url, '_blank');
+              else {
+                 document.body.style.transition = "opacity 0.4s ease";
+                 document.body.style.opacity = 0;
+                 setTimeout(() => window.location.href = d.url, 400);
+              }
+            }
+            return;
+          }
+
+          if (activeNode) {
+            const prevNode = data.nodes.find(n => n.id === activeNode);
+            if (prevNode) { prevNode.fx = null; prevNode.fy = null; }
+          }
+
+          activeNode = d.id;
+          const neighbors = getNeighbors(d);
+
+          d.fx = d.x;
+          d.fy = d.y;
+
+          svg.transition().duration(750).call(
+            zoom.transform,
+            d3.zoomIdentity.translate(width / 2, height / 2).scale(1).translate(-d.x, -d.y)
+          );
+
+          node.classed("is-dimmed", n => n.id !== d.id && !neighbors.includes(n.id));
+          node.selectAll("circle").classed("is-highlighted", false);
+          d3.select(this).select("circle").classed("is-highlighted", true);
+          node.selectAll(".label-record").style("opacity", n => (n.id === d.id || neighbors.includes(n.id)) ? 1 : 0);
+          node.selectAll(".label-desc").style("opacity", n => n.id === d.id ? 0.6 : 0);
+          link.classed("is-dimmed", l => l.source.id !== d.id && l.target.id !== d.id);
+
+          simulation.force("link").distance(l => (l.source.id === d.id || l.target.id === d.id) ? 110 : 250);
+          simulation.force("charge").strength(n => (n.id === d.id || neighbors.includes(n.id)) ? -100 : -1000);
+          simulation.force("collide").radius(n => (n.id === d.id || neighbors.includes(n.id)) ? 60 : 20);
+
+          simulation.alpha(0.8).restart();
+        });
+
+        simulation.on("tick", () => {
+          link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+
+          node.attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+
+        function drag(simulation) {
+          function dragstarted(event) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            event.subject.fx = event.subject.x;
+            event.subject.fy = event.subject.y;
+          }
+          function dragged(event) {
+            event.subject.fx = event.x;
+            event.subject.fy = event.y;
+          }
+          function dragended(event) {
+            if (!event.active) simulation.alphaTarget(0);
+            if (event.subject.id !== activeNode) {
+              event.subject.fx = null;
+              event.subject.fy = null;
+            }
+          }
+          return d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
+        }
+      }).catch(error => {
+          console.error("Failed to load or parse JSON:", error);
+      });
+    });
+  </script>
+</body>
+</html>
