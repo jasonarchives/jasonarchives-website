@@ -19,9 +19,6 @@
       width: 100vw; height: 100vh;
       position: absolute; top: 0; left: 0;
       cursor: grab;
-
-      /* 🟢 THE FIX: Hardware Acceleration Locks.
-         This forces the map into a dedicated GPU layer so the browser never deletes it */
       transform: translateZ(0);
       will-change: transform;
       -webkit-backface-visibility: hidden;
@@ -48,6 +45,7 @@
       position: absolute; top: 2rem; left: 2rem;
       font-family: 'iA Writer Duospace', monospace; font-size: 0.75rem;
       color: var(--text-color); opacity: 0.5; pointer-events: none;
+      z-index: 100;
     }
 
     /* System Navigation (Top Right) */
@@ -69,20 +67,13 @@
       cursor: pointer;
       letter-spacing: 0.05em;
       padding: 0;
-
-      /* 🟢 THE FIX: Explicit transitions prevent tearing */
       transition: transform 0.2s ease, color 0.2s ease;
       will-change: transform;
     }
 
-    .system-nav-btn:hover {
-      color: var(--accent-color);
-    }
-
-    /* 🟢 THE FIX: 3D transforms keep the button in the GPU layer while hovering */
+    .system-nav-btn:hover { color: var(--accent-color); }
     .system-nav-btn.btn-back:hover { transform: translate3d(-4px, 0, 0); }
     .system-nav-btn.btn-home:hover { transform: translate3d(0, -2px, 0); }
-
 
     /* Miro-Style Zoom Controls */
     .zoom-controls {
@@ -98,8 +89,6 @@
       display: flex; justify-content: center; align-items: center;
       font-family: 'iA Writer Duospace', monospace; font-size: 1.2rem;
       cursor: pointer;
-
-      /* 🟢 THE FIX: Explicit transitions */
       transition: border-color 0.2s ease, color 0.2s ease;
       will-change: border-color, color;
     }
@@ -121,6 +110,52 @@
       transition: opacity 0.3s ease;
       pointer-events: none;
     }
+
+    /* 🟢 NEW: The Sidebar */
+    .tag-sidebar {
+      position: absolute;
+      top: 6rem; /* Sits below the HUD overlay */
+      left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      z-index: 100;
+      max-height: calc(100vh - 10rem);
+      overflow-y: auto;
+      pointer-events: auto;
+    }
+
+    /* Hide the scrollbar for the sidebar to keep it clean */
+    .tag-sidebar::-webkit-scrollbar { display: none; }
+    .tag-sidebar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .tag-sidebar-btn {
+      background: transparent;
+      border: none;
+      font-family: 'iA Writer Duospace', monospace;
+      font-size: 0.75rem;
+      color: var(--text-color);
+      opacity: 0.5;
+      text-align: left;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      letter-spacing: 0.05em;
+      transform-origin: left;
+    }
+
+    .tag-sidebar-btn:hover {
+      opacity: 1;
+      color: var(--accent-color);
+      transform: scale(1.05);
+    }
+
+    .tag-sidebar-btn.active-tag {
+      opacity: 1;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
   </style>
 </head>
 <body class="page-atlas">
@@ -129,6 +164,9 @@
     [ SYSTEM ATLAS ]<br>
     INTERACTION: PAN / ZOOM / ISOLATE
   </div>
+
+  <div class="tag-sidebar" id="tag-sidebar">
+    </div>
 
   <div class="system-nav">
     <button class="system-nav-btn btn-back" onclick="routeOut('back')">[ ← BACK ]</button>
@@ -207,24 +245,17 @@
           .style("cursor", "pointer")
           .call(drag(simulation));
 
-        // Draw Shapes and Typography
         node.each(function(d) {
           const el = d3.select(this);
-
           if (d.group === "supernode") {
             el.append("circle").attr("r", 35).attr("class", "node-super");
-            // Shifted the main title up slightly (dy: -2) to make room
             el.append("text").text(d.id).attr("dy", -2).attr("text-anchor", "middle").attr("class", "label-super");
-
-            // 🟢 THE FIX: Add the hidden description to supernodes, centered beneath the title
             if (d.desc) {
                 el.append("text").text(d.desc).attr("dy", 16).attr("text-anchor", "middle").attr("class", "label-desc");
             }
-
           } else if (d.group === "record") {
             el.append("circle").attr("r", 6).attr("class", "node-record");
             el.append("text").text(d.label).attr("dx", 12).attr("dy", 4).attr("class", "label-record");
-            // The contextual subtitle
             if (d.desc) {
                 el.append("text").text(d.desc).attr("dx", 12).attr("dy", 18).attr("class", "label-desc");
             }
@@ -238,6 +269,25 @@
                            .map(l => l.source.id === nodeData.id ? l.target.id : l.source.id);
         }
 
+        // 🟢 NEW: Populate the Sidebar
+        const tagSidebar = document.getElementById("tag-sidebar");
+        const allTags = data.nodes.filter(n => n.group === "tag").sort((a, b) => a.id.localeCompare(b.id));
+
+        allTags.forEach(tagNode => {
+          const btn = document.createElement("button");
+          btn.className = "tag-sidebar-btn";
+          btn.innerText = `[ ${tagNode.id.toUpperCase()} ]`;
+          btn.dataset.id = tagNode.id; // Store the ID for matching later
+
+          btn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            triggerNode(tagNode);
+          });
+
+          tagSidebar.appendChild(btn);
+        });
+
+        // The Reset Engine
         function resetGraph() {
           if (!activeNode) return;
 
@@ -249,11 +299,18 @@
           node.selectAll("circle").classed("is-highlighted", false);
           node.selectAll(".label-record").style("opacity", 0);
           node.selectAll(".label-desc").style("opacity", 0);
+          node.selectAll(".label-tag").style("opacity", 0.5);
           link.classed("is-dimmed", false);
+
+          // Reset Sidebar Buttons
+          document.querySelectorAll(".tag-sidebar-btn").forEach(btn => btn.classList.remove("active-tag"));
 
           simulation.force("link").distance(d => d.type === "main" ? 120 : 180);
           simulation.force("charge").strength(-300);
           simulation.force("collide").radius(d => d.group === "supernode" ? 50 : 20);
+
+          simulation.force("x").strength(d => d.group === "supernode" ? 0.08 : 0);
+          simulation.force("y").strength(d => d.group === "supernode" ? 0.08 : 0);
 
           simulation.alpha(0.8).restart();
           svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
@@ -279,9 +336,15 @@
           link.classed("is-dimmed", false);
         });
 
+        // Pass click events to the centralized function
         node.on("click", function(event, d) {
           event.stopPropagation();
+          triggerNode(d);
+        });
 
+        // 🟢 NEW: Centralized Physics Trigger Engine
+        // (Allows both the map and the sidebar to use the exact same logic)
+        function triggerNode(d) {
           if (activeNode === d.id) {
             if (d.url) {
               if (d.external) window.open(d.url, '_blank');
@@ -290,6 +353,8 @@
                  document.body.style.opacity = 0;
                  setTimeout(() => window.location.href = d.url, 400);
               }
+            } else {
+              resetGraph();
             }
             return;
           }
@@ -311,18 +376,33 @@
           );
 
           node.classed("is-dimmed", n => n.id !== d.id && !neighbors.includes(n.id));
-          node.selectAll("circle").classed("is-highlighted", false);
-          d3.select(this).select("circle").classed("is-highlighted", true);
+          node.selectAll("circle").classed("is-highlighted", n => n.id === d.id);
+
           node.selectAll(".label-record").style("opacity", n => (n.id === d.id || neighbors.includes(n.id)) ? 1 : 0);
           node.selectAll(".label-desc").style("opacity", n => n.id === d.id ? 0.6 : 0);
+
+          node.selectAll(".label-tag").style("opacity", n => n.id === d.id ? 1 : 0.5);
           link.classed("is-dimmed", l => l.source.id !== d.id && l.target.id !== d.id);
+
+          // Update Sidebar Highlights
+          document.querySelectorAll(".tag-sidebar-btn").forEach(btn => {
+            if (btn.dataset.id === d.id) {
+              btn.classList.add("active-tag");
+            } else {
+              btn.classList.remove("active-tag");
+            }
+          });
+
+          // Kill supernode anchors so they float away when a tag is clicked
+          simulation.force("x").strength(0);
+          simulation.force("y").strength(0);
 
           simulation.force("link").distance(l => (l.source.id === d.id || l.target.id === d.id) ? 110 : 250);
           simulation.force("charge").strength(n => (n.id === d.id || neighbors.includes(n.id)) ? -100 : -1000);
           simulation.force("collide").radius(n => (n.id === d.id || neighbors.includes(n.id)) ? 60 : 20);
 
           simulation.alpha(0.8).restart();
-        });
+        }
 
         simulation.on("tick", () => {
           link
