@@ -97,7 +97,7 @@
     {
       "id": "WRT-01",
       "label": "Slowing Down with Resistance",
-      "desc": "Thoughts on production culture.",
+      "desc": "In Mumbai’s Sanjay Gandhi National Park, Local Threads Collective gathered for a simple picnic—unstructured, slow, and free of agenda. Leisure here became resistance...",
       "group": "record",
       "url": "https://medium.com",
       "external": true
@@ -105,7 +105,31 @@
     {
       "id": "WRT-02",
       "label": "A Seat on Skåne Expressen",
-      "desc": "Observational travel writing.",
+      "desc": "On SkåneExpressen Buss 15, nightly rides from Malmö to Vellinge turned routine into quiet beauty. Fields, bridges, and fleeting dawns became the memories that lingered.",
+      "group": "record",
+      "url": "https://medium.com",
+      "external": true
+    },
+    {
+      "id": "WRT-03",
+      "label": "Finding Threads among Fraying Tapestries",
+      "desc": "Organising events and leading teams in Photography & Graphic Design while studying at SFIT Mumbai.",
+      "group": "record",
+      "url": "https://medium.com",
+      "external": true
+    },
+    {
+      "id": "WRT-04",
+      "label": "Inside Puben",
+      "desc": "At Puben in Uppsala’s “White Castle”, bartending turned into fieldwork. Cheap drinks, karaoke, and shared rituals revealed a space of belonging woven from everyday moments.",
+      "group": "record",
+      "url": "https://medium.com",
+      "external": true
+    },
+    {
+      "id": "WRT-05",
+      "label": "Humans, Cameras and Experience - An Essay",
+      "desc": "Over years of use, my camera shifted from tool to extension of myself. Through touch, sight, and emotion, it shaped how I experienced the world. It is no longer just equipment.",
       "group": "record",
       "url": "https://medium.com",
       "external": true
@@ -159,6 +183,10 @@
       "group": "tag"
     },
     {
+      "id": "Photography",
+      "group": "tag"
+    },
+    {
       "id": "Stockholm",
       "group": "tag"
     },
@@ -175,11 +203,11 @@
       "group": "tag"
     },
     {
-      "id": "Medium",
+      "id": "Memoir",
       "group": "tag"
     },
     {
-      "id": "Sweden",
+      "id": "Ethnography",
       "group": "tag"
     }
   ],
@@ -310,6 +338,11 @@
       "type": "sub"
     },
     {
+      "source": "PHO-01",
+      "target": "Photography",
+      "type": "sub"
+    },
+    {
       "source": "Photos Archive",
       "target": "PHO-02",
       "type": "main"
@@ -335,6 +368,11 @@
       "type": "sub"
     },
     {
+      "source": "PHO-02",
+      "target": "Photography",
+      "type": "sub"
+    },
+    {
       "source": "Photos Archive",
       "target": "PHO-03",
       "type": "main"
@@ -357,6 +395,11 @@
     {
       "source": "PHO-03",
       "target": "Uppsala",
+      "type": "sub"
+    },
+    {
+      "source": "PHO-03",
+      "target": "Photography",
       "type": "sub"
     },
     {
@@ -396,7 +439,12 @@
     },
     {
       "source": "WRT-01",
-      "target": "Medium",
+      "target": "Mumbai",
+      "type": "sub"
+    },
+    {
+      "source": "WRT-01",
+      "target": "Community Collaboration",
       "type": "sub"
     },
     {
@@ -406,12 +454,52 @@
     },
     {
       "source": "WRT-02",
-      "target": "Medium",
+      "target": "Malmö",
       "type": "sub"
     },
     {
       "source": "WRT-02",
-      "target": "Sweden",
+      "target": "Memoir",
+      "type": "sub"
+    },
+    {
+      "source": "Writings Archive",
+      "target": "WRT-03",
+      "type": "main"
+    },
+    {
+      "source": "WRT-03",
+      "target": "Mumbai",
+      "type": "sub"
+    },
+    {
+      "source": "WRT-03",
+      "target": "Community Collaboration",
+      "type": "sub"
+    },
+    {
+      "source": "Writings Archive",
+      "target": "WRT-04",
+      "type": "main"
+    },
+    {
+      "source": "WRT-04",
+      "target": "Uppsala",
+      "type": "sub"
+    },
+    {
+      "source": "WRT-04",
+      "target": "Ethnography",
+      "type": "sub"
+    },
+    {
+      "source": "Writings Archive",
+      "target": "WRT-05",
+      "type": "main"
+    },
+    {
+      "source": "WRT-05",
+      "target": "Photography",
       "type": "sub"
     }
   ]

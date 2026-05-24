@@ -137,55 +137,79 @@
     .radar-node.super { fill: var(--bg-color); stroke: var(--text-color); stroke-width: 4px; opacity: 0.8; }
     .radar-viewport { fill: transparent; stroke: var(--accent-color); stroke-width: 6px; }
 
-    /* THE QUICK PEEK CSS */
+/* 🟢 UPGRADE: THE FLOATING CARD CSS */
     .quick-peek-panel {
-      position: absolute; top: 0; right: 0;
-      width: 380px; height: 100vh;
-      background-color: var(--bg-color);
-      border-left: 1px solid rgba(var(--rgb-text), 0.2);
-      transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: absolute;
+      top: 5rem;
+      right: 2rem;
+      width: 260px;
+      max-height: calc(100vh - 7rem);
+
+      /* 🟢 THE BLUR TWEAK: 85% solid background + 16px blur */
+      background-color: color-mix(in srgb, var(--bg-color) 70%, transparent);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px); /* Safari support */
+
+      border: 1px dotted var(--accent-color);
+      border-radius: 12px;
+
+      transform: translateX(calc(100% + 3rem));
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+
       z-index: 200;
-      padding: 2.5rem;
+      padding: 1.25rem;
       box-sizing: border-box;
-      display: flex; flex-direction: column; gap: 1.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
       color: var(--text-color);
-      box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+      box-shadow: -5px 5px 20px rgba(0,0,0,0.1);
+      overflow-y: auto;
     }
-    .quick-peek-panel.is-open { transform: translateX(0); }
+
+    /* Hide scrollbars for brutalist look */
+    .quick-peek-panel::-webkit-scrollbar { display: none; }
+    .quick-peek-panel { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .quick-peek-panel.is-open {
+      transform: translateX(0);
+      opacity: 1;
+    }
 
     .close-peek {
       background: none; border: none; color: var(--text-color);
       cursor: pointer; text-align: left; font-family: 'iA Writer Duospace', monospace;
-      font-size: 0.85rem; opacity: 0.5; padding: 0;
+      font-size: 0.75rem; /* Reduced font */
+      opacity: 0.5; padding: 0;
     }
     .close-peek:hover { opacity: 1; color: var(--accent-color); }
 
-    .peek-type { font-family: 'iA Writer Duospace', monospace; font-size: 0.75rem; opacity: 0.5; letter-spacing: 0.05em; }
-    .peek-title { font-family: 'SF Pro Display', sans-serif; font-size: 1.8rem; line-height: 1.1; margin: 0; }
-    .peek-desc { font-family: 'SF Pro Display', sans-serif; font-size: 0.95rem; line-height: 1.5; opacity: 0.8; }
+    .peek-type { font-family: 'iA Writer Duospace', monospace; font-size: 0.7rem; opacity: 0.5; letter-spacing: 0.05em; }
 
-    /* 🟢 UPGRADE: Dynamic Meta Containers */
-    .peek-meta-title { font-family: 'iA Writer Duospace', monospace; font-size: 0.65rem; opacity: 0.5; margin-bottom: -0.5rem; letter-spacing: 0.05em; }
+    /* Scaled down typography */
+    .peek-title { font-family: 'SF Pro Display', sans-serif; font-size: 1.2rem; line-height: 1.1; margin: 0; }
+    .peek-desc { font-family: 'SF Pro Display', sans-serif; font-size: 0.85rem; line-height: 1.4; opacity: 0.8; }
+
+    .peek-meta-title { font-family: 'iA Writer Duospace', monospace; font-size: 0.6rem; opacity: 0.5; margin-bottom: -0.5rem; letter-spacing: 0.05em; }
     .peek-meta-content { display: flex; flex-wrap: wrap; gap: 0.5rem; flex-direction: column; }
     .peek-meta-content.row { flex-direction: row; }
 
     .peek-tag {
-      font-family: 'iA Writer Duospace', monospace; font-size: 0.65rem;
+      font-family: 'iA Writer Duospace', monospace; font-size: 0.6rem;
       opacity: 0.6; border: 1px solid rgba(var(--rgb-text), 0.3);
-      padding: 0.3rem 0.5rem; border-radius: 2px; text-transform: uppercase;
+      padding: 0.2rem 0.4rem; border-radius: 2px; text-transform: uppercase;
+      pointer-events: none;
     }
-    .peek-record-link {
-      font-family: 'iA Writer Duospace', monospace; font-size: 0.8rem;
-      color: var(--accent-color); cursor: pointer; display: block; opacity: 0.8;
-      transition: opacity 0.2s, padding-left 0.2s;
+    .peek-record-text {
+      font-family: 'iA Writer Duospace', monospace; font-size: 0.75rem;
+      color: var(--text-color); display: block; opacity: 0.7;
+      pointer-events: none;
     }
-    .peek-record-link:hover { opacity: 1; padding-left: 0.3rem; }
 
     .peek-execute {
       margin-top: auto; background: var(--text-color); color: var(--bg-color);
-      border: none; padding: 1.2rem; cursor: pointer; font-family: 'iA Writer Duospace', monospace;
-      font-size: 0.85rem; font-weight: bold; transition: opacity 0.2s; text-align: center;
+      border: none; padding: 0.8rem; /* Tightened padding */
+      cursor: pointer; font-family: 'iA Writer Duospace', monospace;
+      font-size: 0.75rem; font-weight: bold; transition: opacity 0.2s; text-align: center;
       letter-spacing: 0.05em;
     }
     .peek-execute:hover { opacity: 0.8; }
@@ -235,7 +259,10 @@
 
   <svg id="atlas-container"></svg>
 
-  <script>
+
+
+
+<script>
     window.closePeek = function() {
       document.getElementById('atlas-container').dispatchEvent(new Event('click'));
     };
@@ -293,13 +320,28 @@
 
       d3.json("archive-map.json").then(data => {
 
+        // 🟢 DYNAMIC ORBITAL CALCULATION (Future-Proofing)
+        // This mathematically distributes any number of supernodes evenly around the center
+        const supernodes = data.nodes.filter(n => n.group === 'supernode');
+        const numSupernodes = supernodes.length;
+        // Orbit radius adapts to screen size (35% of the shortest dimension)
+        const orbitRadius = Math.min(width, height) * 0.35;
+
+        supernodes.forEach((sn, i) => {
+          // Divide a full circle (2 * PI) by the total number of archives
+          const angle = (i / numSupernodes) * 2 * Math.PI;
+          sn.targetX = (width / 2) + orbitRadius * Math.cos(angle);
+          sn.targetY = (height / 2) + orbitRadius * Math.sin(angle);
+        });
+
         const simulation = d3.forceSimulation(data.nodes)
           .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => d.type === "main" ? 120 : 180))
           .force("charge", d3.forceManyBody().strength(-300))
           .force("center", d3.forceCenter(width / 2, height / 2))
-          .force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 50 : 20))
-          .force("x", d3.forceX(width / 2).strength(d => d.group === "supernode" ? 0.08 : 0))
-          .force("y", d3.forceY(height / 2).strength(d => d.group === "supernode" ? 0.08 : 0));
+          .force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 50 : 20).iterations(1))
+          // 🟢 Pull each supernode to its dynamically calculated orbital position
+          .force("x", d3.forceX(d => d.group === "supernode" ? d.targetX : width / 2).strength(d => d.group === "supernode" ? 0.12 : 0))
+          .force("y", d3.forceY(d => d.group === "supernode" ? d.targetY : height / 2).strength(d => d.group === "supernode" ? 0.12 : 0));
 
         const link = g.append("g")
           .selectAll("line")
@@ -335,7 +377,7 @@
           .data(data.nodes)
           .join("circle")
           .attr("class", d => d.group === "supernode" ? "radar-node super" : "radar-node")
-          .attr("r", d => d.group === "supernode" ? 40 : (d.group === "record" ? 15 : 5));
+          .attr("r", d => d.group === "supernode" ? 150 : (d.group === "record" ? 45 : 20));
 
         function getNeighbors(nodeData) {
           return data.links.filter(l => l.source.id === nodeData.id || l.target.id === nodeData.id)
@@ -376,6 +418,8 @@
               if (clickedId === 'root') {
                 resetGraph();
               } else {
+                if (clickedId === activeNode) return;
+
                 const targetNode = data.nodes.find(n => n.id === clickedId);
                 const stepIndex = trailHistory.findIndex(t => t.id === clickedId);
                 if (stepIndex !== -1) {
@@ -390,6 +434,9 @@
         renderTrail();
 
         function resetGraph() {
+          // ALWAYS reset the camera, regardless of whether a node is open
+          svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+
           if (!activeNode) return;
 
           const prevNode = data.nodes.find(n => n.id === activeNode);
@@ -413,12 +460,14 @@
 
           simulation.force("link").distance(d => d.type === "main" ? 120 : 180);
           simulation.force("charge").strength(-300);
-          simulation.force("collide").radius(d => d.group === "supernode" ? 50 : 20);
-          simulation.force("x").strength(d => d.group === "supernode" ? 0.08 : 0);
-          simulation.force("y").strength(d => d.group === "supernode" ? 0.08 : 0);
+          // Return to organic collisions
+          simulation.force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 50 : 20).iterations(1));
+
+          // Snap nodes back to their dynamic orbital quadrants
+          simulation.force("x", d3.forceX(d => d.group === "supernode" ? d.targetX : width / 2).strength(d => d.group === "supernode" ? 0.12 : 0));
+          simulation.force("y", d3.forceY(d => d.group === "supernode" ? d.targetY : height / 2).strength(d => d.group === "supernode" ? 0.12 : 0));
 
           simulation.alpha(0.8).restart();
-          svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
         }
 
         svg.on("click", resetGraph);
@@ -466,7 +515,6 @@
           d.fx = d.x;
           d.fy = d.y;
 
-          // 🟢 UPGRADE: Dynamic Quick Peek Content Logic
           const peekType = document.getElementById('peek-type');
           const peekTitle = document.getElementById('peek-title');
           const peekDesc = document.getElementById('peek-desc');
@@ -483,12 +531,11 @@
             peekMetaTitle.innerText = 'INDEXED RECORDS:';
             peekMetaContent.classList.remove('row');
 
-            // List all records inside this archive
             const childRecords = data.nodes.filter(n => n.group === 'record' && neighbors.includes(n.id));
             childRecords.forEach(r => {
-              peekMetaContent.innerHTML += `<span class="peek-record-link" data-target="${r.id}">↳ ${r.label || r.id}</span>`;
+              peekMetaContent.innerHTML += `<span class="peek-record-text">↳ ${r.label || r.id}</span>`;
             });
-            executeBtn.innerText = '[ EXPLORE ARCHIVE ↗ ]';
+            executeBtn.innerText = '[ OPEN ARCHIVE ↗ ]';
             executeBtn.classList.remove('hidden');
 
           } else if (d.group === 'record') {
@@ -498,7 +545,6 @@
             peekMetaTitle.innerText = 'SYSTEM TAGS:';
             peekMetaContent.classList.add('row');
 
-            // List all tags attached to this record
             const attachedTags = data.nodes.filter(n => n.group === 'tag' && neighbors.includes(n.id));
             attachedTags.forEach(t => {
               peekMetaContent.innerHTML += `<span class="peek-tag">${t.id}</span>`;
@@ -513,25 +559,13 @@
             peekMetaTitle.innerText = 'CONNECTED RECORDS:';
             peekMetaContent.classList.remove('row');
 
-            // List all records sharing this tag
             const taggedRecords = data.nodes.filter(n => n.group === 'record' && neighbors.includes(n.id));
             taggedRecords.forEach(r => {
-              peekMetaContent.innerHTML += `<span class="peek-record-link" data-target="${r.id}">↳ ${r.label || r.id}</span>`;
+              peekMetaContent.innerHTML += `<span class="peek-record-text">↳ ${r.label || r.id}</span>`;
             });
-            executeBtn.classList.add('hidden'); // Tags don't have a direct URL to execute
+            executeBtn.classList.add('hidden');
           }
 
-          // Allow the newly generated links in the panel to be clicked!
-          document.querySelectorAll('.peek-record-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-              e.stopPropagation();
-              const targetId = link.getAttribute('data-target');
-              const targetNode = data.nodes.find(n => n.id === targetId);
-              if (targetNode) triggerNode(targetNode);
-            });
-          });
-
-          // Manage the routing for the execute button
           if (d.url) {
             executeBtn.onclick = () => {
               if (d.external) window.open(d.url, '_blank');
@@ -549,13 +583,20 @@
           if (existingIndex !== -1) {
             trailHistory = trailHistory.slice(0, existingIndex + 1);
           } else {
-            trailHistory.push(d);
+            const isSibling = trailHistory.length > 0 &&
+                              trailHistory[trailHistory.length - 1].group === 'record' &&
+                              d.group === 'record';
+            if (isSibling) {
+              trailHistory[trailHistory.length - 1] = d;
+            } else {
+              trailHistory.push(d);
+            }
           }
           renderTrail();
 
           svg.transition().duration(750).call(
             zoom.transform,
-            d3.zoomIdentity.translate((width / 2) - 150, height / 2).scale(1).translate(-d.x, -d.y)
+            d3.zoomIdentity.translate((width / 2) - 130, height / 2).scale(1).translate(-d.x, -d.y)
           );
 
           node.classed("is-hover-dimmed", false);
@@ -580,9 +621,20 @@
           simulation.force("x").strength(0);
           simulation.force("y").strength(0);
 
-          simulation.force("link").distance(l => (l.source.id === d.id || l.target.id === d.id) ? 110 : 250);
-          simulation.force("charge").strength(n => (n.id === d.id || neighbors.includes(n.id)) ? -100 : -1000);
-          simulation.force("collide").radius(n => (n.id === d.id || neighbors.includes(n.id)) ? 60 : 20);
+          simulation.force("link").distance(l => (l.source.id === d.id || l.target.id === d.id) ? 140 : 250);
+          simulation.force("charge").strength(n => (n.id === d.id || neighbors.includes(n.id)) ? -150 : -1000);
+
+          // THE CLEARING EFFECT: Push overlapping nodes away from active text
+          simulation.force("collide", d3.forceCollide().radius(n => {
+            if (n.id === d.id || neighbors.includes(n.id)) {
+               if (n.group === "record" || n.group === "tag") {
+                 const textString = n.label || n.id || "";
+                 return 20 + (textString.length * 3.5);
+               }
+               return 65;
+            }
+            return n.group === "supernode" ? 50 : 20;
+          }).iterations(3));
 
           simulation.alpha(0.8).restart();
         }
@@ -625,5 +677,11 @@
       });
     });
   </script>
+
+
+
+
+
+
 </body>
 </html>

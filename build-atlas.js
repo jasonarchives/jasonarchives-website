@@ -10,10 +10,13 @@ const supernodes = [
 ];
 
 const externalRecords = [
-  { id: "WRT-01", label: "Slowing Down with Resistance", desc: "Thoughts on production culture.", group: "record", url: "https://medium.com", external: true, parent: "Writings Archive", tags: ["Medium"] },
-  { id: "WRT-02", label: "A Seat on Skåne Expressen", desc: "Observational travel writing.", group: "record", url: "https://medium.com", external: true, parent: "Writings Archive", tags: ["Medium", "Sweden"] }
-  // Add the rest of your Medium links here...
+  { id: "WRT-01", label: "Slowing Down with Resistance", desc: "In Mumbai’s Sanjay Gandhi National Park, Local Threads Collective gathered for a simple picnic—unstructured, slow, and free of agenda. Leisure here became resistance...", group: "record", url: "https://medium.com", external: true, parent: "Writings Archive", tags: ["Mumbai", "Community Collaboration"] },
+  { id: "WRT-02", label: "A Seat on Skåne Expressen", desc: "On SkåneExpressen Buss 15, nightly rides from Malmö to Vellinge turned routine into quiet beauty. Fields, bridges, and fleeting dawns became the memories that lingered.", group: "record", url: "https://medium.com", external: true, parent: "Writings Archive", tags: ["Malmö", "Memoir"] },
+  { id: "WRT-03", label: "Finding Threads among Fraying Tapestries", desc: "Organising events and leading teams in Photography & Graphic Design while studying at SFIT Mumbai.", group: "record", url: "https://medium.com", external: true, parent: "Writings Archive", tags: ["Mumbai", "Community Collaboration"] },
+  { id: "WRT-04", label: "Inside Puben", desc: "At Puben in Uppsala’s “White Castle”, bartending turned into fieldwork. Cheap drinks, karaoke, and shared rituals revealed a space of belonging woven from everyday moments.", group: "record", url: "https://medium.com", external: true, parent: "Writings Archive", tags: ["Uppsala", "Ethnography"] },
+  { id: "WRT-05", label: "Humans, Cameras and Experience - An Essay", desc: "Over years of use, my camera shifted from tool to extension of myself. Through touch, sight, and emotion, it shaped how I experienced the world. It is no longer just equipment.", group: "record", url: "https://medium.com", external: true, parent: "Writings Archive", tags: ["Photography"] }
 ];
+
 
 // Folders to scan for local HTML records
 const foldersToScan = ['designrec', 'photorec', 'communityrec'];
