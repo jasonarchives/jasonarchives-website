@@ -1,12 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atlas | Jason Mendes</title>
+
 
   <link rel="stylesheet" href="core.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
+
+
+
+
+
+
+<!-- SEO SECTION BEGINS -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#F4F4F0">
+
+<!-- SEO title & meta -->
+  <title>Jason Mendes | Interactive Archive Map</title>
+
+
+<script>
+  (function() {
+    // Kill all transitions immediately
+    document.documentElement.classList.add('no-transition');
+
+    const savedTheme = localStorage.getItem('os-theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+
+    // Allow transitions again
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.documentElement.classList.remove('no-transition');
+      }, 100);
+    });
+  })();
+</script>
+
+  <meta name="title" content="Jason Mendes | Interactive Archive Map">
+  <meta name="description" content="Hi, I'm Jason Mendes. This is my digital archive map spanning my work in design, photography, writing & community building.">
+
+<!-- SEO meta and og -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jasonarchives.online/atlas.html">
+  <meta property="og:title" content="Jason Mendes | Interactive Archive Map">
+  <meta property="og:description" content="Hi, I'm Jason Mendes. This is my digital archive map spanning my work in design, photography, writing & community building.">
+  <meta property="og:image" content="https://jasonarchives.online/preview/preview.jpg">
+
+
+<!-- Canonical Link -->
+  <link rel="canonical" href="https://jasonarchives.online/atlas.html">
+
+<!-- 1. favicon.ico -->
+  <link rel="icon" href="favicon.ico?v=2" sizes="any">
+
+<!-- 2. The Apple Touch Icon (for saving to iOS Home Screen) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- 3. iOS Status Bar Color (Optional but premium) -->
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "CollectionPage",
+  "name": "Jason Mendes | Interactive Archive Map",
+  "description": "Hi, I'm Jason Mendes. This is my digital archive map spanning my work in design, photography, writing & community building.",
+  "url": "https://jasonarchives.online/atlas.html",
+  "image": "https://jasonarchives.online/preview/preview.jpg"
+}
+</script>
+
+
+
+
+
+
+
+
+
 
   <style>
     body.page-atlas {
@@ -215,6 +293,7 @@
     .peek-execute:hover { opacity: 0.8; }
     .peek-execute.hidden { display: none; }
   </style>
+
 </head>
 <body class="page-atlas">
 
