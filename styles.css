@@ -137,37 +137,6 @@ body, html {
 
 
 
-/* ========================= */
-/* Journey Projection (Hook) */
-/* ========================= */
-
-.journey-projection {
-  position: absolute;
-  pointer-events: none;
-  z-index: 10;
-  /* The Animation Setup */
-  opacity: 0;
-  clip-path: inset(0 100% 0 0); /* Hides the text by clipping the right side */
-  transition: opacity 0.4s ease, clip-path 0.6s cubic-bezier(0.8, 0, 0.2, 1);
-}
-
-.journey-projection.is-visible {
-  opacity: 1;
-  clip-path: inset(0 0 0 0); /* Wipes open to reveal the text */
-}
-
-#journey-text {
-  font-family: 'iA Writer Duospace', monospace;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text-color);
-  opacity: 0.9;
-  
-  /* Minimalist framing */
-  padding-left: 1rem;
-  border-left: 2px solid var(--text-color);
-}
-
 
 /* ----------------------------------------- */
 /* 1. MASSIVE MONITORS (1400px and up)       */
@@ -376,3 +345,106 @@ a:hover .quickarrow {
 }
 
 
+
+
+
+/* ========================================== */
+/* ATLAS LIVING BACKDROP                      */
+/* ========================================== */
+
+.atlas-backdrop-wrapper {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  /* 🟢 FIX 1: Brought to z-index 0 (above the body background) to fix Light Mode */
+  z-index: 0;
+  pointer-events: none;
+
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+}
+
+#atlas-bg-container {
+  width: 100%; height: 100%;
+  pointer-events: auto; /* SVG catches its own clicks */
+}
+
+.atlas-fade-mask {
+  position: absolute; top: 0; left: 0;
+  width: 55vw; height: 100%;
+  background: linear-gradient(to right, rgba(var(--rgb-bg), 1) 30%, rgba(var(--rgb-bg), 0) 100%);
+  pointer-events: none;
+}
+
+/* 🟢 D3 extracted base styles */
+.bg-link-main { stroke: var(--text-color); stroke-opacity: 0.25; stroke-width: 1.5px; transition: stroke-opacity 0.4s; }
+.bg-link-sub { stroke: var(--text-color); stroke-opacity: 0.1; stroke-width: 1px; stroke-dasharray: 4,4; transition: stroke-opacity 0.4s; }
+
+.bg-node-super circle { fill: var(--bg-color); stroke: var(--text-color); stroke-width: 2px; transition: all 0.3s; }
+.bg-node-super text { font-family: 'iA Writer Duospace', monospace; font-size: 11px; fill: var(--text-color); pointer-events: none; transition: all 0.3s; }
+
+.bg-node-record circle { fill: var(--text-color); transition: all 0.3s; }
+.bg-node-tag text { font-family: 'iA Writer Duospace', monospace; font-size: 9px; fill: var(--text-color); opacity: 0.4; pointer-events: none; transition: all 0.3s; }
+
+/* 🟢 Interaction State Classes */
+.bg-dimmed { opacity: 0.1 !important; }
+
+/* Highlight circles for everything */
+.bg-hovered circle, .bg-active circle {
+  fill: var(--accent-color) !important;
+  stroke: var(--accent-color) !important;
+}
+
+/* 🟢 FIX 1: Highlight text ONLY for records and tags.
+   This leaves the Supernode text its default readable color! */
+.bg-node-record.bg-hovered text, .bg-node-record.bg-active text,
+.bg-node-tag.bg-hovered text, .bg-node-tag.bg-active text {
+  fill: var(--text-color) !important;
+  opacity: 1 !important;
+}
+
+/* 🟢 Redesigned Button - Fixed Z-Index Context */
+.explore-atlas-btn {
+  position: fixed; /* Breaks it out of the container completely */
+  bottom: 2rem; right: 2rem;
+  z-index: 9999; /* Forces it to the very front of the glass */
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--text-color);
+  background: var(--bg-color); /* Adds a solid background */
+  border: 1px solid rgba(var(--rgb-text), 0.2);
+  padding: 0.8rem 1.2rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  pointer-events: auto !important;
+}
+
+.explore-atlas-btn:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* 🟢 FIX 1: Layering Fix - ensures the text sits firmly OVER the map */
+.landing-page { position: relative; z-index: 10; pointer-events: none !important; }
+.top-section, .hero-content-wrapper { pointer-events: none !important; }
+.giant-link, .mono-utility a, .navbar, .explore-atlas-btn { pointer-events: auto !important; }
+
+@media (max-width: 1100px) {
+  .atlas-backdrop-wrapper {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* 🟢 Adds the button to the mobile hide rule */
+  .explore-atlas-btn {
+    display: none !important;
+  }
+}
+
+.nav-active {
+  color: var(--accent-color) !important;
+  opacity: 1 !important;
+}

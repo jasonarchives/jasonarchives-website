@@ -48,12 +48,12 @@
 .os-theme-toggle-desktop::before {
   content: "";
   position: absolute;
-  /* Extends the hover zone slightly above and below so it doesn't close if your hand shakes */
-  top: -20px;
-  bottom: -20px;
+  /* Reduced top and bottom buffer */
+  top: -10px;
+  bottom: -10px;
   right: 0;
-  /* Creates a wide, invisible net to the left to catch the mouse as you move to click */
-  width: 200px;
+  /* 🟢 Drastically reduced from 200px to 90px */
+  width: 40px;
   z-index: -1;
 }
 

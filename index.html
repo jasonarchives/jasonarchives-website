@@ -66,15 +66,11 @@
   <link rel="stylesheet" href="core.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="cursor.css"> 
-  <link rel="stylesheet" href="stickynotes.css">
+
   <link rel="stylesheet" href="terminal.css">  
   <link rel="stylesheet" href="theme.css">
 
 
-  <link rel="preload" href="yellow.webp" as="image">
-  <link rel="preload" href="green.webp" as="image">
-  <link rel="preload" href="blue.webp" as="image">
-  <link rel="preload" href="red.webp" as="image">
 
 <!-- Schema Markup --> 
 <script type="application/ld+json">
@@ -103,6 +99,10 @@
 }
 </script>
 
+<!-- D3 Physics -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+
 </head>
 
 <!----------------------------------------------------------------------------------------------------------------------> 
@@ -111,6 +111,11 @@
 
 <body class="page-index">
 
+<div class="atlas-backdrop-wrapper">
+  <svg id="atlas-bg-container"></svg>
+  <div class="atlas-fade-mask"></div>
+</div>
+<a href="atlas.html" class="explore-atlas-btn">EXPLORE INTERACTIVE MAP ↗</a>
 
 <div id="boot-sequence" class="boot-overlay">
   <div class="boot-text-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
@@ -121,8 +126,7 @@
   </div>
 </div>
 
-<!-- Sticky Cursor --> 
-<div id="sticky-cursor-prompt"></div>
+
 
 <!-- All Navbar --> 
 <nav class="navbar">
@@ -173,27 +177,20 @@
 <!-- Massive Links --> 
  
 <nav class="massive-hero-nav tile-in-delay">
-  
-  <a href="design.html" class="giant-link" data-journey="[ 01 / DESIGNS ] This archive is a living document of my curiosity for humans and technology.">Designs</a>
+  <a href="design.html" class="giant-link" data-node-id="Design Archive">Designs</a>
   <p class="sr-only">Portfolio of UX Research and Experience Design case studies, documenting curiosity about human behavior and digital systems.</p>
-  
-  <a href="photos.html" class="giant-link" data-journey="[ 02 / PHOTOS ] This archive is a visual ledger ranging from intimate client portraits to long-exposures of the Aurora Borealis.">Photos</a>
-  <p class="sr-only">A visual ledger and photography archive ranging from intimate portraits to long-exposure landscape photography.</p>
-  
-  <a href="writings.html" class="giant-link" data-journey="[ 03 / WRITINGS ] This archive is my documentation of the messy intersections between human behavior, physical spaces, and digital systems. ">Writings</a>
-  <p class="sr-only">Articles and writings documenting the intersections of human-computer interaction, physical architecture, and digital interfaces.</p>
-  
-  <a href="community.html" class="giant-link" data-journey="[ 04 / COMMUNITY ] Community collaboration is where my passion for design, my love for art, my need for documenting, and my appreciation for people come together to build something beautiful and long-lasting.">Community</a>
-  <p class="sr-only">Community collaboration projects combining design, art, and archival documentation.</p>
 
+  <a href="photos.html" class="giant-link" data-node-id="Photos Archive">Photos</a>
+  <p class="sr-only">A visual ledger and photography archive ranging from intimate portraits to long-exposure landscape photography.</p>
+
+  <a href="writings.html" class="giant-link" data-node-id="Writings Archive">Writings</a>
+  <p class="sr-only">Articles and writings documenting the intersections of human-computer interaction, physical architecture, and digital interfaces.</p>
+
+  <a href="community.html" class="giant-link" data-node-id="Community Archive">Community</a>
+  <p class="sr-only">Community collaboration projects combining design, art, and archival documentation.</p>
 </nav>
 
 
-<!-- Journey --> 
-
-<div class="journey-projection">
-  <p id="journey-text">[ 03 / WRITINGS ] This archive is my documentation of the messy intersections between human behavior, physical spaces, and digital systems. </p>
-</div>
 
 <!-- External Links & CV --> 
 
@@ -340,38 +337,11 @@ window.addEventListener("pageshow", (event) => {
 });
 </script> 
 
-  
-  
-<!-- Journey --> 
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const links = document.querySelectorAll('.giant-link');
-  const projectionBox = document.querySelector('.journey-projection');
-  const projectionText = document.getElementById('journey-text');
-
-  links.forEach(link => {
-    // When the mouse enters the giant text
-    link.addEventListener('mouseenter', () => {
-      const journeyContent = link.getAttribute('data-journey');
-      if (journeyContent) {
-        projectionText.textContent = journeyContent;
-        projectionBox.classList.add('is-visible');
-      }
-    });
-
-    // When the mouse leaves the giant text
-    link.addEventListener('mouseleave', () => {
-      projectionBox.classList.remove('is-visible');
-    });
-  });
-});
-</script>
-  
  
 <!-- Other JS Links --> 
 <script src="theme.js"> </script>
-<script src="stickynotes.js"> </script>
+
 <script src="cursor.js"> </script>
 <script src="terminal.js"> </script>
 
@@ -388,6 +358,154 @@ document.addEventListener('DOMContentLoaded', () => {
     <button class="theme-btn" data-set-theme="dark">[◐ DARK]</button>
   </div>
 </div>
+
+
+
+
+<!-- D3 Map (Hidden on Mobile) -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (width <= 1100) return;
+
+    const svg = d3.select("#atlas-bg-container").attr("viewBox", [0, 0, width, height]);
+    const g = svg.append("g");
+    const rightCenter = width * 0.75;
+    let mousePos = [rightCenter, height / 2];
+    let activeSupernode = null;
+
+    const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
+    svg.call(zoom).on("wheel.zoom", null).on("dblclick.zoom", null);
+
+    d3.json("archive-map.json").then(data => {
+      const supernodes = data.nodes.filter(n => n.group === 'supernode');
+      const orbitRadius = Math.min(width, height) * 0.12;
+
+      supernodes.forEach((sn, i) => {
+        const angle = (i / supernodes.length) * 2 * Math.PI;
+        sn.targetX = rightCenter + orbitRadius * Math.cos(angle);
+        sn.targetY = (height / 2) + orbitRadius * Math.sin(angle);
+      });
+
+      const simulation = d3.forceSimulation(data.nodes)
+        .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => d.type === "main" ? 80 : 130))
+        .force("charge", d3.forceManyBody().strength(-150))
+        .force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 40 : 15).iterations(2))
+        .force("x", d3.forceX(d => d.group === "supernode" ? d.targetX : rightCenter).strength(0.08))
+        .force("y", d3.forceY(d => d.group === "supernode" ? d.targetY : height / 2).strength(0.08));
+
+      // 🟢 HELPER: Sync Nav Links with Map
+      function updateNavHighlight(id) {
+        document.querySelectorAll('.giant-link').forEach(link => {
+          link.classList.toggle('nav-active', link.getAttribute('data-node-id') === id);
+        });
+      }
+
+      const link = g.append("g").selectAll("line").data(data.links).join("line")
+        .attr("class", d => d.type === "main" ? "bg-link-main" : "bg-link-sub");
+
+      const node = g.append("g").selectAll("g").data(data.nodes).join("g")
+        .style("cursor", "pointer")
+        .call(d3.drag()
+          .on("start", (event, d) => { if (!event.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+          .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
+          .on("end", (event, d) => { if (!event.active) simulation.alphaTarget(0); if (d.id !== activeSupernode) { d.fx = null; d.fy = null; } }));
+
+      node.each(function(d) {
+        const el = d3.select(this);
+        if (d.group === "supernode") {
+          el.attr("class", "bg-node-super");
+          el.append("circle").attr("r", 25);
+          el.append("text").text(d.id).attr("dy", -2).attr("text-anchor", "middle");
+        } else if (d.group === "record") {
+          el.attr("class", "bg-node-record");
+          el.append("circle").attr("r", 4);
+          el.append("text").text(d.label || d.id).attr("dx", 10).attr("dy", 3)
+            .style("font-family", "'SF Pro Display', sans-serif").style("font-size", "10px")
+            .style("fill", "var(--text-color)").style("opacity", "0").style("transition", "opacity 0.3s ease")
+            .style("pointer-events", "none").attr("class", "bg-label-record");
+        } else if (d.group === "tag") {
+          el.attr("class", "bg-node-tag");
+          el.append("text").text(`[${d.id.toUpperCase()}]`).attr("dy", 4).attr("text-anchor", "middle");
+        }
+      });
+
+      function getNeighbors(nodeData) {
+        return data.links.filter(l => l.source.id === nodeData.id || l.target.id === nodeData.id).map(l => l.source.id === nodeData.id ? l.target.id : l.source.id);
+      }
+
+      function resetGraph() {
+        activeSupernode = null;
+        updateNavHighlight(null); // Clear Nav links
+        node.classed("bg-dimmed", false).classed("bg-active", false);
+        link.classed("bg-dimmed", false);
+        node.selectAll(".bg-label-record").style("opacity", "0");
+        svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+        simulation.force("link").distance(d => d.type === "main" ? 80 : 130);
+        simulation.force("charge").strength(-150);
+        simulation.force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 40 : 15).iterations(2));
+        simulation.alpha(0.5).restart();
+      }
+
+      svg.on("click", resetGraph);
+
+      function triggerNode(d) {
+        if (activeSupernode === d.id) return;
+        activeSupernode = d.id;
+        updateNavHighlight(d.id); // Highlight Nav link
+
+        const neighbors = getNeighbors(d);
+        d.fx = d.x; d.fy = d.y;
+
+        node.classed("bg-dimmed", n => n.group === "tag" || (n.id !== d.id && !neighbors.includes(n.id)));
+        node.classed("bg-active", n => n.id === d.id || neighbors.includes(n.id));
+        link.classed("bg-dimmed", l => l.source.id !== d.id && l.target.id !== d.id);
+        node.selectAll(".bg-label-record").style("opacity", n => (n.id === d.id || neighbors.includes(n.id)) ? "1" : "0");
+
+        svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(rightCenter, height / 2).scale(1.4).translate(-d.x, -d.y));
+
+        simulation.force("link").distance(l => (l.source.id === d.id || l.target.id === d.id) ? 40 : 130);
+        simulation.force("charge").strength(n => (n.id === d.id || neighbors.includes(n.id)) ? -30 : -150);
+        simulation.force("collide", d3.forceCollide().radius(n => (n.id === d.id || neighbors.includes(n.id)) ? 45 : 15).iterations(3));
+        simulation.alpha(0.5).restart();
+      }
+
+      // Hover logic for Map
+      node.on("mouseover", function(event, d) {
+          if (d.group === "tag" || d.group === "record") return;
+          d3.select(this).classed("bg-hovered", true);
+        })
+        .on("mouseout", function(event, d) {
+          d3.select(this).classed("bg-hovered", false);
+        })
+        .on("click", function(event, d) {
+          event.stopPropagation();
+          if (d.group === "supernode") triggerNode(d);
+          else if (d.group === "record" && d.url) window.location.href = d.url;
+        });
+
+      // 🟢 The Nav-to-Node Bridge
+      document.querySelectorAll('.giant-link').forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          const target = data.nodes.find(n => n.id === link.getAttribute('data-node-id'));
+          if (target && target.group === 'supernode') triggerNode(target);
+        });
+        link.addEventListener('mouseleave', () => resetGraph());
+      });
+
+      simulation.on("tick", () => {
+        data.nodes.forEach(d => { d.x = Math.max(40, Math.min(width - 40, d.x)); d.y = Math.max(40, Math.min(height - 40, d.y)); });
+        link.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+        node.attr("transform", d => `translate(${d.x},${d.y})`);
+      });
+    }).catch(console.error);
+  });
+</script>
+
+
+
 
 
 </body>
