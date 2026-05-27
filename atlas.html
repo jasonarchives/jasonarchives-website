@@ -229,7 +229,7 @@
   <div class="tag-sidebar" id="tag-sidebar"></div>
 
   <div class="radar-container">
-    <span class="radar-label">[ RADAR ]</span>
+
     <svg id="radar-svg"></svg>
   </div>
 
@@ -542,7 +542,7 @@
             peekType.innerText = '[ RECORD ]';
             peekTitle.innerText = d.label || d.id;
             peekDesc.innerText = d.desc || "Archival record data.";
-            peekMetaTitle.innerText = 'SYSTEM TAGS:';
+            peekMetaTitle.innerText = 'TAGS:';
             peekMetaContent.classList.add('row');
 
             const attachedTags = data.nodes.filter(n => n.group === 'tag' && neighbors.includes(n.id));
@@ -553,9 +553,9 @@
             executeBtn.classList.remove('hidden');
 
           } else if (d.group === 'tag') {
-            peekType.innerText = '[ SYSTEM TAG ]';
+            peekType.innerText = '[ TAG ]';
             peekTitle.innerText = d.id.toUpperCase();
-            peekDesc.innerText = "System metadata grouping related records together across all archives.";
+            peekDesc.innerText = "Tags connect related records together based on a theme or location.";
             peekMetaTitle.innerText = 'CONNECTED RECORDS:';
             peekMetaContent.classList.remove('row');
 
