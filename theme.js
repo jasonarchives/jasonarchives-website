@@ -69,3 +69,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // Boot the engine on page load
   initTheme();
 });
+
+// Live IST Clock Engine
+document.addEventListener('DOMContentLoaded', () => {
+  const clockElement = document.getElementById('footer-local-time');
+  if (!clockElement) return;
+
+  function tick() {
+    const now = new Date();
+
+    // Forces the clock to always calculate Indian Standard Time (Asia/Kolkata)
+    const options = {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false // Technical 24-hour format to match the brutalist aesthetic
+    };
+
+    const istTime = new Intl.DateTimeFormat('en-US', options).format(now);
+    clockElement.textContent = `${istTime} IST`;
+  }
+
+  tick(); // Execute immediately so there is no 1-second blank delay
+  setInterval(tick, 1000); // Pulse every second
+});

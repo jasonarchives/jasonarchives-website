@@ -1,37 +1,3 @@
-// ==========================================
-// 1. Read Time and Scroll Percentage Tracker
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-  const pctText = document.getElementById("read-pct");
-  const timeText = document.getElementById("read-time");
-  
-  // Detects both standard UX Case Studies and the new Photo Dossiers
-  const contentBody = document.querySelector(".article-body, .dossier-body");
-  
-  if (!pctText || !timeText || !contentBody) return;
-  
-  const text = contentBody.innerText || contentBody.textContent;
-  const wordCount = text.trim().split(/\s+/).length;
-  const totalReadTimeMinutes = Math.ceil(wordCount / 200); 
-  
-  timeText.textContent = totalReadTimeMinutes.toString().padStart(2, '0');
-
-  window.addEventListener("scroll", () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    
-    let scrolled = (winScroll / height) * 100;
-    if (scrolled > 100) scrolled = 100;
-    if (scrolled < 0) scrolled = 0;
-    
-    pctText.textContent = Math.round(scrolled).toString().padStart(2, '0');
-    
-    const percentRemaining = 100 - scrolled;
-    const timeRemaining = Math.ceil((totalReadTimeMinutes * percentRemaining) / 100);
-    
-    timeText.textContent = timeRemaining.toString().padStart(2, '0');
-  });
-});
 
 // ==========================================
 // 2. Universal Intersection Observer for Sticky Ledger
