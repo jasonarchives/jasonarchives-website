@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+
+      // 🟢 MAP AFFORDANCE: Fade out crosshair to reveal native grab hand
+      if (e.target.closest('#atlas-bg-container')) {
+        cursor.style.opacity = '0';
+      } else {
+        cursor.style.opacity = '1';
+      }
     });
 
     // Animate smoothly at 60fps (Using translate3d to force GPU rendering)

@@ -357,13 +357,11 @@ window.addEventListener("pageshow", (event) => {
   document.addEventListener("DOMContentLoaded", () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
-
     if (width <= 1100) return;
 
     const svg = d3.select("#atlas-bg-container").attr("viewBox", [0, 0, width, height]);
     const g = svg.append("g");
     const rightCenter = width * 0.75;
-    let mousePos = [rightCenter, height / 2];
     let activeSupernode = null;
 
     const zoom = d3.zoom().on("zoom", (event) => g.attr("transform", event.transform));
@@ -380,116 +378,163 @@ window.addEventListener("pageshow", (event) => {
       });
 
       const simulation = d3.forceSimulation(data.nodes)
-        .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => d.type === "main" ? 80 : 130))
-        .force("charge", d3.forceManyBody().strength(-150))
-        .force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 40 : 15).iterations(2))
-        .force("x", d3.forceX(d => d.group === "supernode" ? d.targetX : rightCenter).strength(0.08))
-        .force("y", d3.forceY(d => d.group === "supernode" ? d.targetY : height / 2).strength(0.08));
+        .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => d.type === "main" ? 120 : 180))
+        .force("charge", d3.forceManyBody().strength(-300))
+        .force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 50 : 20).iterations(1))
+        .force("x", d3.forceX(d => d.group === "supernode" ? d.targetX : rightCenter).strength(d => d.group === "supernode" ? 0.12 : 0))
+        .force("y", d3.forceY(d => d.group === "supernode" ? d.targetY : height / 2).strength(d => d.group === "supernode" ? 0.12 : 0));
 
-      // 🟢 HELPER: Sync Nav Links with Map
-      function updateNavHighlight(id) {
+      function syncNavUI(nodeId) {
         document.querySelectorAll('.giant-link').forEach(link => {
-          link.classList.toggle('nav-active', link.getAttribute('data-node-id') === id);
+          link.classList.toggle('nav-active', link.getAttribute('data-node-id') === nodeId);
         });
       }
 
       const link = g.append("g").selectAll("line").data(data.links).join("line")
-        .attr("class", d => d.type === "main" ? "bg-link-main" : "bg-link-sub");
+        .attr("class", d => d.type === "main" ? "link-main" : "link-sub");
 
       const node = g.append("g").selectAll("g").data(data.nodes).join("g")
+        .attr("class", "node-group")
         .style("cursor", "pointer")
         .call(d3.drag()
           .on("start", (event, d) => { if (!event.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
           .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
-          .on("end", (event, d) => { if (!event.active) simulation.alphaTarget(0); if (d.id !== activeSupernode) { d.fx = null; d.fy = null; } }));
+          .on("end", (event, d) => { if (!event.active) simulation.alphaTarget(0.01); if (d.id !== activeSupernode) { d.fx = null; d.fy = null; } }));
 
       node.each(function(d) {
         const el = d3.select(this);
         if (d.group === "supernode") {
-          el.attr("class", "bg-node-super");
-          el.append("circle").attr("r", 25);
-          el.append("text").text(d.id).attr("dy", -2).attr("text-anchor", "middle");
+          el.classed("node-super-group", true);
+          el.append("circle").attr("r", 35).attr("class", "node-super");
+          el.append("text").text(d.id).attr("dy", -2).attr("text-anchor", "middle").attr("class", "label-super");
         } else if (d.group === "record") {
-          el.attr("class", "bg-node-record");
-          el.append("circle").attr("r", 4);
-          el.append("text").text(d.label || d.id).attr("dx", 10).attr("dy", 3)
-            .style("font-family", "'SF Pro Display', sans-serif").style("font-size", "10px")
-            .style("fill", "var(--text-color)").style("opacity", "0").style("transition", "opacity 0.3s ease")
-            .style("pointer-events", "none").attr("class", "bg-label-record");
+          el.classed("node-record-group", true);
+          el.append("circle").attr("r", 5).attr("class", "node-record");
+          el.append("text").text(d.label || d.id).attr("dx", 14).attr("dy", 4).attr("class", "label-record");
         } else if (d.group === "tag") {
-          el.attr("class", "bg-node-tag");
-          el.append("text").text(`[${d.id.toUpperCase()}]`).attr("dy", 4).attr("text-anchor", "middle");
+          el.classed("node-tag-group", true);
+          el.append("text").text(`[ ${d.id.toUpperCase()} ]`).attr("dy", 4).attr("text-anchor", "middle").attr("class", "label-tag");
         }
       });
 
-      function getNeighbors(nodeData) {
-        return data.links.filter(l => l.source.id === nodeData.id || l.target.id === nodeData.id).map(l => l.source.id === nodeData.id ? l.target.id : l.source.id);
-      }
+      function getNeighbors(nodeData) { return data.links.filter(l => l.source.id === nodeData.id || l.target.id === nodeData.id).map(l => l.source.id === nodeData.id ? l.target.id : l.source.id); }
 
       function resetGraph() {
         activeSupernode = null;
-        updateNavHighlight(null); // Clear Nav links
-        node.classed("bg-dimmed", false).classed("bg-active", false);
-        link.classed("bg-dimmed", false);
-        node.selectAll(".bg-label-record").style("opacity", "0");
+        syncNavUI(null);
+
+        // Zoom Out
         svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
-        simulation.force("link").distance(d => d.type === "main" ? 80 : 130);
-        simulation.force("charge").strength(-150);
-        simulation.force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 40 : 15).iterations(2));
-        simulation.alpha(0.5).restart();
+
+        node.classed("is-hover-dimmed", false).classed("is-active-dimmed", false).classed("is-highlighted", false);
+        link.classed("is-hover-dimmed", false).classed("is-active-dimmed", false);
+
+        node.selectAll(".label-record").style("opacity", 0);
+        node.selectAll(".label-tag").style("opacity", 0.5);
+
+        simulation.force("link").distance(d => d.type === "main" ? 120 : 180);
+        simulation.force("charge").strength(-300);
+        simulation.force("collide", d3.forceCollide().radius(d => d.group === "supernode" ? 50 : 20).iterations(1));
+
+        simulation.alpha(0.8).restart();
+        setTimeout(() => { if (!activeSupernode) simulation.alphaTarget(0.01); }, 3000);
       }
 
       svg.on("click", resetGraph);
 
-      function triggerNode(d) {
-        if (activeSupernode === d.id) return;
-        activeSupernode = d.id;
-        updateNavHighlight(d.id); // Highlight Nav link
+      function isolateNode(d, isLock = false) {
+        if (activeSupernode && isLock && activeSupernode === d.id) { resetGraph(); return; }
+        activeSupernode = isLock ? d.id : activeSupernode;
 
+        syncNavUI(d.id);
         const neighbors = getNeighbors(d);
         d.fx = d.x; d.fy = d.y;
 
-        node.classed("bg-dimmed", n => n.group === "tag" || (n.id !== d.id && !neighbors.includes(n.id)));
-        node.classed("bg-active", n => n.id === d.id || neighbors.includes(n.id));
-        link.classed("bg-dimmed", l => l.source.id !== d.id && l.target.id !== d.id);
-        node.selectAll(".bg-label-record").style("opacity", n => (n.id === d.id || neighbors.includes(n.id)) ? "1" : "0");
+        node.classed("is-active-dimmed", n => n.id !== d.id && !neighbors.includes(n.id));
+        link.classed("is-active-dimmed", l => l.source.id !== d.id && l.target.id !== d.id);
 
-        svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(rightCenter, height / 2).scale(1.4).translate(-d.x, -d.y));
+        // 🟢 Includes records in the highlight class so they turn orange
+        node.classed("is-highlighted", n => n.id === d.id || neighbors.includes(n.id));
+        node.selectAll(".label-record").style("opacity", n => (n.id === d.id || neighbors.includes(n.id)) ? 1 : 0);
+        node.selectAll(".label-tag").style("opacity", n => n.id === d.id ? 1 : 0.5);
 
-        simulation.force("link").distance(l => (l.source.id === d.id || l.target.id === d.id) ? 40 : 130);
-        simulation.force("charge").strength(n => (n.id === d.id || neighbors.includes(n.id)) ? -30 : -150);
-        simulation.force("collide", d3.forceCollide().radius(n => (n.id === d.id || neighbors.includes(n.id)) ? 45 : 15).iterations(3));
-        simulation.alpha(0.5).restart();
+        // 🟢 CAMERA ZOOM IN (Restored!)
+        svg.transition().duration(750).call(
+          zoom.transform,
+          d3.zoomIdentity.translate(rightCenter, height / 2).scale(1.25).translate(-d.x, -d.y)
+        );
+
+        // 🟢 FIX: Tighten the links and reduce repulsion so nodes stay firmly in viewport!
+        simulation.force("link").distance(l => (l.source.id === d.id || l.target.id === d.id) ? 35 : 120);
+        simulation.force("charge").strength(n => (n.id === d.id || neighbors.includes(n.id)) ? -45 : -300);
+
+        simulation.force("collide", d3.forceCollide().radius(n => {
+          if (n.id === d.id || neighbors.includes(n.id)) {
+             if (n.group === "record" || n.group === "tag") {
+               const textString = n.label || n.id || "";
+               return 15 + (textString.length * 3.5);
+             }
+             return 45;
+          }
+          return n.group === "supernode" ? 50 : 20;
+        }).iterations(3));
+
+        simulation.alphaTarget(0);
+        simulation.alpha(0.8).restart();
       }
 
-      // Hover logic for Map
       node.on("mouseover", function(event, d) {
-          if (d.group === "tag" || d.group === "record") return;
-          d3.select(this).classed("bg-hovered", true);
+          if (activeSupernode) return;
+          if (d.group === "tag") return;
+          syncNavUI(d.id);
+
+          const neighbors = getNeighbors(d);
+          node.classed("is-hover-dimmed", n => n.id !== d.id && !neighbors.includes(n.id));
+          link.classed("is-hover-dimmed", l => l.source.id !== d.id && l.target.id !== d.id);
+
+          d3.select(this).classed("is-highlighted", true);
         })
         .on("mouseout", function(event, d) {
-          d3.select(this).classed("bg-hovered", false);
+          if (activeSupernode) return;
+          syncNavUI(null);
+          node.classed("is-hover-dimmed is-highlighted", false);
+          link.classed("is-hover-dimmed", false);
         })
         .on("click", function(event, d) {
           event.stopPropagation();
-          if (d.group === "supernode") triggerNode(d);
-          else if (d.group === "record" && d.url) window.location.href = d.url;
+          if (d.group === "supernode") isolateNode(d, true);
+          else if (d.group === "record" && d.url) {
+            if (d.external) window.open(d.url, '_blank');
+            else {
+              document.body.style.transition = "opacity 0.4s ease";
+              document.body.style.opacity = 0;
+              setTimeout(() => window.location.href = d.url, 400);
+            }
+          }
         });
 
-      // 🟢 The Nav-to-Node Bridge
       document.querySelectorAll('.giant-link').forEach(link => {
         link.addEventListener('mouseenter', () => {
+          if (activeSupernode) return;
           const target = data.nodes.find(n => n.id === link.getAttribute('data-node-id'));
-          if (target && target.group === 'supernode') triggerNode(target);
+          if (target && target.group === 'supernode') isolateNode(target, false);
         });
-        link.addEventListener('mouseleave', () => resetGraph());
+        link.addEventListener('mouseleave', () => {
+          if (!activeSupernode) resetGraph();
+        });
       });
 
       simulation.on("tick", () => {
-        data.nodes.forEach(d => { d.x = Math.max(40, Math.min(width - 40, d.x)); d.y = Math.max(40, Math.min(height - 40, d.y)); });
+        data.nodes.forEach(d => {
+          d.x = Math.max(50, Math.min(width - 50, d.x));
+          d.y = Math.max(50, Math.min(height - 50, d.y));
+        });
         link.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
         node.attr("transform", d => `translate(${d.x},${d.y})`);
       });
+
+      setTimeout(() => { if (!activeSupernode) simulation.alphaTarget(0.01); }, 3000);
+
     }).catch(console.error);
   });
 </script>

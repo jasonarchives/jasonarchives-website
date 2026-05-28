@@ -5,34 +5,25 @@ body, html {
   font-family: 'SF Pro Display', -apple-system, sans-serif;
   
   background-color: var(--bg-color);
-  /* This creates a 20px dot grid */
-/* This creates a 20px dot grid that shifts colors automatically */
+  /* This creates a 20px dot grid that shifts colors automatically */
   background-image: radial-gradient(circle, rgba(var(--rgb-text), 0.15) 0.79px, transparent 0.2px);
   background-size: 30px 30px;
   background-attachment: fixed;
-  /* Slight transparency so the dots are subtle */
   color: var(--text-color);
   overflow-x: hidden; 
   overflow-y: auto; 
   cursor: default;
 }
 
-
-
-
 /* =========================================================================== */
-
-
 
 /* Main Container */
 .landing-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* THE FIX: 'safe center' stops the text from pushing off the top of the screen */
   justify-content: safe center;
   align-items: flex-start;
-  /* THE FIX: Hard padding guarantees it never hits the navbar */
   padding: 140px var(--global-padding) 4rem var(--global-padding);
   box-sizing: border-box;
 }
@@ -60,11 +51,7 @@ body, html {
   align-items: flex-start;
   gap: 1rem;
   width: 100%;
-  /* THE FIX: Removed margin-top: -6rem; which was yanking the text behind the navbar */
 }
-
-
-
 
 /* 1. Monospace Intro */
 .mono-intro h1 {
@@ -75,7 +62,6 @@ body, html {
   opacity: 0.7;
   letter-spacing: 0.05em;
 }
-
 
 /* 2. Massive Brutalist Nav */
 .massive-hero-nav {
@@ -92,106 +78,39 @@ body, html {
   letter-spacing: -0.04em;
   color: var(--text-color);
   text-decoration: none;
-  /* Removes the transform transition, matching the Writing page exactly */
   transition: opacity 0.4s ease, color 0.4s ease;
   width: max-content;
 }
 
-/* Focus Hover Effect (Smooth Fade, No Movement) */
+/* Focus Hover Effect */
 .massive-hero-nav:hover .giant-link {
-  opacity: 0.3; /* Gently dims the un-hovered links */
+  opacity: 0.3;
 }
 
 .massive-hero-nav .giant-link:hover {
   opacity: 1;
   color: #C85A32;
-  /* The transform: translateX nudge has been completely removed */
 }
 
-/* ========================= */
 /* Giant Link Arrow Pointers */
-/* ========================= */
-
 .giant-link::after {
   content: " ↗"; 
   font-family: 'iA Writer Duospace', monospace;
-  font-size: 0.4em; /* Scales perfectly relative to the massive text */
-  font-weight: 400; /* Keeps the arrow slightly thinner than the bold 700 text for a refined look */
-  opacity: 0.2; /* Very subtle default state */
+  font-size: 0.4em;
+  font-weight: 400;
+  opacity: 0.2;
   display: inline-block;
   margin-left: 0.2em;
   transition: opacity 0.4s ease, transform 0.4s ease, color 0.6s ease;
 }
 
-/* Hover Interaction */
 .massive-hero-nav .giant-link:hover::after {
   opacity: 1;
   color: var(--text-color);
-  transform: translate(2px, -1px); /* A sharp, satisfying nudge up and to the right */
+  transform: translate(2px, -1px);
 }
-
-
 
 /* =========================================================================== */
-
-
-
-
-
-/* ----------------------------------------- */
-/* 1. MASSIVE MONITORS (1400px and up)       */
-/* Sits in the center-right void             */
-/* ----------------------------------------- */
-@media (min-width: 1400px) {
-  .journey-projection {
-    right: 8vw;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    max-width: 340px;
-  }
-  #journey-text {
-    padding-left: 1.5rem;
-    border-left: 1px solid var(--accent-color);
-    text-align: left;
-  }
-}
-
-/* ----------------------------------------- */
-/* 2. LAPTOPS & TABLETS (900px to 1399px)    */
-/* Anchors to bottom-right to avoid overlap  */
-/* ----------------------------------------- */
-@media (max-width: 1399px) and (min-width: 900px) {
-  .journey-projection {
-    right: var(--global-padding);
-    bottom: 4.5rem; 
-    top: auto;
-    transform: none;
-    max-width: 300px;
-  }
-  #journey-text {
-    font-size: 0.85rem; /* Scales down slightly for tighter screens */
-    padding-right: 1.5rem;
-    border-left: none; /* Removes left border */
-    border-right: 1px solid var(--accent-color); /* Adds right border */
-    text-align: right; /* Flips the text alignment to hug the screen edge */
-  }
-}
-
-/* ----------------------------------------- */
-/* 3. MOBILE SCREENS (Below 900px)           */
-/* Hidden, as hover doesn't exist on touch   */
-/* ----------------------------------------- */
-@media (max-width: 899px) {
-  .journey-projection {
-    display: none;
-  }
-}
-
-
-/* =========================================================================== */
-
-
 
 /* 3. Monospace Utility & Socials */
 .mono-utility {
@@ -206,10 +125,8 @@ body, html {
   font-size: 0.9rem;
   text-decoration: none;
   color: var(--text-color);
-  padding: 0 0 0.3rem 0; 
-  /* Uses the dynamic variable so borders invert in dark mode */
+  padding: 0 0 0.3rem 0;
   border-bottom: 1px solid rgba(var(--rgb-text), 0.2);
-
   transition: all 0.3s ease;
   opacity: 0.8;
 }
@@ -231,144 +148,118 @@ body, html {
   border-bottom-color: var(--accent-color);
 }
 
-
 /* Mobile Refinement for Mono Utility */
 @media (max-width: 800px) {
   .mono-utility {
-    gap: 1rem; /* Tightens the horizontal/vertical spacing */
+    gap: 1rem;
     margin-top: -0.2rem;
   }
 
   .mono-utility a {
-    font-size: 0.75rem; /* Scales down from 0.9rem */
-    padding-bottom: 0.2rem; /* Thinner padding for a more compact look */
+    font-size: 0.75rem;
+    padding-bottom: 0.2rem;
   }
 
-  /* Ensures the arrows don't look oversized compared to the new text size */
   .quickarrow {
     font-size: 0.7rem;
   }
 }
 
-
-/* 1. The Default State */
+/* Quickarrow interactions */
 .quickarrow {
   display: inline-block;
   margin-left: 0.1rem;
   transition: transform 0.3s cubic-bezier(0.45, 0, 0.55, 1);
 }
 
-/* 2. The Hover State */
 a:hover .quickarrow {
-  transform: translate(1px, -1px); /* Kinetic nudge */
+  transform: translate(1px, -1px);
 }
-
 
 /* ========================= */
 /* Mobile Adjustments        */
 /* ========================= */
 @media (max-width: 600px) {
-
-  /* 1. The Kill-Switch: Strictly disables scrolling on the index page */
   body.page-index {
     overflow: hidden !important;
   }
 
-  /* 2. Container Lock: Fits exactly into the mobile viewport */
   .landing-page {
     height: 100dvh !important; 
     min-height: 100dvh !important;
     justify-content: center !important; 
-    padding-top: 4rem !important; /* Space for the top navbar */
-    padding-bottom: 3rem !important; /* Space for the bottom footer */
+    padding-top: 4rem !important;
+    padding-bottom: 3rem !important;
     box-sizing: border-box;
   }
 
   .hero-content-wrapper {
-    margin-top: 0 !important; /* Removes negative desktop margins */
-    gap: 1.5rem; /* Tightens the vertical space between blocks */
+    margin-top: 0 !important;
+    gap: 1.5rem;
   }
 
-  /* 3. Height-Aware Typography */
   .massive-hero-nav {
-    gap: 0; /* Removes excess space between links */
+    gap: 0;
   }
 
   .giant-link {
-    /* CRITICAL: Uses 'vh' instead of 'vw' so the text shrinks if the screen is short */
     font-size: clamp(2.5rem, 8vh, 4rem) !important; 
   }
 
-  /* 4. Utility Compression */
   .mono-utility {
     gap: 0.8rem 1.2rem;
-    flex-direction: row; /* Keeps them horizontal to save vertical real estate */
+    flex-direction: row;
     margin-top: 0;
   }
 }
+
 /* =========================================================================== */
 /* VERTICAL COMPRESSION: HEIGHT-AWARE SCALING (DESKTOP ONLY)                   */
 /* =========================================================================== */
 
-/* 1. Moderate Compression (Standard Laptops: Height under 850px, but wider than mobile) */
+/* 1. Moderate Compression */
 @media (max-height: 850px) and (min-width: 801px) {
   .landing-page {
     padding-top: max(110px, 12vh) !important;
     padding-bottom: 2rem !important;
   }
-
   .giant-link {
     font-size: clamp(3rem, min(8vw, 11vh), 7rem) !important;
     line-height: 0.85;
   }
-
   .hero-content-wrapper { gap: 0.8rem; }
   .mono-utility { margin-top: 1rem; }
 }
 
-/* 2. Extreme Compression (Short Laptops / High Scaling: Height under 700px, but wider than mobile) */
+/* 2. Extreme Compression */
 @media (max-height: 700px) and (min-width: 801px) {
   .landing-page {
     padding-top: max(95px, 10vh) !important;
     padding-bottom: 1rem !important;
   }
-
   .giant-link {
     font-size: clamp(2.5rem, min(7vw, 10vh), 5rem) !important;
     line-height: 0.8;
   }
-
   .hero-content-wrapper { gap: 0.5rem; }
   .mono-intro h1 { font-size: 0.85rem; margin-bottom: 0.5rem; }
   .mono-utility { margin-top: 0.5rem; gap: 1rem; }
   .mono-utility a { font-size: 0.8rem; padding-bottom: 0.1rem; }
 }
 
-
-
-
-
 /* ========================================== */
 /* ATLAS LIVING BACKDROP                      */
 /* ========================================== */
 
 .atlas-backdrop-wrapper {
-  position: fixed;
-  top: 0; left: 0;
+  position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
-  /* 🟢 FIX 1: Brought to z-index 0 (above the body background) to fix Light Mode */
-  z-index: 0;
-  pointer-events: none;
-
-  opacity: 1;
-  visibility: visible;
+  z-index: 0; pointer-events: none;
+  opacity: 1; visibility: visible;
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
 }
 
-#atlas-bg-container {
-  width: 100%; height: 100%;
-  pointer-events: auto; /* SVG catches its own clicks */
-}
+#atlas-bg-container { width: 100%; height: 100%; pointer-events: auto; }
 
 .atlas-fade-mask {
   position: absolute; top: 0; left: 0;
@@ -377,74 +268,75 @@ a:hover .quickarrow {
   pointer-events: none;
 }
 
-/* 🟢 D3 extracted base styles */
-.bg-link-main { stroke: var(--text-color); stroke-opacity: 0.25; stroke-width: 1.5px; transition: stroke-opacity 0.4s; }
-.bg-link-sub { stroke: var(--text-color); stroke-opacity: 0.1; stroke-width: 1px; stroke-dasharray: 4,4; transition: stroke-opacity 0.4s; }
+/* 🟢 MINIATURIZED MAP STYLES */
+.link-main { stroke: var(--text-color); stroke-opacity: 0.5; stroke-width: 1px; transition: stroke-opacity 0.4s ease, opacity 0.4s ease; }
+.link-sub { stroke: var(--text-color); stroke-opacity: 0.15; stroke-width: 0.5px; stroke-dasharray: 3,3; transition: stroke-opacity 0.4s ease, opacity 0.4s ease; }
 
-.bg-node-super circle { fill: var(--bg-color); stroke: var(--text-color); stroke-width: 2px; transition: all 0.3s; }
-.bg-node-super text { font-family: 'iA Writer Duospace', monospace; font-size: 11px; fill: var(--text-color); pointer-events: none; transition: all 0.3s; }
+.node-group { transition: opacity 0.4s ease; }
+.node-super { fill: var(--bg-color); stroke: var(--text-color); stroke-width: 1.5px; transition: all 0.3s ease; }
 
-.bg-node-record circle { fill: var(--text-color); transition: all 0.3s; }
-.bg-node-tag text { font-family: 'iA Writer Duospace', monospace; font-size: 9px; fill: var(--text-color); opacity: 0.4; pointer-events: none; transition: all 0.3s; }
-
-/* 🟢 Interaction State Classes */
-.bg-dimmed { opacity: 0.1 !important; }
-
-/* Highlight circles for everything */
-.bg-hovered circle, .bg-active circle {
-  fill: var(--accent-color) !important;
-  stroke: var(--accent-color) !important;
+/* 🟢 UPGRADE: TACTILE RECORD NODES */
+.node-record {
+  fill: var(--text-color);
+  stroke: rgba(200, 90, 50, 0); /* Invisible border by default */
+  stroke-width: 0px;
+  /* Removed transform scaling to fix the jumping bug */
+  transition: all 0.3s ease;
 }
 
-/* 🟢 FIX 1: Highlight text ONLY for records and tags.
-   This leaves the Supernode text its default readable color! */
-.bg-node-record.bg-hovered text, .bg-node-record.bg-active text,
-.bg-node-tag.bg-hovered text, .bg-node-tag.bg-active text {
-  fill: var(--text-color) !important;
+/* 🟢 UPGRADE: MAGNETIC HOVER STATE */
+.node-record-group:hover .node-record,
+.node-record-group.is-highlighted .node-record {
+  fill: var(--accent-color) !important;
+  stroke: rgba(200, 90, 50, 0.3) !important; /* Soft terracotta ring */
+  stroke-width: 8px !important; /* Expands a halo instead of scaling the shape */
+}
+
+.node-record-group:hover .label-record {
+  fill: var(--accent-color) !important;
   opacity: 1 !important;
 }
 
-/* 🟢 Redesigned Button - Fixed Z-Index Context */
+/* 🟢 SCALED DOWN FONT SIZES */
+.label-super { font-family: 'iA Writer Duospace', monospace; font-size: 10px; fill: var(--text-color) !important; font-weight: bold; pointer-events: none; transition: fill 0.3s; }
+.label-record { font-family: 'SF Pro Display', sans-serif; font-size: 9px; fill: var(--text-color); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.label-tag { font-family: 'iA Writer Duospace', monospace; font-size: 8px; fill: var(--text-color); opacity: 0.5; pointer-events: none; transition: opacity 0.3s ease; }
+
+/* ATLAS.HTML INTERACTION CLASSES */
+.is-hover-dimmed { opacity: 0.15 !important; pointer-events: none; }
+.is-active-dimmed { opacity: 0.06 !important; pointer-events: none; }
+
+/* 🟢 BULLETPROOF HIGHLIGHTING LOGIC */
+/* 1. Records and Tags turn Accent Color */
+.node-record-group.is-highlighted circle { fill: var(--accent-color) !important; }
+.node-record-group.is-highlighted text,
+.node-tag-group.is-highlighted text { fill: var(--accent-color) !important; opacity: 1 !important; }
+
+/* 2. Supernodes turn solid Accent, and their text inverts to Background color so it stays readable */
+.node-super-group.is-highlighted circle { fill: var(--accent-color) !important; stroke: var(--accent-color) !important; }
+.node-super-group.is-highlighted text { fill: var(--text-color) !important; stroke: none !important; }
+
+/* EXPLORE BUTTON */
 .explore-atlas-btn {
-  position: fixed; /* Breaks it out of the container completely */
-  bottom: 2rem; right: 2rem;
-  z-index: 9999; /* Forces it to the very front of the glass */
-  font-family: 'iA Writer Duospace', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  color: var(--text-color);
-  background: var(--bg-color); /* Adds a solid background */
-  border: 1px solid rgba(var(--rgb-text), 0.2);
-  padding: 0.8rem 1.2rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  pointer-events: auto !important;
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+  font-family: 'iA Writer Duospace', monospace; font-size: 0.75rem;
+  letter-spacing: 0.05em; color: var(--text-color);
+  background: var(--bg-color); border: 1px solid rgba(var(--rgb-text), 0.2);
+  padding: 0.8rem 1.2rem; text-decoration: none;
+  transition: all 0.3s ease; pointer-events: auto !important;
 }
+.explore-atlas-btn:hover { color: var(--accent-color); border-color: var(--accent-color); transform: translateY(-2px); }
 
-.explore-atlas-btn:hover {
-  color: var(--accent-color);
-  border-color: var(--accent-color);
-  transform: translateY(-2px);
-}
-
-/* 🟢 FIX 1: Layering Fix - ensures the text sits firmly OVER the map */
+/* LAYERING OVERRIDES */
 .landing-page { position: relative; z-index: 10; pointer-events: none !important; }
 .top-section, .hero-content-wrapper { pointer-events: none !important; }
 .giant-link, .mono-utility a, .navbar, .explore-atlas-btn { pointer-events: auto !important; }
 
+/* Binds the Nav links to the D3 Hover */
+.nav-active { color: var(--accent-color) !important; opacity: 1 !important; }
+
+/* MOBILE RESPONSIVE DISAPPEARANCE */
 @media (max-width: 1100px) {
-  .atlas-backdrop-wrapper {
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
-
-  /* 🟢 Adds the button to the mobile hide rule */
-  .explore-atlas-btn {
-    display: none !important;
-  }
-}
-
-.nav-active {
-  color: var(--accent-color) !important;
-  opacity: 1 !important;
+  .atlas-backdrop-wrapper { opacity: 0 !important; visibility: hidden !important; }
+  .explore-atlas-btn { display: none !important; }
 }

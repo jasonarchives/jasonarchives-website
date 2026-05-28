@@ -3,9 +3,17 @@
 /* ========================= */
 
 @media (pointer: fine) {
-  /* Hides the default arrow */
+
   body, html, a, button, .giant-link {
-    cursor: none !important; 
+    cursor: none;
+  }
+
+  /* 🟢 MAP AFFORDANCE: Forces the native grab hand over the map */
+  #atlas-bg-container, .atlas-backdrop-wrapper {
+    cursor: grab !important;
+  }
+  #atlas-bg-container:active, .atlas-backdrop-wrapper:active {
+    cursor: grabbing !important;
   }
 
   #crosshair-cursor {
@@ -15,11 +23,12 @@
     width: 20px;
     height: 20px;
     pointer-events: none; 
-    z-index: 999999; /* Maxed out to ensure it is always on top */
+    z-index: 999999;
     will-change: transform; 
     display: block;
+    /* 🟢 Added opacity transition so it fades out smoothly */
+    transition: opacity 0.2s ease;
   }
-
   
   
   /* The Crosshair Lines */
