@@ -297,19 +297,77 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="physics.js"></script>
 <script src="terminal.js"></script>
 <script src="overlay.js"></script>
-
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="global-atlas.js"></script>
 
 
 <!-- DESKTOP THEME TOGGLE (Hidden on Mobile) -->
 <div class="os-theme-toggle-desktop" id="desktop-theme-toggle">
   <!-- The Resting Vertical Spine -->
-  <div class="theme-label" id="theme-label">[ MODE: LIGHT ]</div>
+  <div class="theme-label" id="theme-label">[MODE: LIGHT]</div>
   <!-- The Hover Controls -->
   <div class="theme-controls">
     <button class="theme-btn" data-set-theme="light">[◯ LIGHT]</button>
     <button class="theme-btn" data-set-theme="dark">[◐ DARK]</button>
   </div>
 </div>
+
+<!-- GLOBAL ATLAS MAP (Hidden on Mobile) -->
+<button onclick="openAtlasOverlay('Design Archive')" class="explore-atlas-btn" aria-label="Open Interactive Map">
+  <svg class="button-node-icon" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+    <circle cx="19" cy="6" r="1.5" fill="currentColor"/>
+    <circle cx="5" cy="10" r="1.5" fill="currentColor"/>
+    <circle cx="14" cy="20" r="1.5" fill="currentColor"/>
+    <line x1="12" y1="12" x2="19" y2="6" stroke="currentColor" stroke-width="1"/>
+    <line x1="12" y1="12" x2="5" y2="10" stroke="currentColor" stroke-width="1"/>
+    <line x1="12" y1="12" x2="14" y2="20" stroke="currentColor" stroke-width="1"/>
+  </svg>
+  [EXPLORE MAP ↗]
+</button>
+
+<div id="global-atlas-overlay">
+  <div class="hud-overlay">
+    [ SYSTEM ATLAS ]<br>
+    INTERACTION: PAN / ZOOM / ISOLATE
+    <div id="execution-trail">
+      <span class="trail-link" data-id="root">PATH: ~/atlas</span>
+    </div>
+  </div>
+
+  <div class="tag-sidebar" id="tag-sidebar"></div>
+
+  <div class="radar-container">
+    <svg id="radar-svg"></svg>
+  </div>
+
+  <div id="quick-peek" class="quick-peek-panel">
+    <button class="close-peek" onclick="closePeek()">[ ✕ DISMISS ]</button>
+    <div class="peek-type" id="peek-type">[ TYPE ]</div>
+    <h2 class="peek-title" id="peek-title">Title</h2>
+    <p class="peek-desc" id="peek-desc">Description</p>
+    <div class="peek-meta-title" id="peek-meta-title">METADATA:</div>
+    <div class="peek-meta-content" id="peek-meta-content"></div>
+    <button class="peek-execute" id="peek-execute">[ EXECUTE ↗ ]</button>
+  </div>
+
+  <div class="system-nav">
+    <button class="system-nav-btn btn-back" onclick="closeAtlasOverlay()">[✕ CLOSE MAP]</button>
+    <button class="system-nav-btn btn-home" onclick="window.location.href='/index.html'">[⌂ HOME]</button>
+  </div>
+
+  <div class="zoom-controls">
+    <div class="zoom-label" id="zoom-percent">100%</div>
+    <button class="zoom-btn" id="zoom-in">+</button>
+    <button class="zoom-btn" id="zoom-reset">⌂</button>
+    <button class="zoom-btn" id="zoom-out">-</button>
+  </div>
+
+  <svg id="atlas-container"></svg>
+</div>
+
+
+
 
 
 </body>

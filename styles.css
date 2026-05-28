@@ -247,6 +247,8 @@ a:hover .quickarrow {
   .mono-utility a { font-size: 0.8rem; padding-bottom: 0.1rem; }
 }
 
+
+
 /* ========================================== */
 /* ATLAS LIVING BACKDROP                      */
 /* ========================================== */
@@ -293,7 +295,8 @@ a:hover .quickarrow {
 }
 
 .node-record-group:hover .label-record {
-  fill: var(--accent-color) !important;
+  fill: var(--text-color) !important;
+  stroke: none !important; /* 🟢 Kills the inherited orange stroke */
   opacity: 1 !important;
 }
 
@@ -307,14 +310,21 @@ a:hover .quickarrow {
 .is-active-dimmed { opacity: 0.06 !important; pointer-events: none; }
 
 /* 🟢 BULLETPROOF HIGHLIGHTING LOGIC */
-/* 1. Records and Tags turn Accent Color */
+/* 1. Records and Tags turn Accent Color, text stays normal with NO stroke */
 .node-record-group.is-highlighted circle { fill: var(--accent-color) !important; }
 .node-record-group.is-highlighted text,
-.node-tag-group.is-highlighted text { fill: var(--accent-color) !important; opacity: 1 !important; }
+.node-tag-group.is-highlighted text {
+  fill: var(--text-color) !important;
+  stroke: none !important; /* 🟢 Kills the inherited orange stroke */
+  opacity: 1 !important;
+}
 
 /* 2. Supernodes turn solid Accent, and their text inverts to Background color so it stays readable */
 .node-super-group.is-highlighted circle { fill: var(--accent-color) !important; stroke: var(--accent-color) !important; }
-.node-super-group.is-highlighted text { fill: var(--text-color) !important; stroke: none !important; }
+.node-super-group.is-highlighted text {
+  fill: var(--text-color) !important; /* 🟢 Fixed this so it inverts to your background color */
+  stroke: none !important;
+}
 
 /* EXPLORE BUTTON */
 .explore-atlas-btn {
@@ -322,10 +332,37 @@ a:hover .quickarrow {
   font-family: 'iA Writer Duospace', monospace; font-size: 0.75rem;
   letter-spacing: 0.05em; color: var(--text-color);
   background: var(--bg-color); border: 1px solid rgba(var(--rgb-text), 0.2);
-  padding: 0.8rem 1.2rem; text-decoration: none;
+  padding: 0.6rem 1rem; text-decoration: none;
   transition: all 0.3s ease; pointer-events: auto !important;
+
+  /* 🟢 Aligns the icon and text */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
-.explore-atlas-btn:hover { color: var(--accent-color); border-color: var(--accent-color); transform: translateY(-2px); }
+
+.explore-atlas-btn:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* 🟢 The Brutalist Icon Animation */
+.button-node-icon {
+  width: 18px;
+  height: 18px;
+  /* A slow, 12-second continuous mechanical rotation */
+  animation: mechanical-spin 12s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes mechanical-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
 
 /* LAYERING OVERRIDES */
 .landing-page { position: relative; z-index: 10; pointer-events: none !important; }
@@ -339,4 +376,40 @@ a:hover .quickarrow {
 @media (max-width: 1100px) {
   .atlas-backdrop-wrapper { opacity: 0 !important; visibility: hidden !important; }
   .explore-atlas-btn { display: none !important; }
+}
+
+/* ========================================== */
+/* ACCESSIBILITY (a11y) & WCAG STANDARDS      */
+/* ========================================== */
+
+/* 1. Screen Reader Announcer (Visually hidden, but spoken aloud) */
+.sr-announcer {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* 2. SVG Keyboard Focus Ring */
+/* When a user hits 'Tab', this highlights the SVG node */
+.node-group:focus {
+  outline: none;
+}
+.node-group:focus-visible circle {
+  stroke: var(--accent-color) !important;
+  stroke-width: 4px !important;
+  stroke-dasharray: 4, 4;
+}
+.node-group:focus-visible text {
+  fill: var(--accent-color) !important;
+  opacity: 1 !important;
+}
+
+/* 3. WCAG: Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
