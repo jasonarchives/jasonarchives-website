@@ -32,6 +32,7 @@
 </script>
 
 
+
   <meta name="title" content="Midnight in Uppsala | Jason Mendes Photography">
   <meta name="description" content="Two years of midnight adventures in Uppsala. An exploration of celestial lights, city streets, and finding warmth.">
   <meta name="author" content="Jason Mendes">
@@ -503,7 +504,7 @@
 
 
 
-      <!-- SHARING CLUSTER -->
+<!-- SHARING CLUSTER (Already in your code) -->
       <div class="share-cluster">
         <span class="share-label">DISTRIBUTE RECORD:</span>
         <a href="#" id="share-linkedin" class="share-link" target="_blank" rel="noopener noreferrer">[ in ]</a>
@@ -512,7 +513,27 @@
         <button id="share-copy" class="share-link" style="background: none; border: none; padding: 0; cursor: pointer;">[ copy ]</button>
       </div>
 
+      <!-- ========================================== -->
+      <!-- DYNAMIC RECOMMENDED RECORDS CAROUSEL       -->
+      <!-- ========================================== -->
+      <div class="adjacent-records-module">
+        <div class="adjacent-header">
+          <span class="adjacent-title">[ RECOMMENDED RECORDS ]</span>
+          <span class="adjacent-hint">SCROLL ➔</span>
+        </div>
+
+        <!-- The JS engine will inject the data-driven cards here -->
+        <div class="adjacent-carousel" id="dynamic-records-container">
+        </div>
+      </div>
+
     </div> <!-- End of essay-body -->
+
+
+
+
+
+
   </article>
 </main>
 
@@ -581,6 +602,7 @@
 <script src="../overlay.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="../global-atlas.js"></script>
+<script src="../record.js"></script>
 
 <!-- DESKTOP THEME TOGGLE -->
 <div class="os-theme-toggle-desktop" id="desktop-theme-toggle">

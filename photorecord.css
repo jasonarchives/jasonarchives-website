@@ -556,6 +556,9 @@ body.hide-ui-mode .bottom-left-footer {
   opacity: 1;
 }
 
+
+
+
 /* =========================================================================== */
 /* DARK MODE TEXTURE REPAIR                                                    */
 /* =========================================================================== */
@@ -565,6 +568,8 @@ html[data-theme="dark"] body {
                     url("https://www.transparenttextures.com/patterns/p6.png") !important;
   background-blend-mode: normal !important;
 }
+
+
 
 
 /* =========================================================================== */
@@ -613,3 +618,136 @@ html[data-theme="dark"] body {
 }
 
 
+
+
+
+/* ========================================== */
+/* RECOMMENDED RECORDS CAROUSEL (MINIMAL)     */
+/* ========================================== */
+
+.adjacent-records-module {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  /* Changed from dotted to a solid, faint structural line */
+  border-top: 1px solid rgba(var(--rgb-text), 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.adjacent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  opacity: 0.5; /* Muted the header slightly */
+  letter-spacing: 0.05em;
+}
+
+/* The Sideways Scroll Container */
+.adjacent-carousel {
+  display: flex;
+  gap: 1rem; /* Tightened the gap slightly */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+
+  /* Hides default scrollbars */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.adjacent-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* 🟢 The Individual Cards (Stripped & Flattened) */
+.record-card {
+  flex: 0 0 calc(50% - 1.5rem);
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: transparent; /* No fill */
+  border: 1px solid rgba(var(--rgb-text), 0.2); /* Sharp, thin border */
+  padding: 1.5rem;
+  scroll-snap-align: start;
+  color: var(--text-color);
+
+  /* Fast, mechanical transition. No shadows, no translating. */
+  transition: border-color 0.1s ease, color 0.1s ease;
+}
+
+.card-id {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.65rem;
+  opacity: 0.4;
+  margin-bottom: 0.5rem;
+  display: block;
+  letter-spacing: 0.05em;
+  color: var(--text-color);
+}
+
+.card-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.card-desc {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+/* Tag Cluster Styling */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-tag {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid rgba(var(--rgb-text), 0.2);
+  opacity: 0.7;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.card-footer {
+  font-family: 'iA Writer Duospace', monospace;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--text-color);
+  border-top: 1px solid rgba(var(--rgb-text), 0.1);
+  padding-top: 1rem;
+  text-align: left; /* Changed to left alignment for a "log" feel */
+  transition: color 0.1s ease;
+}
+
+/* 🟢 Sharp Hover Physics (No geometry changes, just colors) */
+.record-card:hover {
+  border-color: var(--text-color); /* Border simply sharpens to full opacity */
+}
+.record-card:hover .card-title,
+.record-card:hover .card-footer {
+  color: var(--accent-color); /* Text flashes terracotta */
+}
+
+/* 🟢 External Link (Medium) Special Styling */
+/* Removed dashed borders. It now uses the exact same sharp geometry as internal cards */
+.external-card {
+  background: rgba(var(--rgb-text), 0.02); /* Very subtle tint to distinguish it */
+}
